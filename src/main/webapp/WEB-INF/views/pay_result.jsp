@@ -146,7 +146,7 @@
         }
 
         /* 선택중인 메뉴 css */
-        main aside ul li:first-child>div {
+        main aside ul li:nth-child(3)>div {
             border: 1px solid transparent;
             background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, #21A5B5 0%, #71B2B4 100%);
             background-origin: border-box;
@@ -310,9 +310,9 @@
     <main>
         <div class="mypage-container">
         <aside>
-            <ul>
+            <ul id="sidemenulist">
                 <li>
-                    <div>
+                    <div class="sidemenu">
                         <div class="mytext">
                             <h4>마이페이지</h4>
                             <p>내 정보 조회 / 수정 / 적립금조회</p>
@@ -323,7 +323,7 @@
                     </div>
                 </li>
                 <li>
-                    <div>
+                    <div class="sidemenu">
                         <div class="mytext">
                             <h4>장바구니</h4>
                         </div>
@@ -333,7 +333,7 @@
                     </div>
                 </li>
                 <li>
-                    <div>
+                    <div class="sidemenu">
                         <div class="mytext">
                             <h4>주문내역 조회</h4>
                             <p>주문 / 배송 조회</p>
@@ -344,7 +344,7 @@
                     </div>
                 </li>
                 <li>
-                    <div>
+                    <div class="sidemenu">
                         <div class="mytext">
                             <h4>내가 쓴 글</h4>
                         </div>
@@ -433,6 +433,15 @@
     <footer>
 
     </footer>
+    
+        <script type="text/javascript">
+    	for (var i = 0; i < document.getElementById("sidemenulist").children.length; i++) {
+    		console.log(document.getElementById("sidemenulist").children.length);
+    		document.getElementsByClassName("sidemenu")[i].addEventListener("click",function(){
+    			location.href = "${pageContext.request.contextPath}/movemypage/"+i;
+    		});
+		}
+    </script>
 </body>
 
 </html>
