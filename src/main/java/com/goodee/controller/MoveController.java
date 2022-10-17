@@ -25,10 +25,12 @@ public class MoveController {
 		System.out.println("i : " + i);
 		if(i == 0) {
 			return "my_page";
+		} else if (i == 2) {
+			return "login";
 		}else if(i == 3){
 			return "pay_result";
 		}else {
-			return "/";
+			return "pay";
 		}
 	}
 }

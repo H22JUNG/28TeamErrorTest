@@ -161,7 +161,7 @@
     </div>
     <div class="login-container">
         <div class="login-box">
-            <form action="" method="post">
+            <form action="${pageContext.request.contextPath}/login" method="post">
                 <span>╳</span>
                 <h3>로그인</h3>
                 <ul class="logininput">

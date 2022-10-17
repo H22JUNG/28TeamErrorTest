@@ -350,7 +350,7 @@
     		console.log("${pageContext.request.contextPath}/mypage/"+i);
     		console.log(document.getElementsByClassName("sidemenu")[i]);
     		document.getElementsByClassName("sidemenu")[i].addEventListener("click",function(){
-    			location.href = "${pageContext.request.contextPath}/mypage/"+i;
+    			location.href = "${pageContext.request.contextPath}/mypage/"+i+"";
     		});
 		};
     </script>
