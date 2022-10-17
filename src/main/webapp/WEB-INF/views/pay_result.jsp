@@ -262,17 +262,22 @@
             padding-top: 10px;
         }
         @media (max-width: 700px) {
-            #container{
+            .mypage-container{
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 display: flex;
             }
             #right{
-                width: 100%;
+                width: 600px;
             }
             #inleft{
                 width: 20%;
+            }
+        }
+        @media (max-width: 500px) {
+            #right{
+                width: 400px;
             }
         }
        
@@ -359,16 +364,15 @@
             <div id="right">
                 <div id="rightTop">
                 <div id="inleft">
-                    <h4>어쩌고 써있음</h4>
-                    <p>날짜인듯</p>
-                    <h4>어쩌고 써있음</h4>
-                    <p>갯수인듯</p>
-                    <h4>어쩌고 써있음</h4>
-                    <p>ㅇ건몰라</p>
-                    <h4>어쩌고 써있음</h4>
-                    <p>스파시바</p>
-                    <h4>어쩌고 써있음</h4>
-                    <p>어쩌고저쩌고라</p>
+                     <h4>주문자 이름</h4>
+                    <p>신유진</p>
+                    <h4>주문 날짜</h4>
+                    <p>20221017</p>
+                    <h4>주문 수량</h4>
+                    <p>3</p>
+                    <h4>결제 수단</h4>
+                    <p>무통장입금</p>
+                   
                 </div>
                 <div id="inRight">
                     <div class="Itembox">
@@ -380,9 +384,9 @@
                                 <h4>상품 이름</h4>
                                 <p>선택한 상품사이즈</p>
                                 <h4>주문 상태</h4>
-                                <p>준비중이니까 기다려</p>
+                                <p>배송준비중</p>
                                 <h4>상품 가격</h4>
-                                <p class="number">상품 갯수 : 몰라</p>
+                                <p class="number">상품 갯수 : 1</p>
                             </div>
                         </div>
                     </div>
@@ -395,9 +399,9 @@
                                 <h4>상품 이름</h4>
                                 <p>선택한 상품사이즈</p>
                                 <h4>주문 상태</h4>
-                                <p>준비중이니까 기다려</p>
+                                <p>배송준비중</p>
                                 <h4>상품 가격</h4>
-                                <p class="number">상품 갯수 : 몰라</p>
+                                <p class="number">상품 갯수 : 1</p>
                             </div>
                         </div>
                     </div>
@@ -410,19 +414,19 @@
                                 <h4>상품 이름</h4>
                                 <p>선택한 상품사이즈</p>
                                 <h4>주문 상태</h4>
-                                <p>준비중이니까 기다려</p>
+                                <p>배송준비중</p>
                                 <h4>상품 가격</h4>
-                                <p class="number">상품 갯수 : 몰라</p>
+                                <p class="number">상품 갯수 : 1</p>
                             </div>
                         </div>
                     </div>
                     <div id="bottom">
-                    <h3>뭐라고써있는 버튼</h3>
+                    <h3>결제 금액</h3>
                     </div>
                 </div><!--inRight끝-->
             </div>
                 <div id="lastBottom">
-                    <h3>머라고 써있는게야</h3>
+                    <h3>주문 번호</h3>
                 </div>
             </div>
             <!--컨테이너 끝-->
