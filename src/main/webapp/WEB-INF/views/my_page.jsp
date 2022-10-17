@@ -232,6 +232,7 @@
             width: 500px;
             display: flex;
             justify-content: flex-end;
+            padding : 20px 0;
         }
         
         main section .edit #edit {
@@ -346,7 +347,9 @@
     
     <script type="text/javascript">
     	for (var i = 0; i < document.getElementById("sidemenulist").children.length; i++) {
-    		document.getElementsByClassName('sidemenu')[i].addEventListener("click",function(){
+    		console.log("${pageContext.request.contextPath}/mypage/"+i);
+    		console.log(document.getElementsByClassName("sidemenu")[i]);
+    		document.getElementsByClassName("sidemenu")[i].addEventListener("click",function(){
     			location.href = "${pageContext.request.contextPath}/mypage/"+i;
     		});
 		};

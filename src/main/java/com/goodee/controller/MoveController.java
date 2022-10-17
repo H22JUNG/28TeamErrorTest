@@ -22,10 +22,13 @@ public class MoveController {
 	
 	@GetMapping("/mypage/{path}")
 	public String mypage(@PathVariable("path") int i) {
+		System.out.println("i : " + i);
 		if(i == 0) {
 			return "my_page";
-		}else {
+		}else if(i == 3){
 			return "pay_result";
+		}else {
+			return "/";
 		}
 	}
 }
