@@ -93,7 +93,7 @@
 
         .signup-box form input[type="text"],
         .signup-box form input[type="password"],
-        .signup-box form input[type="tel"] {
+        .signup-box form input[type="email"] {
             width: 335px;
             height: 52px;
             background: #FFFFFF;

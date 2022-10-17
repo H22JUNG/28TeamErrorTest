@@ -104,7 +104,14 @@
             padding: 20px;
             min-width: 1200px;
         }
-
+		
+		main .mypage-container {
+			display: flex;
+			width: 80%;
+			justify-content: center;
+			align-items: center
+		}
+		
         /* 마이페이지 메뉴 */
         main aside {
             display: flex;
@@ -266,6 +273,7 @@
         </nav>
     </header>
     <main>
+    	<div class="mypage-container">
         <aside>
             <ul>
                 <li>
@@ -330,6 +338,7 @@
                 </button>
             </div>
         </section>
+        </div>
     </main>
     <footer>
 
