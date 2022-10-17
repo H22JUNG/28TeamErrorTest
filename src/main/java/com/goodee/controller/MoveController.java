@@ -20,8 +20,8 @@ public class MoveController {
 		return "my_page";
 	}
 	
-	@GetMapping("/movemypage/{path}")
-	public String movemypage(@PathVariable("path") int i) {
+	@GetMapping("/mypage/{path}")
+	public String mypage(@PathVariable("path") int i) {
 		if(i == 0) {
 			return "my_page";
 		}else {

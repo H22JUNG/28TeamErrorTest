@@ -346,10 +346,10 @@
     
     <script type="text/javascript">
     	for (var i = 0; i < document.getElementById("sidemenulist").children.length; i++) {
-    		document.getElementsByClassName("sidemenu")[i].addEventListener("click",function(){
-    			location.href = "${pageContext.request.contextPath}/movemypage/"+i;
+    		document.getElementsByClassName('sidemenu')[i].addEventListener("click",function(){
+    			location.href = "${pageContext.request.contextPath}/mypage/"+i;
     		});
-		}
+		};
     </script>
 </body>
 

@@ -212,7 +212,7 @@
                 <div class="itembox">
                     <div class="smallItembox">
                     <div class="itemImage">
-                        <img src="./projectimg/dresser/dresser1_1.webp">
+                        <img src="image/dresser1_2.webp">
                     </div>
                     <div class="itemboxText">
                         <h4>상품 이름 : </h4>
@@ -225,8 +225,9 @@
 
                 </div>
                 <div class="itembox">
-                    <div class="smallItembox">                    <div class="itemImage">
-                        <img src="./projectimg/dresser/dresser1_2.webp">
+                    <div class="smallItembox">                    
+                    <div class="itemImage">
+                        <img src="image/dresser1_2.webp">
                     </div>
                     <div class="itemboxText">
                         <h4>상품 이름 : </h4>
