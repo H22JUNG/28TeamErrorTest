@@ -275,9 +275,9 @@
     <main>
     	<div class="mypage-container">
         <aside>
-            <ul>
+            <ul id="sidemenulist">
                 <li>
-                    <div>
+                    <div class="sidemenu">
                         <div class="mytext">
                             <h4>마이페이지</h4>
                             <p>내 정보 조회 / 수정 / 적립금조회</p>
@@ -288,7 +288,7 @@
                     </div>
                 </li>
                 <li>
-                    <div>
+                    <div class="sidemenu">
                         <div class="mytext">
                             <h4>장바구니</h4>
                         </div>
@@ -298,7 +298,7 @@
                     </div>
                 </li>
                 <li>
-                    <div>
+                    <div class="sidemenu">
                         <div class="mytext">
                             <h4>주문내역 조회</h4>
                             <p>주문 / 배송 조회</p>
@@ -309,7 +309,7 @@
                     </div>
                 </li>
                 <li>
-                    <div>
+                    <div class="sidemenu">
                         <div class="mytext">
                             <h4>내가 쓴 글</h4>
                         </div>
@@ -343,6 +343,14 @@
     <footer>
 
     </footer>
+    
+    <script type="text/javascript">
+    	for (var i = 0; i < document.getElementById("sidemenulist").children.length; i++) {
+    		document.getElementsByClassName("sidemenu")[i].addEventListener("click",function(){
+    			location.href = "${pageContext.request.contextPath}/movemypage/"+i;
+    		});
+		}
+    </script>
 </body>
 
 </html>

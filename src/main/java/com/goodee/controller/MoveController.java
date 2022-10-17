@@ -2,6 +2,7 @@ package com.goodee.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class MoveController {
@@ -17,5 +18,14 @@ public class MoveController {
 	@GetMapping("/mypage")
 	public String mypage() {
 		return "my_page";
+	}
+	
+	@GetMapping("/movemypage/{path}")
+	public String movemypage(@PathVariable("path") int i) {
+		if(i == 0) {
+			return "my_page";
+		}else {
+			return "pay_result";
+		}
 	}
 }
