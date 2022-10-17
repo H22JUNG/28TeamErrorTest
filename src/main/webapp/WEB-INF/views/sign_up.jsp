@@ -156,7 +156,7 @@
                 <h3>회원가입</h3>
                 <ul class="signupinput">
                     <li>
-                        <input type="text" name="name" id="name" placeholder="이름">
+                        <input type="text" name="username" id="username" placeholder="이름">
                     </li>
                     <li class="idli">
                         <input type="text" name="userid" id="userid" placeholder="아이디">
@@ -169,7 +169,7 @@
                         <input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인">
                     </li>
                     <li>
-                        <input type="tel" name="userphone" id="userphone" placeholder="휴대폰 번호">
+                        <input type="email" name="email" id="email" placeholder="이메일">
                     </li>
                 </ul>
                 <button class="btn">회원가입</button>
