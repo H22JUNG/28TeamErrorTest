@@ -24,8 +24,11 @@ public class LoginService {
 			map.put("login", "success");
 		}else {
 			map.put("login", "false");
-			
 		}
 		return map;
+	}
+	
+	public int getId(UserVO vo) {
+		return dao.getId(vo);
 	}
 }

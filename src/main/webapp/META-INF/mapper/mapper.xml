@@ -3,8 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.goodee.dao.ProjectDAO">
+
 	<select id="login" resultType="int" parameterType="userVO">
 		select count(*) from user
+		where userid = #{userid} and password = #{password}
+	</select>
+	<select id="getId" resultType="int" parameterType="UserVO">
+		select id from user
 		where userid = #{userid} and password = #{password}
 	</select>
 </mapper>

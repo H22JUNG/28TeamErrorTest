@@ -345,15 +345,7 @@
 
     </footer>
     
-    <script type="text/javascript">
-    	for (var i = 0; i < document.getElementById("sidemenulist").children.length; i++) {
-    		console.log("${pageContext.request.contextPath}/mypage/"+i);
-    		console.log(document.getElementsByClassName("sidemenu")[i]);
-    		document.getElementsByClassName("sidemenu")[i].addEventListener("click",function(){
-    			location.href = "${pageContext.request.contextPath}/mypage/"+i+"";
-    		});
-		};
-    </script>
+    
 </body>
 
 </html>

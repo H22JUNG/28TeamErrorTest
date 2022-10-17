@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,7 +147,12 @@
                 <ul>
                     <li><a href=""><img src="" alt="">검색</a></li>
                     <li><a href=""><img src="" alt="">장바구니</a></li>
+                    <c:if test="${id eq null}">
                     <li><a href="${pageContext.request.contextPath}/loginpage">로그인</a></li>
+                    </c:if>
+                    <c:if test="${id != null}">
+                    <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
+                    </c:if>
                     <li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
                 </ul>
             </div>

@@ -1,5 +1,7 @@
 package com.goodee.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,21 +18,13 @@ public class MoveController {
 		return "sign_up";
 	}	
 	@GetMapping("/mypage")
-	public String mypage() {
+	public String mypage(HttpSession session) {
+		if(session.getAttribute("id")!=null) {
 		return "my_page";
-	}
-	
-	@GetMapping("/mypage/{path}")
-	public String mypage(@PathVariable("path") int i) {
-		System.out.println("i : " + i);
-		if(i == 0) {
-			return "my_page";
-		} else if (i == 2) {
+		} else {
 			return "login";
-		}else if(i == 3){
-			return "pay_result";
-		}else {
-			return "pay";
 		}
 	}
+	
+	
 }

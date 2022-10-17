@@ -1,5 +1,6 @@
 package com.goodee.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -18,12 +19,20 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String login(UserVO vo, HttpSession session) {
+	public String login(UserVO vo, HttpSession session, HttpServletRequest request) {
 		if(service.login(vo).get("login").equals("success")) {
-			session.setAttribute("login", vo);
+			session = request.getSession();
+			session.setAttribute("id", service.getId(vo));
 			return "redirect:/";
 		}else {
+			session.invalidate();
 			return "login";
 		}
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 }

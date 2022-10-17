@@ -8,4 +8,5 @@ import com.goodee.vo.UserVO;
 public interface ProjectDAO {
 	
 	public int login(UserVO vo);
+	public int getId(UserVO vo);
 }
