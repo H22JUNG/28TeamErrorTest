@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 	
-	@RequestMapping(value="/")
+	@RequestMapping(value="/") //value="/" : 기존 servlet의  @WebServlet("/..")과 동일
 	public String home() {
-
-		return "index";
+		System.out.println("HomeController.home()");
+		return "main";
 	}
 }
