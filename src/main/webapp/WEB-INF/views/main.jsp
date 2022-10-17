@@ -17,7 +17,7 @@
         }
 
         body {
-            background: url("image/KakaoTalk_20221013_170149504.webp") 0% 300% fixed;
+            background: url("${pageContext.request.contextPath}/image/KakaoTalk_20221013_170149504.webp") 0% 300% fixed;
             background-size: cover;
             height: 100vh;
             display: flex;
@@ -140,7 +140,7 @@
     <header>
         <div class="header-top">
             <div class="logo">
-                <a href="${pageContext.request.contextPath}/"><img src="image/KakaoTalk_20221012_170414651.png" alt=""></a>
+                <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/image/KakaoTalk_20221012_170414651.png" alt=""></a>
             </div>
             <div class="side">
                 <ul>

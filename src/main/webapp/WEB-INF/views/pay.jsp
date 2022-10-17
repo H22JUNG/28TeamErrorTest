@@ -212,7 +212,7 @@
                 <div class="itembox">
                     <div class="smallItembox">
                     <div class="itemImage">
-                        <img src="image/dresser1_2.webp">
+                        <img src="${pageContext.request.contextPath}/image/dresser1_2.webp">
                     </div>
                     <div class="itemboxText">
                         <h4>상품 이름 : </h4>
@@ -227,7 +227,7 @@
                 <div class="itembox">
                     <div class="smallItembox">                    
                     <div class="itemImage">
-                        <img src="image/dresser1_2.webp">
+                        <img src="${pageContext.request.contextPath}/image/dresser1_2.webp">
                     </div>
                     <div class="itemboxText">
                         <h4>상품 이름 : </h4>

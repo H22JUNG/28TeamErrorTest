@@ -17,7 +17,7 @@
         }
 
         body {
-            background: url("image/KakaoTalk_20221013_170149504.webp") center;
+            background: url("${pageContext.request.contextPath}/image/KakaoTalk_20221013_170149504.webp") center;
             background-size: cover;
             height: 100vh;
             display: flex;
@@ -147,7 +147,7 @@
 
     </div>
     <div class="logo">
-        <img src="image/KakaoTalk_20221012_170414651.png" alt="">
+        <img src="${pageContext.request.contextPath}/image/KakaoTalk_20221012_170414651.png" alt="">
     </div>
     <div class="signup-container">
         <div class="signup-box">
