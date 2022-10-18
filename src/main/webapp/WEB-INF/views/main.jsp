@@ -104,11 +104,17 @@
             gap: 30px;
             min-width: 1200px;
         }
-        main .event {
-            width: 800px;
+           main .event {
+            width: 900px;
             height: 400px;
-            border: 1px solid black;
         }
+
+        main .event img {
+            width: 100%;
+            height: 100%;
+        }
+
+        
         main .best {
             width: 800px;
             display: flex;
@@ -175,7 +181,7 @@
     </header>
     <main>
         <div class="event">
-
+			<img src="image/event.png" alt="">
         </div>
         <div class="best">
             <h1>Best</h1>
@@ -191,6 +197,35 @@
     <footer>
 
     </footer>
+    
+     <script>
+        var slideIndex = 0;
+
+        window.onload = function () {
+            showSlides(slideIndex);
+
+            var sec = 3000;
+            setInterval(function () {
+                slideIndex++;
+                showSlides(slideIndex);
+            }, sec);
+        }
+
+        function showSlides(n) {
+            if ((n + 1) > 7) {
+                slideIndex = 0; n = 0;
+            } else if (n < 0) {
+                slideIndex = (7 - 1);
+                n = (7 - 1);
+            }
+            var slide = document.querySelector(".event img");
+            for (let i = 0; i < 7; i++) {
+                slide.setAttribute("src", "image/event" + slideIndex + ".png");
+            }
+        }
+
+        
+    </script>
 </body>
 
 </html>
