@@ -19,7 +19,7 @@ public class MoveController {
 	}	
 	@GetMapping("/mypage")
 	public String mypage(HttpSession session) {
-		if(session.getAttribute("id")!=null) {
+		if(session.getAttribute("user")!=null) {
 		return "my_page";
 		} else {
 			return "login";

@@ -8,8 +8,8 @@
 		select count(*) from user
 		where userid = #{userid} and password = #{password}
 	</select>
-	<select id="getId" resultType="int" parameterType="UserVO">
-		select id from user
+	<select id="getUser" resultType="userVO" parameterType="userVO">
+		select userid, username from user
 		where userid = #{userid} and password = #{password}
 	</select>
 </mapper>
