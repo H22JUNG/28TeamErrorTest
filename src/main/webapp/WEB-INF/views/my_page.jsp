@@ -329,7 +329,8 @@
                     <li><span>이름</span>${user.username}</li>
                     <li><span>비밀번호 변경</span><input type="password" name="" id=""></li>
                     <li><span>비밀번호 확인</span><input type="password" name="" id=""></li>
-                    <li><span>휴대폰 번호</span> 010-xxxx-xxxx</li>
+                    <li><span>휴대폰 번호</span> ${user.tel}</li>
+                    <li><span>이메일</span> ${user.email}</li>
                     <li><span>적립금</span>xxx p</li>
                 </ul>
             <div class="edit">
