@@ -6,9 +6,11 @@ import org.apache.ibatis.type.Alias;
 public class UserVO {
 
 	private int id;
-	private String username;
 	private String userid;
 	private String password;
+	private String username;
+	private String tel;
+	private String address;
 	private String email;
 	
 	public int getId() {
@@ -40,6 +42,18 @@ public class UserVO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	
