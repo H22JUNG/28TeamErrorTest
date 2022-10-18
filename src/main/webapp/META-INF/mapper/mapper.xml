@@ -9,7 +9,11 @@
 		where userid = #{userid} and password = #{password}
 	</select>
 	<select id="getUser" resultType="userVO" parameterType="userVO">
-		select userid, username from user
+		select userid, username, tel, email from user
 		where userid = #{userid} and password = #{password}
+	</select>
+	<select id="isAdmin" resultType="int" parameterType="userVO">
+		select count(*) from user
+		where userid = #{userid} and password = #{password} and admin = 1
 	</select>
 </mapper>

@@ -9,4 +9,5 @@ public interface ProjectDAO {
 	
 	public int login(UserVO vo);
 	public UserVO getUser(UserVO vo);
+	public int isAdmin(UserVO vo);
 }

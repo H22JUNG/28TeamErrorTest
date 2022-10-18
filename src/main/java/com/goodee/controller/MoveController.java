@@ -26,6 +26,11 @@ public class MoveController {
 		}
 	}
 	
+	@GetMapping("/adminpage")
+	public String adiminpage() {
+		return "admin-user";
+	}
+	
 	@GetMapping("/movemypage/{path}")
 	public String movemypage(@PathVariable("path") int path) {
 		System.out.println("path : "+path);
@@ -39,4 +44,5 @@ public class MoveController {
 			return "wrote";
 		}
 	}
+	
 }

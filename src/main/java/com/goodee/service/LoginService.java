@@ -31,4 +31,12 @@ public class LoginService {
 	public UserVO getUser(UserVO vo) {
 		return dao.getUser(vo);
 	}
+	
+	public Boolean isAdmin(UserVO vo) {
+		if(dao.isAdmin(vo)==1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
