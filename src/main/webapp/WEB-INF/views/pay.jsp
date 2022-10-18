@@ -186,7 +186,7 @@
             cursor: pointer;
         }
         #sample6_address{
-            width: 500px;
+            width: 70%;
         }
 
         .checkItems {
@@ -296,6 +296,12 @@
             #right{
                 margin-left: 20%;
             }
+             #sample6_postcode{
+                width: 100px;
+            }
+            #addBtn{
+                width: 50px;
+            }
         }
         @media (max-width:500px) {
             #right{
@@ -370,8 +376,10 @@
              <div id="infor">
                 <h3>고객 정보 입력</h3>
                 <div class="inforBox"> 
+                <div>
                 <input type="text" id="sample6_postcode" placeholder="우편번호">
                 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" id="addBtn"><br>
+                </div>
                주소<input type="text" class="inforInput" required  id="sample6_address" placeholder="주소"><br>
                상세 주소<input type="text" class="inforInput"  id="sample6_detailAddress" required placeholder="상세주소를 입력해주세요"> <input type="text" id="sample6_extraAddress" placeholder="(동, 건물)" class="inforInput"></div>
                 <div class="inforBox">주문자  <input type="text" class="inforInput" placeholder="이름을 입력해주세요" required> 연락처 <input type="text" class="inforInput" placeholder="숫자로만 입력해주세요" required></div>
