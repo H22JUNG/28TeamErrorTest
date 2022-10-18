@@ -449,7 +449,13 @@ main section {
 	</main>
 	<footer> </footer>
 
-	 
+	 <script>
+        for (let i = 0; i < document.getElementById("sidemenulist").children.length; i++) {
+            document.getElementsByClassName("sidemenu")[i].addEventListener("click", function(){
+                location.href = "${pageContext.request.contextPath}/movemypage/"+i;
+            });
+        };
+	  </script>
 </body>
 
 </html>

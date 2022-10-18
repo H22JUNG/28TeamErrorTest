@@ -28,7 +28,7 @@ public class LoginService {
 		return map;
 	}
 	
-	public int getId(UserVO vo) {
-		return dao.getId(vo);
+	public UserVO getUser(UserVO vo) {
+		return dao.getUser(vo);
 	}
 }

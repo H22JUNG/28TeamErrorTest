@@ -325,8 +325,8 @@
             <h2>내 정보 조회</h2>
             <form action="${pageContext.request.contextPath}/" method="post" class="my-info">
                 <ul>
-                    <li><span>아이디</span> xxxxx</li>
-                    <li><span>이름</span>xxx</li>
+                    <li><span>아이디</span> ${user.userid}</li>
+                    <li><span>이름</span>${user.username}</li>
                     <li><span>비밀번호 변경</span><input type="password" name="" id=""></li>
                     <li><span>비밀번호 확인</span><input type="password" name="" id=""></li>
                     <li><span>휴대폰 번호</span> 010-xxxx-xxxx</li>
@@ -345,7 +345,13 @@
 
     </footer>
     
-    
+        <script>
+        for (let i = 0; i < document.getElementById("sidemenulist").children.length; i++) {
+            document.getElementsByClassName("sidemenu")[i].addEventListener("click", function(){
+                location.href = "${pageContext.request.contextPath}/movemypage/"+i;
+            });
+        };
+	    </script>
 </body>
 
 </html>

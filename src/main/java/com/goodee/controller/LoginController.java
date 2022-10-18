@@ -22,7 +22,7 @@ public class LoginController {
 	public String login(UserVO vo, HttpSession session, HttpServletRequest request) {
 		if(service.login(vo).get("login").equals("success")) {
 			session = request.getSession();
-			session.setAttribute("id", service.getId(vo));
+			session.setAttribute("user", service.getUser(vo));
 			return "redirect:/";
 		}else {
 			session.invalidate();

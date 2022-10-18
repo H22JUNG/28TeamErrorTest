@@ -19,12 +19,24 @@ public class MoveController {
 	}	
 	@GetMapping("/mypage")
 	public String mypage(HttpSession session) {
-		if(session.getAttribute("id")!=null) {
+		if(session.getAttribute("user")!=null) {
 		return "my_page";
 		} else {
 			return "login";
 		}
 	}
 	
-	
+	@GetMapping("/movemypage/{path}")
+	public String movemypage(@PathVariable("path") int path) {
+		System.out.println("path : "+path);
+		if(path == 0) {
+			return "my_page";
+		} else if(path == 1) {
+			return "pay";
+		} else if(path == 2) {
+			return "pay_result";
+		} else {
+			return "wrote";
+		}
+	}
 }
