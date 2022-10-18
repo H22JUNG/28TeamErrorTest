@@ -9,11 +9,35 @@
 		where userid = #{userid} and password = #{password}
 	</select>
 	<select id="getUser" resultType="userVO" parameterType="userVO">
-		select userid, username, tel, email from user
+		select id, userid, username, tel, email from user
 		where userid = #{userid} and password = #{password}
 	</select>
 	<select id="isAdmin" resultType="int" parameterType="userVO">
 		select count(*) from user
 		where userid = #{userid} and password = #{password} and admin = 1
 	</select>
+	
+	
+	<!-- 내가 쓴 글 -->
+		<select id="getwrote" resultType="wroteVO" parameterType="userVO">
+		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
+		from wrotebbs where re_id=0 and owner_id=#{id}
+	</select>
+	<select id="getRewrote" resultType="wroteVO">
+		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
+		from wrotebbs where re_id !=0;
+	</select>
+	<select id="getsearch" resultType="wroteVO" parameterType="String">
+		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
+		from wrotebbs 
+		where category = #{category};
+	</select>
+	<select id="getdetail" resultType="wroteVO" parameterType="wroteVO">
+		select id, category, title, owner, date_format(create_date, '%Y-%m-%d') createDate, content
+		from wrotebbs 
+		where id=#{id};
+	</select>
+	<delete id="getdelete">
+		delete from wrotebbs where re_id=#{id} or id=#{id};
+	</delete>
 </mapper>

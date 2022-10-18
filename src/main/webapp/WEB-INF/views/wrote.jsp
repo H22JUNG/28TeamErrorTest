@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -247,10 +248,11 @@
         }
         table {
             color: #616161;
+            border-collapse: collapse;
         }
         th {
             color: black;
-            border-bottom : 2px solid #21A5B5;
+            border-bottom : 3px solid #21A5B5;
             padding: 10px 0 10px 0;
         }
         td{
@@ -260,6 +262,17 @@
         }
         td:nth-child(3) {
             text-align: start;
+        }
+        table a {
+        	text-decoration : none;
+        	color: #616161;
+        }
+        #paging {
+        	border : 1px solid #21A5B5;
+        	background-color: #F8F8F8;
+        	text-align : center;
+        	border-radius: 10px;
+        	padding : 10px;
         }
     </style>
 </head>
@@ -292,100 +305,144 @@
             </ul>
         </nav>
     </header>
-    <main>
-    	<div class="mypage-container">
-        <aside>
-            <ul id="sidemenulist">
-                <li>
-                    <div class="sidemenu">
-                        <div class="mytext">
-                            <h4>마이페이지</h4>
-                            <p>내 정보 조회 / 수정 / 적립금조회</p>
-                        </div>
-                        <div class="open">
-                            <div><span>+</span></div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="sidemenu">
-                        <div class="mytext">
-                            <h4>장바구니</h4>
-                        </div>
-                        <div class="open">
-                            <div><span>+</span></div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="sidemenu">
-                        <div class="mytext">
-                            <h4>주문내역 조회</h4>
-                            <p>주문 / 배송 조회</p>
-                        </div>
-                        <div class="open">
-                            <div><span>+</span></div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="sidemenu">
-                        <div class="mytext">
-                            <h4>내가 쓴 글</h4>
-                        </div>
-                        <div class="open">
-                            <div><span>+</span></div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </aside>
-        <section>
-            <h2>내가 쓴 글</h2>
-            <div id="ca-search">
-            <form action="/조회하는controller" method="get" >
-            <p >카테고리별 조회</p>
-            <select name="category" id="category">
-                <option value="Q&A">Q&A</option>
-                <option value="review">review</option>
-            </select>
-            <button>검색</button>
-            </form>
-            </div>
-                <table>
-                    <thead>
-                        <tr>
-                        <th>번호</th>
-                        <th>카테고리</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성일</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <td>1</td>
-                        <td>Q&A</td>
-                        <td>글제목</td>
-                        <td>김희정</td>
-                        <td>2022-1017</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Q&A</td>
-                            <td>글제목</td>
-                            <td>김희정</td>
-                            <td>2022-1017</td>
-                        </tr>
-                    </tbody>
-                </table>
-           <div id="paging">
-            1234
-           </div>
-        </section>
-        </div>
-    </main>
-    <footer>
+	<main>
+		<div class="mypage-container">
+			<aside>
+				<ul id="sidemenulist">
+					<li>
+						<div class="sidemenu">
+							<div class="mytext">
+								<h4>마이페이지</h4>
+								<p>내 정보 조회 / 수정 / 적립금조회</p>
+							</div>
+							<div class="open">
+								<div>
+									<span>+</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="sidemenu">
+							<div class="mytext">
+								<h4>장바구니</h4>
+							</div>
+							<div class="open">
+								<div>
+									<span>+</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="sidemenu">
+							<div class="mytext">
+								<h4>주문내역 조회</h4>
+								<p>주문 / 배송 조회</p>
+							</div>
+							<div class="open">
+								<div>
+									<span>+</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="sidemenu">
+							<div class="mytext">
+								<h4>내가 쓴 글</h4>
+							</div>
+							<div class="open">
+								<div>
+									<span>+</span>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</aside>
+			<section>
+				<h2>내가 쓴 글</h2>
+				<div id="ca-search">
+					<form action="${pageContext.request.contextPath}/search"
+						method="get">
+						<p>카테고리별 조회</p>
+						<select name="category" id="category">
+							<option value="Q&A">Q&A</option>
+							<option value="review">review</option>
+						</select>
+						<button>검색</button>
+					</form>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>카테고리</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="item" items="${list}">
+							<tr>
+								<td>${item.id}</td>
+								<td>${item.category}</td>
+								<td><a
+									href="${pageContext.request.contextPath }/wrotedetail?id=${item.id}">${item.title}</a></td>
+								<td>${item.owner}</td>
+								<td>${item.createDate}</td>
+							</tr>
+								<c:forEach var="item2" items="${Relist}">
+									<c:if test="${item2.reId eq item.id}">
+									<tr>
+										<td>${item2.id}</td>
+										<td>${item2.category}</td>
+										<td> └ <a href="${pageContext.request.contextPath }/wrotedetail?id=${item2.id}">${item2.title}</a></td>
+										<td>${item2.owner}</td>
+										<td>${item2.createDate}</td>
+									</tr>
+									</c:if>
+								</c:forEach>
+						</c:forEach>
+					</tbody>
+				</table>
+				<%-- <div id="paging">
+					<% %>
+					<c:choose>
+						<c:when test="${1==page.nowPage}">
+							<span>◀</span>
+						</c:when>
+						<c:otherwise>
+							<a href="${pageContext.request.contextPath}/paging?page=${page.nowPage-1}">◀</a>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+						<c:choose>
+							<c:when test="${page.nowPage eq i}">
+								<span>${i}</span>
+							</c:when>
+							<c:otherwise>
+								<a
+									href="${pageContext.request.contextPath}/paging?page=${i}">${i}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${page.totalPage == page.nowPage}">
+							<span>▶</span>
+						</c:when>
+						<c:otherwise>
+							<a
+								href="${pageContext.request.contextPath}/paging?page=${page.nowPage+1}">▶</a>
+						</c:otherwise>
+					</c:choose>
+				</div> --%>
+			</section>
+		</div>
+	</main>
+	<footer>
 
     </footer>
 

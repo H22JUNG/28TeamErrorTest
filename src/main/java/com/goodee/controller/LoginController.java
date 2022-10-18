@@ -23,9 +23,9 @@ public class LoginController {
 		if(service.login(vo).get("login").equals("success")) {
 			session = request.getSession();
 			session.setAttribute("user", service.getUser(vo));
-			if(service.isAdmin(vo) == true) {
-				session.setAttribute("admin", "true");
-			}
+//			if(service.isAdmin(vo) == true) {
+//				session.setAttribute("admin", "true");
+//			}
 			return "redirect:/";
 		}else {
 			session.invalidate();
