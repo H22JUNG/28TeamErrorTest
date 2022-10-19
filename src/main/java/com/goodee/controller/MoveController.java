@@ -5,14 +5,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodee.service.BbsService;
-import com.goodee.vo.UserVO;
-import com.goodee.vo.WrotebbsVO;
 
 @Controller
 public class MoveController {
@@ -31,6 +28,12 @@ public class MoveController {
 	public String signuppage() {
 		return "sign_up";
 	}	
+	
+	@GetMapping("/cart")
+	public String cartPage() {
+		return "cart";
+	}
+	
 	@GetMapping("/mypage")
 	public String mypage(HttpSession session) {
 		if(session.getAttribute("user")!=null) {
@@ -44,6 +47,7 @@ public class MoveController {
 	public String adiminpage() {
 		return "admin-user";
 	}
+	
 	
 	@GetMapping("/movemypage/{path}")
 	public String movemypage(@PathVariable("path") int path, Model model, HttpSession session) {
@@ -81,15 +85,38 @@ public class MoveController {
 		return "redirect:/movemypage/3";
 	}
 	@GetMapping("/modify/{id}")
-	public String modify(@PathVariable("id") int id, @ModelAttribute("detail") WrotebbsVO vo, Model model) {
-		bbsservice.getdetail(id, model);
+	public String modify(@PathVariable("id") int id) {
 		return "wroteModify";
 	}
 	@PostMapping("/modify")
-	public String modifydone(@ModelAttribute("detail")WrotebbsVO vo, @RequestParam("id") int id) {
-		vo.setId(id);
-		bbsservice.modify(vo);
-		return "redirect:/modify/"+vo.getId();
+	public String modifydone() {
+		return "wrotedetail";
 	}
 	
+	
+	
+	
+	// 관리자 페이지 - 상품정보
+	@GetMapping("/admin_product_list")
+	public String adminProductList() {
+		return "adminProduct/product_list";
+	}
+	
+	// 관리자 페이지 - 상품등록
+	@GetMapping("/admin_product_insert")
+	public String adminProductInsert() {
+		return "adminProduct/product_insert";
+	}
+	
+	// 관리자 페이지 - 상품수정
+	@GetMapping("/admin_product_update")
+	public String adminProductUpdate() {
+		return "adminProduct/product_update";
+	}
+	
+	// 관리자 페이지 - 상품삭제
+	@GetMapping("/admin_product_delete")
+	public String adminProductDelete() {
+		return "adminProduct/product_delete";
+	}
 }

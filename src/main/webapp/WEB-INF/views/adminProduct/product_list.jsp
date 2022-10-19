@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -174,7 +176,9 @@ main section {
 }
 /* 본문 */
 #search {
-	align-self: flex-end;
+	/* align-self: flex-end; */
+    float: right;
+    padding: 20px;
 }
 
 #search button {
@@ -189,25 +193,48 @@ main section {
 	width: 100px;
 }
 
+.row {
+	display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+h1 {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    background-color: #21A5B5;
+}
+table, th, td {
+    border-collapse: collapse;
+}
+
 table {
-	border-collapse: collapse;
+	width: 100%
 }
 
 th {
-	color: black;
-	padding: 10px 0 10px 0;
-	border-bottom: 3px solid #616161;
+    border-bottom: 1px solid rgb(183, 183, 183);
+    padding-bottom: 10px;
+    color: gray;
 }
-
 td {
-	border-bottom: 1px solid #616161;
-	padding: 10px 0 10px 0;
-	text-align: center;
+    padding: 10px 1px 10px 1px;
 }
 
-td:nth-child(5), td:nth-child(6) {
-	text-align: start;
+#insert_btn {
+    border: none;
+    background-color: #64d6e4;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    float: right;
+    margin-top: 20px;
+    cursor: pointer;
 }
+
 
 /* 컨텐츠 메뉴 */
 .side-menu {
@@ -235,6 +262,9 @@ td:nth-child(5), td:nth-child(6) {
 			</div>
 			<div class="side">
 				<ul>
+					<c:if test="${admin != null}">
+                    <li><a href="${pageContext.request.contextPath}/adminpage">관리자페이지</a></li>
+                    </c:if>
 					<li><a href=""><img src="" alt="">검색</a></li>
 					<li><a href=""><img src="" alt="">장바구니</a></li>
 					<li><a href="${pageContext.request.contextPath}/loginpage">로그인</a></li>
@@ -268,7 +298,7 @@ td:nth-child(5), td:nth-child(6) {
 						</li>
 						<li>
 							<h4>
-								<a href="${pageContext.request.contextPath}/admin_product_list">✔ 상품관리</a>
+								<a href="">✔ 상품관리</a>
 							</h4>
 						</li>
 						<li>
@@ -297,72 +327,87 @@ td:nth-child(5), td:nth-child(6) {
 			<div class="content-box">
 				<section>
 					<ul class="side-menu">
-						<li>
+                        <li>
 							<h4>
-								<a href="">회원정보 조회</a>
+								<a href="${pageContext.request.contextPath}/admin_product_list">상품정보 조회</a>
 							</h4>
 						</li>
 						<li>
 							<h4>
-								<a href="">회원정보 수정</a>
+								<a href="${pageContext.request.contextPath}/admin_product_insert">상품정보 등록</a>
 							</h4>
 						</li>
 						<li>
 							<h4>
-								<a href="">회원정보 삭제</a>
+								<a href="${pageContext.request.contextPath}/admin_product_update">상품정보 수정</a>
+							</h4>
+						</li>
+						<li>
+							<h4>
+								<a href="${pageContext.request.contextPath}/admin_product_delete">상품정보 삭제</a>
 							</h4>
 						</li>
 					</ul>
 				</section>
 				<section>
-					<div id="search">
-						<form action="" method="get">
-							<select name="" id="">
-								<option value="">첫번째</option>
-								<option value="">두번째</option>
-								<option value="">세번째</option>
-								<option value="">네번째</option>
-								<option value="">첫번째</option>
-							</select> <input type="text" placeholder="검색어를 입력하세요">
-							<button>검색</button>
-						</form>
-					</div>
-					<table>
-						<thead>
-							<tr>
-								<th>회원번호</th>
-								<th>회원 아이디</th>
-								<th>회원명</th>
-								<th>회원 연락처</th>
-								<th>회원 주소</th>
-								<th>회원 이메일</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>aaa1</td>
-								<td>글제목</td>
-								<td>김희정</td>
-								<td>2022-1017</td>
-								<td>2022-1017</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>Q&A</td>
-								<td>글제목</td>
-								<td>김희정</td>
-								<td>2022-1017</td>
-								<td>2022@1017</td>
-							</tr>
-						</tbody>
-					</table>
+                    
+                    <div class="container admin_container">
+                            <h1 class="jumbotron" style="text-align: center;">상품 리스트</h1>
+                        <div class="row">
+                            
+                            <div id="search">
+                                <form action="" method="get">
+                                    <select name="" id="">
+                                        <option value="">첫번째</option>
+                                        <option value="">두번째</option>
+                                        <option value="">세번째</option>
+                                        <option value="">네번째</option>
+                                        <option value="">첫번째</option>
+                                    </select> <input type="text" placeholder="검색어를 입력하세요">
+                                    <button>검색</button>
+                                </form>
+                            </div>
+
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>상품ID</th>
+                                        <th>상품명</th>
+                                        <th>상품가격</th>
+                                        <th>재고</th>
+                                        <th>조회수</th>
+                                        <th>상품 등록일</th>
+                                        <th>최종 수정일</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="">${productInfo.productId}내용물 블라블라블라</a></td>
+                                        <td>${productInfo.productName}내용물 블라블라블라</td>
+                                        <td>${productInfo.price}내용물 블라블라블라</td>
+                                        <td>${productInfo.stock}내용물 블라블라블라</td>
+                                        <td>${productInfo.productView}내용물 블라블라블라</td>
+                                        <td><fmt:formatDate value="${productInfo.regDate}" type="date" pattern="yyyy-MM-dd"/> </td>
+                                        <td><fmt:formatDate value="${productInfo.updateDate}" type="date" pattern="yyyy-MM-dd"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button id="insert_btn">상품 등록</button>
+                        </div>
+                        <!-- class = row -->
+                    </div>
 				</section>
 			</div>
 		</div>
 	</main>
 	<footer>
 	</footer>
+	
+	<script type="text/javascript">
+    	document.getElementById("insert_btn").addEventListener("click",function(){
+        	location.href = "${pageContext.request.contextPath}/admin_product_insert";
+    	});
+	</script>
 </body>
 
 </html>
