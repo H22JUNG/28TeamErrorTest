@@ -378,7 +378,8 @@
 
                 </div>
                 <div class="itembox">
-                    <div class="smallItembox">                    <div class="itemImage">
+                    <div class="smallItembox">
+                    <div class="itemImage">
                         <img src="${pageContext.request.contextPath}/image/dresser1_2.webp">
                     </div>
                     <div class="itemboxText">
@@ -425,11 +426,9 @@
             <!--여기까지 결제 할 물건 -->
             <div id="selectPay">
                 <h3>결제 방법 선택</h3>
-                <form id="selectPayForm" action="">
                <label for="cash">무통장입금<input type="radio" class="pay" name="pay" value="cash" id="cash"></label>
                <label for="card">카드결제<input type="radio" class="pay" name="pay" value="card" id="card"></label>
                <p>사용가능 적립금 : </p><label for="point">사용할 적립금 <input type="text" class="pay" id="point"></label>
-            </form>
             </div>
             <!--여기 까지 결제 할 물건-->
             <div id="messageContainer">
