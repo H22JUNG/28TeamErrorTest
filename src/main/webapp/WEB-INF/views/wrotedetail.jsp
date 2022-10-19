@@ -209,7 +209,7 @@
 				<form action="/delete" method="post">
 					<button id="delete">삭 제</button>
 				</form>
-				<form action="${pageContext.request.contextPath}/modify" method="post">
+				<form action="/modify" method="post">
 					<button id="modify">수 정</button>
 				</form>
 			</div>

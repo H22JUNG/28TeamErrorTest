@@ -45,6 +45,9 @@ public class BbsService {
 		return dao.getdetail(id);
 	}
 	
+	public void modify(WrotebbsVO vo) {
+		dao.modify(vo);
+	}
 	public void getdelete(int id) {
 		dao.getdelete(id);
 	}

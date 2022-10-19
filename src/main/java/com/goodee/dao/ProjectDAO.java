@@ -21,4 +21,5 @@ public interface ProjectDAO {
 	public List<WrotebbsVO> getsearch(@Param("category")String category);
 	public WrotebbsVO getdetail(@Param("id") int id);
 	public void getdelete(int id);
+	public void modify(WrotebbsVO vo);
 }

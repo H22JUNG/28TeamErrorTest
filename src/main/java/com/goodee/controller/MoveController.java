@@ -5,11 +5,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodee.service.BbsService;
+import com.goodee.vo.UserVO;
+import com.goodee.vo.WrotebbsVO;
 
 @Controller
 public class MoveController {
@@ -78,12 +81,15 @@ public class MoveController {
 		return "redirect:/movemypage/3";
 	}
 	@GetMapping("/modify/{id}")
-	public String modify(@PathVariable("id") int id) {
+	public String modify(@PathVariable("id") int id, @ModelAttribute("detail") WrotebbsVO vo, Model model) {
+		bbsservice.getdetail(id, model);
 		return "wroteModify";
 	}
 	@PostMapping("/modify")
-	public String modifydone() {
-		return "wrotedetail";
+	public String modifydone(@ModelAttribute("detail")WrotebbsVO vo, @RequestParam("id") int id) {
+		vo.setId(id);
+		bbsservice.modify(vo);
+		return "redirect:/modify/"+vo.getId();
 	}
 	
 }

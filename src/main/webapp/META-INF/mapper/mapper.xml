@@ -25,18 +25,22 @@
 	</select>
 	<select id="getRewrote" resultType="wroteVO">
 		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
-		from wrotebbs where re_id !=0;
+		from wrotebbs where re_id !=0
 	</select>
 	<select id="getsearch" resultType="wroteVO" parameterType="String">
 		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
 		from wrotebbs 
-		where category = #{category};
+		where category = #{category}
 	</select>
 	<select id="getdetail" resultType="wroteVO" parameterType="wroteVO">
 		select id, category, title, owner, date_format(create_date, '%Y-%m-%d') createDate, content
 		from wrotebbs 
-		where id=#{id};
+		where id=#{id}
 	</select>
+	<update id="modify" parameterType="wroteVO">
+		update wrotebbs set title=#{title}, content=#{content}
+		where id=#{id}
+	</update>
 	<delete id="getdelete">
 		delete from wrotebbs where re_id=#{id} or id=#{id};
 	</delete>

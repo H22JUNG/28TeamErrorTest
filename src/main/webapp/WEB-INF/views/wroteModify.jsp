@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -198,15 +199,16 @@
     <div id="coverContainer">
       <div id="container">
 			<h2>${detail.category}</h2>
+			
+			<form:form modelAttribute="detail" action="${pageContext.request.contextPath}/modify?id=${detail.id}" method="post">
 			<table>
 				<tr>
 					<td>제목</td>
-					<form action="${pageContext.request.contextPath}/modify" method="post">
-					<td><input type="text" value="${detail.title }" id="title"></td>
+					<td><form:input type="text" path="title" /></td>
 				</tr>
 				<tr>
 					<td>작성자</td>
-					<td>${detail.owner }</td>
+					<td>${detail.owner}</td>
 				</tr>
 				<tr>
 					<td>작성일자</td>
@@ -214,13 +216,14 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td><input type="text" value="${detail.content}" id="content"></td>
+					<td><form:input type="text" path="content"/></td>
 				</tr>
 			</table>
 			<div id="btn">
-					<button id="modify">수 정</button>
-				</form>
+				<button id="modify">수 정</button>
 			</div>
+			</form:form>
+			
         </div>
     </div>
     <footer>
