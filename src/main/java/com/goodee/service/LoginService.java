@@ -14,7 +14,6 @@ public class LoginService {
 	public ProjectDAO dao;
 
 	public LoginService(ProjectDAO dao) {
-		super();
 		this.dao = dao;
 	}
 	

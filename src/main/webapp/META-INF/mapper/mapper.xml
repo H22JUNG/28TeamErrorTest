@@ -17,6 +17,19 @@
 		where userid = #{userid} and password = #{password} and admin = 1
 	</select>
 	
+	<!-- product list -->
+	<!-- 카테고리별 -->
+	<select id="selectCategory" resultType="productVO" parameterType="productVO">
+		select pic1, pic2, pic3, pic4, name, price, discount, view, date_format (create_date, '%Y-%m-%d %T') 'createDate'
+		from product
+		where category1 = #{category1}
+	</select>
+	<select id="selectInnerCategory" resultType="productVO" parameterType="productVO">
+		select pic1, pic2, pic3, pic4, name, price, discount, view, date_format (create_date, '%Y-%m-%d %T') 'createDate'
+		from product
+		where category2 = #{category2}
+	</select>
+	
 	
 	<!-- 내가 쓴 글 -->
 		<select id="getwrote" resultType="wroteVO" parameterType="userVO">

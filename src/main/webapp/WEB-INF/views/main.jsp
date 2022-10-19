@@ -167,17 +167,17 @@
             </div>
         </div>
         <nav class="category">
-            <ul>
-                <li>Category</li>
-                <li>가구</li>
-                <li>패브릭</li>
-                <li>수납용품</li>
-                <li>생활용품</li>
-                <li>공지사항</li>
-                <li>Q&A</li>
-                <li>이벤트</li>
-            </ul>
-        </nav>
+			<ul>
+				<li>Category</li>
+				<li><a href="${pageContext.request.contextPath}/category/furniture">가구</a></li>
+				<li><a href="${pageContext.request.contextPath}/category/fabric">패브릭</a></li>
+				<li><a href="${pageContext.request.contextPath}/category/storage">수납용품</a></li>
+				<li><a href="${pageContext.request.contextPath}/category/supplies">생활용품</a></li>
+				<li>공지사항</li>
+				<li>Q&A</li>
+				<li>이벤트</li>
+			</ul>
+		</nav>
     </header>
     <main>
         <div class="event">
@@ -199,33 +199,35 @@
     </footer>
     
      <script>
-        var slideIndex = 0;
+ 	// 미래의 나에게 : 나중에 잊지말고 반드시 7 => 이벤트 count로 바꿔야돼
+     
+     var slideIndex = 0;
 
-        window.onload = function () {
-            showSlides(slideIndex);
+     window.onload = function () {
+         showSlides(slideIndex);
 
-            var sec = 3000;
-            setInterval(function () {
-                slideIndex++;
-                showSlides(slideIndex);
-            }, sec);
-        }
+         var sec = 3000;
+         setInterval(function () {
+             slideIndex++;
+             showSlides(slideIndex);
+         }, sec);
+     }
 
-        function showSlides(n) {
-            if ((n + 1) > 7) {
-                slideIndex = 0; n = 0;
-            } else if (n < 0) {
-                slideIndex = (7 - 1);
-                n = (7 - 1);
-            }
-            var slide = document.querySelector(".event img");
-            for (let i = 0; i < 7; i++) {
-                slide.setAttribute("src", "image/event" + slideIndex + ".png");
-            }
-        }
+     function showSlides(n) {
+         if ((n + 1) > 7) {
+             slideIndex = 0; n = 0;
+         } else if (n < 0) {
+             slideIndex = (7 - 1);
+             n = (7 - 1);
+         }
+         var slide = document.querySelector(".event img");
+         for (let i = 0; i < 7; i++) {
+             slide.setAttribute("src", "image/event" + slideIndex + ".png");
+         }
+     }
 
-        
-    </script>
+     
+ </script>
 </body>
 
 </html>
