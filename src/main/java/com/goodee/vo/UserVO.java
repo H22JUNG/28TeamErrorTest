@@ -12,6 +12,7 @@ public class UserVO {
 	private String tel;
 	private String address;
 	private String email;
+	private int point;
 	
 	public int getId() {
 		return id;
@@ -54,6 +55,12 @@ public class UserVO {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
 	}
 	
 	
