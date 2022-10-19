@@ -112,6 +112,11 @@
             gap: 20px;
           
         }
+        #container form {
+	display: flex;
+    justify-content: center;
+	gap : 20px;
+	}
 
         .itembox {
             border-bottom: 2px solid #71B2B4;
@@ -249,20 +254,32 @@
             font-size: 22px;
             cursor: pointer;
         }
-        #rightBottom{
-            border:2px solid  #71B2B4;
-            border-radius: 20px 20px;
-            height: 100px;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        #rightBottom {
+	border: 2px solid #71B2B4;
+	border-radius: 20px 20px;
+	height: 120px;
+	margin-top: 20px;
+	font-size:12px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding:0 10px;
+	}
+	#rightBottom div{
+	display:inline-block;
+	width:130px;
+	height:20px;
+	}
+	#rightBottom h4{
+	display:inline-block;
+	}
+
         @media  (max-width : 700px){
             *{
                 box-sizing: content-box;
             }
-            #container{
+            #container form{
                 flex-direction: column;
 
             }
@@ -341,6 +358,7 @@
     </header>
     <div id="coverContainer">
     <div id="container">
+    <form action="${pageContext.request.contextPath}/InforController" method="get">
         <div class="left">
             <div id="top">
                 <h3>선택한 상품</h3>
@@ -360,7 +378,8 @@
 
                 </div>
                 <div class="itembox">
-                    <div class="smallItembox">                    <div class="itemImage">
+                    <div class="smallItembox">
+                    <div class="itemImage">
                         <img src="${pageContext.request.contextPath}/image/dresser1_2.webp">
                     </div>
                     <div class="itemboxText">
@@ -407,11 +426,9 @@
             <!--여기까지 결제 할 물건 -->
             <div id="selectPay">
                 <h3>결제 방법 선택</h3>
-                <form id="selectPayForm" action="">
                <label for="cash">무통장입금<input type="radio" class="pay" name="pay" value="cash" id="cash"></label>
                <label for="card">카드결제<input type="radio" class="pay" name="pay" value="card" id="card"></label>
                <p>사용가능 적립금 : </p><label for="point">사용할 적립금 <input type="text" class="pay" id="point"></label>
-            </form>
             </div>
             <!--여기 까지 결제 할 물건-->
             <div id="messageContainer">
@@ -435,9 +452,12 @@
                 <p>배송비 : 2500원</p>
             </div>
             <div id="rightBottom">
-              <p>주문 번호 : </p>
+             <div><input type="checkbox" /><h4>주문내역확인동의</h4></div>
+				<p>주문할 상품의 상품명, 상품가격, 배송정보를 확인하였으며,
+				구매에 동의 하시겠습니까?(전자상거래법 제8조, 제2항)</p>
             </div>
         </div>
+        </form>
     </div>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
