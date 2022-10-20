@@ -38,4 +38,18 @@ public class LoginService {
 			return false;
 		}
 	}
+	
+//	회원가입
+	public void addUser(UserVO vo) {
+		dao.addUser(vo);
+	}
+	public Map<String, String> checkid(UserVO vo) {
+		Map<String, String> map = new HashMap<String, String>();
+		if(dao.checkid(vo) > 0) {
+			map.put("state", "fail");
+		} else {
+			map.put("state", "success");
+		}
+		return map;
+	}
 }

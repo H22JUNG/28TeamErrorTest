@@ -196,16 +196,16 @@
     </div>
     <div class="signup-container">
         <div class="signup-box">
-            <form action="" method="post">
+            <form action="${pageContext.request.contextPath}/adduser" method="post">
                 <span>╳</span>
                 <h3>회원가입</h3>
                 <ul class="signupinput">
                     <li>
-                        <input type="text" name="name" id="name" placeholder="이름">
+                        <input type="text" name="username" id="username" placeholder="이름">
                     </li>
                     <li class="idli">
                         <input type="text" name="userid" id="userid" placeholder="아이디">
-                        <button class="idcheck">아이디 중복 확인</button>
+                        <button class="idcheck" id="idcheck">아이디 중복 확인</button>
                     </li>
                     <li>
                         <input type="password" name="password" id="password" placeholder="비밀번호">
@@ -214,10 +214,10 @@
                         <input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인">
                     </li>
                     <li>
-                        <input type="tel" name="userphone" id="userphone" placeholder="휴대폰 번호">
+                        <input type="tel" name="tel" id="tehl" placeholder="휴대폰 번호">
                     </li>
                     <li>
-                        <input type="email" name="useremail" id="useremail" placeholder="이메일">
+                        <input type="email" name="email" id="email" placeholder="이메일">
                     </li>
                     <li>
                         <input type="checkbox" name="agree" id="agree"><label for="agree" class="saveck">회원정보약관에
@@ -229,7 +229,7 @@
         </div>
     </div>
 
-    <script>
+     <script>
         const agree = document.getElementById("agree");
         let ischeck = document.querySelectorAll(".saveck");
         agree.addEventListener("click", function () {
@@ -241,7 +241,29 @@
                 style.innerHTML = ".saveck:after {display: none;}";
             }
         });
+        
+        document.getElementById("idcheck").addEventListener("click",function(){
+        	popup();
+        });
+        document.getElementById("userid").addEventListener("click",function(){
+        	popup();
+        });
+        
+        function popup() {
+            var url = "${pageContext.request.contextPath}/idcheck";
+            var name = "idcheck";
+            var option = "width = 401, height = 301, left = 280, top = 250";
+            window.open(url,name,option);
+        }
+        document.getElementById()
 
+        
+        document.getElementById("btn").addEventListener("click",function(e){
+        	e.preventDefault();
+        	if(document.getElementById("userid").value != null) {
+        		
+        	}
+        });
     </script>
 </body>
 
