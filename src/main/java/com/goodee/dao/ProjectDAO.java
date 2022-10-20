@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.goodee.vo.PageVO;
 import com.goodee.vo.ProductVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.WrotebbsVO;
@@ -32,6 +33,13 @@ public interface ProjectDAO {
 	public WrotebbsVO getdetail(@Param("id") int id);
 	public void getdelete(int id);
 	public void modify(WrotebbsVO vo);
+	
+	//관리자페이지 회원조회
+	public int usercount();
+	public List<UserVO> userList(PageVO vo);
+	public List<UserVO> userListdetail(@Param("id") int id);
+	public void adminUserUpdate(UserVO vo);
+	public void adminUserDelete(UserVO vo);
 	
 	//유진 DAO
 	public void orderUserInfor(orderUser vo);

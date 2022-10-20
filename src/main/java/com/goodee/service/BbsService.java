@@ -22,6 +22,7 @@ public class BbsService {
 		this.dao = dao;
 	}
 
+	//내가 쓴 글
 	UserVO uservo = new UserVO();
 	
 	public List<WrotebbsVO> getwrote(Model model, HttpSession session) {

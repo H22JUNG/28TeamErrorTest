@@ -40,9 +40,8 @@
 		where category2 = #{category2}
 	</select>
 	
-	
 	<!-- 내가 쓴 글 -->
-		<select id="getwrote" resultType="wroteVO" parameterType="userVO">
+	<select id="getwrote" resultType="wroteVO" parameterType="userVO">
 		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
 		from wrotebbs where re_id=0 and owner_id=#{id}
 	</select>
@@ -66,6 +65,27 @@
 	</update>
 	<delete id="getdelete">
 		delete from wrotebbs where re_id=#{id} or id=#{id};
+	</delete>
+	
+	<!-- 관리자페이지 회원조회 -->
+	<select id="usercount" resultType="int">
+		select count(id) from user
+	</select>
+	
+	<select id="userList" resultType="userVO" parameterType="pageVO">
+		select id, userid, username, tel, address, email, point from user where admin=0
+		limit #{start}, #{cntPerPage}
+	</select>
+	<select id="userListdetail" resultType="userVO">
+		select id, userid, username, tel, address, email, point from user where admin=0
+		and id=#{id}
+	</select>
+	<update id="adminUserUpdate" parameterType="userVO">
+		update user set username=#{username}, tel=#{tel}, address=#{address}, email=#{email}, point=#{point}
+		where id=#{id}
+	</update>
+	<delete id="adminUserDelete" parameterType="userVO">
+		delete from user where userid=#{userid}
 	</delete>
 	
 	<!-- 유진 mapper, 주문페이지에서 입력한 정보 전송 -->

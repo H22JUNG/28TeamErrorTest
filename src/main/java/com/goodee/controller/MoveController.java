@@ -4,20 +4,31 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.goodee.service.BbsService;
+import com.goodee.service.UserService;
+import com.goodee.vo.PageVO;
+import com.goodee.vo.UserVO;
+import com.goodee.vo.WrotebbsVO;
 
 @Controller
 public class MoveController {
 	public BbsService bbsservice;
-	
-	public MoveController(BbsService bbsservice) {
+	public UserService userservice;
+
+	public MoveController(BbsService bbsservice, UserService userservice) {
 		super();
 		this.bbsservice = bbsservice;
+		this.userservice = userservice;
 	}
 	
 	@GetMapping("/loginpage")
@@ -44,10 +55,14 @@ public class MoveController {
 	}
 	
 	@GetMapping("/adminpage")
-	public String adiminpage() {
+	public String adiminpage(Model model,@RequestParam int page, PageVO vo) {
+		if(page == 0) {
+			vo.setNowPage(1);
+		}
+		vo.setNowPage(page);
+		userservice.userlist(model, vo, page);
 		return "admin-user";
 	}
-	
 	
 	@GetMapping("/movemypage/{path}")
 	public String movemypage(@PathVariable("path") int path, Model model, HttpSession session) {
@@ -85,16 +100,36 @@ public class MoveController {
 		return "redirect:/movemypage/3";
 	}
 	@GetMapping("/modify/{id}")
-	public String modify(@PathVariable("id") int id) {
+	public String modify(@PathVariable("id") int id, @ModelAttribute("detail") WrotebbsVO vo, Model model) {
+		bbsservice.getdetail(id, model);
 		return "wroteModify";
 	}
 	@PostMapping("/modify")
-	public String modifydone() {
-		return "wrotedetail";
+	public String modifydone(@ModelAttribute("detail")WrotebbsVO vo, @RequestParam("id") int id) {
+		vo.setId(id);
+		bbsservice.modify(vo);
+		return "redirect:/wrotedetail?id="+vo.getId();
 	}
-	
-	
-	
+
+	//관리자페이지 -회원관리
+	@GetMapping("/adminuserpopup")
+	public String adminuserpopup(int id, Model model) {
+		userservice.userlistmodi(model, id);
+		return "admin-user-popup";
+	}
+	@PatchMapping("/adminUserModify")
+	@ResponseBody
+	public UserVO adminUserModify(@RequestBody UserVO vo) {
+		userservice.adminUserUpdate(vo);
+		return vo;
+	}
+	@DeleteMapping("/adminUserDelete")
+	@ResponseBody
+	public UserVO adminUserDelete(@RequestBody UserVO vo) {
+		userservice.adminUserDelete(vo);
+		return vo;
+	}
+
 	
 	// 관리자 페이지 - 상품정보
 	@GetMapping("/admin_product_list")

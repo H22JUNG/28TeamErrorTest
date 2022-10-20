@@ -216,7 +216,7 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td><form:input type="text" path="content"/></td>
+					<td><form:textarea type="text" path="content"/></td>
 				</tr>
 			</table>
 			<div id="btn">
