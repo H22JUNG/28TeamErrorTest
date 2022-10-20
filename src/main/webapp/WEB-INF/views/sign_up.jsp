@@ -84,7 +84,7 @@
             cursor: pointer;
         }
 
-        /* input */
+         /* input */
         .signup-box form .signupinput {
             display: flex;
             flex-direction: column;
@@ -93,6 +93,7 @@
 
         .signup-box form input[type="text"],
         .signup-box form input[type="password"],
+        .signup-box form input[type="tel"],
         .signup-box form input[type="email"] {
             width: 335px;
             height: 52px;
@@ -110,6 +111,50 @@
         #userid {
             width: auto;
             flex: 1;
+        }
+
+        /* 아이디 중복 */
+        .idcheck {
+            background: rgba(162, 212, 214, 0.44);
+            padding: 10px;
+            border: 0.5px solid #CFCFCF;
+            border-radius: 15px;
+            flex: 1;
+            cursor: pointer;
+        }
+
+        /* 약관 동의 */
+
+        #agree {
+            display: none;
+        }
+
+        .saveck {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .saveck::before {
+            content: "";
+            width: 18px;
+            height: 18px;
+            border: 1px solid #bdbbbb;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+
+        .saveck::after {
+            box-sizing: border-box;
+            content: "";
+            position: absolute;
+            left: 4px;
+            width: 10px;
+            height: 10px;
+            background: #21A5B5;
+            border-radius: 50%;
+            display: none;
         }
 
         /* 아이디 중복 */
@@ -156,7 +201,7 @@
                 <h3>회원가입</h3>
                 <ul class="signupinput">
                     <li>
-                        <input type="text" name="username" id="username" placeholder="이름">
+                        <input type="text" name="name" id="name" placeholder="이름">
                     </li>
                     <li class="idli">
                         <input type="text" name="userid" id="userid" placeholder="아이디">
@@ -169,13 +214,35 @@
                         <input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인">
                     </li>
                     <li>
-                        <input type="email" name="email" id="email" placeholder="이메일">
+                        <input type="tel" name="userphone" id="userphone" placeholder="휴대폰 번호">
+                    </li>
+                    <li>
+                        <input type="email" name="useremail" id="useremail" placeholder="이메일">
+                    </li>
+                    <li>
+                        <input type="checkbox" name="agree" id="agree"><label for="agree" class="saveck">회원정보약관에
+                            동의합니다</label>
                     </li>
                 </ul>
                 <button class="btn">회원가입</button>
             </form>
         </div>
     </div>
+
+    <script>
+        const agree = document.getElementById("agree");
+        let ischeck = document.querySelectorAll(".saveck");
+        agree.addEventListener("click", function () {
+            if (agree.checked) {
+                var style = document.head.appendChild(document.createElement("style"));
+                style.innerHTML = ".saveck:after {display: block;}";
+            } else {
+                var style = document.head.appendChild(document.createElement("style"));
+                style.innerHTML = ".saveck:after {display: none;}";
+            }
+        });
+
+    </script>
 </body>
 
 </html>

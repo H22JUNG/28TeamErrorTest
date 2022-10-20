@@ -105,12 +105,35 @@
         /* 비밀번호 눈모양 */
  
 
-        /* 아이디 저장 */
-        form input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            border: 1px solid #CFCFCF;
+      /* 아이디 저장 */
+        #saveid {
+            display: none;
+        }
+
+        .saveck {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .saveck::before {
+            content: "";
+            width: 18px;
+            height: 18px;
+            border: 1px solid #bdbbbb;
             border-radius: 50%;
+            box-sizing: border-box;
+        }
+        .saveck::after {
+            box-sizing: border-box;
+            content: "";
+            position: absolute;
+            left: 4px;
+            width: 10px;
+            height: 10px;
+            background: #21A5B5;
+            border-radius: 50%;
+            display: none;
         }
 
         /* 아이디/비밀번호 찾기, 회원가입 */
@@ -118,18 +141,38 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
+            align-items: center;
             gap: 10px;
+            height: 20px;
         }
-
+        .login-menu li {
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .login-menu li:not(:first-child):before {
+            content: "";
+            display: inline-block;
+            background: linear-gradient(90deg, #21A5B5 0%, #71B2B4 100%);
+            width: 1px;
+            height: 15px;
+        }
+        
         .login-menu li a {
             font-weight: 400;
             font-size: 16px;
+            height: 100%;
             text-decoration: none;
             background: linear-gradient(90deg, #21A5B5 0%, #71B2B4 100%);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
         }
+
 
         /* 로그인 버튼 */
         button {
@@ -173,7 +216,7 @@
                         <i class="fa fa-eye fa-lg"></i>
                     </li>
                     <li>
-                        <input type="checkbox" name="saveid" id="saveid"><label for="saveid">아이디 저장</label>
+                        <input type="checkbox" name="saveid" id="saveid"><label for="saveid" class="saveck">아이디 저장</label>
                     </li>
                 </ul>
                 <ul class="login-menu">
@@ -187,8 +230,17 @@
     </div>
 
     <script>
-        
-
+        const saveid = document.getElementById("saveid");
+        let ischeck = document.querySelectorAll(".saveck");
+        saveid.addEventListener("click",function(){
+            if(saveid.checked) {
+                var style = document.head.appendChild(document.createElement("style"));
+                style.innerHTML = ".saveck:after {display: block;}";
+            }else {
+                var style = document.head.appendChild(document.createElement("style"));
+                style.innerHTML = ".saveck:after {display: none;}";
+            }
+        });
     </script>
 </body>
 
