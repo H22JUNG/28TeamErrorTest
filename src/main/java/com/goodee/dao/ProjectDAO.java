@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.goodee.vo.ProductVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.WrotebbsVO;
+import com.goodee.vo.orderUser;
 
 @Mapper
 public interface ProjectDAO {
@@ -27,4 +28,7 @@ public interface ProjectDAO {
 	public WrotebbsVO getdetail(@Param("id") int id);
 	public void getdelete(int id);
 	public void modify(WrotebbsVO vo);
+	
+	//유진 DAO
+	public void orderUserInfor(orderUser vo);
 }

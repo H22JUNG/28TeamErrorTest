@@ -113,10 +113,10 @@
           
         }
         #container form {
-	display: flex;
-    justify-content: center;
-	gap : 20px;
-	}
+		display: flex;
+    	justify-content: center;
+		gap : 20px;
+		}
 
         .itembox {
             border-bottom: 2px solid #71B2B4;
@@ -176,7 +176,7 @@
             border-radius: 10px 10px;
             padding-left: 10px;
         }
-        #sample6_postcode{
+        #postcode{
             background-color: #D9D9D9;
             border : 2px solid #D9D9D9;
             margin-left: 5px;
@@ -190,7 +190,7 @@
             font-size: 12px;
             cursor: pointer;
         }
-        #sample6_address{
+        #address{
             width: 70%;
         }
 
@@ -313,7 +313,7 @@
             #right{
                 margin-left: 20%;
             }
-             #sample6_postcode{
+             #postcode{
                 width: 100px;
             }
             #addBtn{
@@ -372,7 +372,6 @@
                         <p>Size : </p>
                         <h4>상품 가격 : </h4>
                         
-                          
                     </div>
                 </div>
 
@@ -396,12 +395,15 @@
                 <h3>고객 정보 입력</h3>
                 <div class="inforBox"> 
                 <div>
-                <input type="text" id="sample6_postcode" placeholder="우편번호">
-                <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" id="addBtn"><br>
+                <input type="text" id="postcode" placeholder="우편번호">
+                <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" id="addBtn"><br>
                 </div>
-               주소<input type="text" class="inforInput" required  id="sample6_address" placeholder="주소"><br>
-               상세 주소<input type="text" class="inforInput"  id="sample6_detailAddress" required placeholder="상세주소를 입력해주세요"> <input type="text" id="sample6_extraAddress" placeholder="(동, 건물)" class="inforInput"></div>
-                <div class="inforBox">주문자  <input type="text" class="inforInput" placeholder="이름을 입력해주세요" required> 연락처 <input type="text" class="inforInput" placeholder="숫자로만 입력해주세요" required></div>
+               주소<input type="text" class="inforInput" required  id="address" name="address" placeholder="주소"><br>
+               상세 주소<input type="text" class="inforInput"  id="detailAddress" name="detailAddress" required placeholder="상세주소를 입력해주세요"> 
+               <input type="text" id="extraAddress" name="extraAddress" placeholder="(동, 건물)" class="inforInput"></div>
+                <div class="inforBox">
+                주문자  <input type="text" class="inforInput" placeholder="이름을 입력해주세요" required name="orderName"> 
+                연락처 <input type="text" class="inforInput" placeholder="숫자로만 입력해주세요" required name="orderTel"></div>
             </div>
             <!--여기까지 infor끝-->
             <div id="checkItem">
@@ -428,7 +430,7 @@
                 <h3>결제 방법 선택</h3>
                <label for="cash">무통장입금<input type="radio" class="pay" name="pay" value="cash" id="cash"></label>
                <label for="card">카드결제<input type="radio" class="pay" name="pay" value="card" id="card"></label>
-               <p>사용가능 적립금 : </p><label for="point">사용할 적립금 <input type="text" class="pay" id="point"></label>
+               <p>사용가능 적립금 : </p><label for="point">사용할 적립금 <input type="text" class="pay" id="point" name="point"></label>
             </div>
             <!--여기 까지 결제 할 물건-->
             <div id="messageContainer">
@@ -462,7 +464,7 @@
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-  function sample6_execDaumPostcode() {
+  function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -495,17 +497,17 @@
                         extraAddr = ' (' + extraAddr + ')';
                     }
                     // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                    document.getElementById("extraAddress").value = extraAddr;
                 
                 } else {
-                    document.getElementById("sample6_extraAddress").value = '';
+                    document.getElementById("extraAddress").value = '';
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("sample6_detailAddress").focus();
+                document.getElementById("detailAddress").focus();
             }
         }).open();
     }

@@ -57,4 +57,12 @@
 	<delete id="getdelete">
 		delete from wrotebbs where re_id=#{id} or id=#{id};
 	</delete>
+	
+	<!-- 유진 mapper, 주문페이지에서 입력한 정보 전송 -->
+	<insert id="orderUserInfor" parameterType="orderUser"> 
+ 	insert into orderUserbbs(id,order_name,pay,address,detailAddress,extraAddress,order_tel,point)
+ 	values(#{id},#{orderName},#{pay},#{address},#{detailAddress},#{extraAddress},#{orderTel},#{point})
+	</insert>
+	
+	
 </mapper>
