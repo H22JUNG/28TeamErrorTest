@@ -1,11 +1,13 @@
 package com.goodee.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.goodee.vo.PageVO;
+import com.goodee.vo.ProductListVO;
 import com.goodee.vo.ProductVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.WrotebbsVO;
@@ -25,6 +27,15 @@ public interface ProjectDAO {
 	//카테고리별 상품 리스트로 이동
 	public List<ProductVO> selectCategory(String category1);
 	public List<ProductVO> selectInnerCategory(String category2);
+	
+	//product List 출력 - 윤정
+	public List<Map<String,Object>> selectProductList();
+	//productUpdateList 출력
+	public List<Map<String,Object>> selectUpdateList(String pro_num);
+	
+	public void update1(ProductListVO vo);
+	public void update2(ProductListVO vo);
+	public void update3(ProductListVO vo);
 	
 	//내가 쓴 글
 	public List<WrotebbsVO> getwrote(UserVO vo);

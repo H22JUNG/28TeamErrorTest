@@ -40,6 +40,59 @@
 		where category2 = #{category2}
 	</select>
 	
+	
+	<!-- product 전체 list 뽑기 - 윤정 -->
+	 <select id="selectProductList" resultType="map">
+	 	SELECT product.id, product.NAME, price, view, create_date, option.pro_num, size, color, stock
+		FROM option INNER JOIN product
+		ON option.id = product.id;
+	 </select>
+	 
+	 <!-- product 수정 불러오기 -->
+	 <select id="selectUpdateList" resultType="map">
+	 	SELECT option.pro_num, product.pic1, product.pic2, product.pic3, product.pic4, product.NAME, product.price, 
+	 	product.discount, product.category1, product.category2, product.view, product.create_date, option.size, option.color, option.stock
+		FROM option INNER JOIN product
+		ON option.id = product.id
+		where pro_num = #{pro_num};
+	 </select>
+	
+	<!-- update를 서비스에 한번에 담아준다. -->
+	<update id="update1">
+		UPDATE product INNER JOIN option o
+		ON product.id = o.id
+		SET 
+			category1 = #{category1},
+			category2 = #{category2},
+			product.name = #{name},
+			price = #{price},
+			discount = #{discount},
+			category_id = (SELECT id FROM category WHERE category1 = #{category1} AND category2 = #{category2})
+		WHERE o.pro_num = #{proNum}
+	</update>
+	
+	<update id="update2">
+		UPDATE option o INNER JOIN (product INNER JOIN category ON product.category_id = category.id)
+		ON o.id = product.id
+		SET 
+			o.id = product.id,
+			size = #{size},
+			color = #{color},
+			stock = #{stock}
+		WHERE o.pro_num = #{proNum}
+	</update>
+	
+	<update id="update3">
+		UPDATE option o 
+		INNER JOIN (product p INNER JOIN category c ON p.category_id = c.id)
+		ON p.id = o.id
+		SET o.pro_num = CONCAT(o.id,category_code1,category_code2,UPPER(ifnull(size,'')),UPPER(left(ifnull(color,''),1)))
+	</update>
+	
+	
+	
+	
+	
 	<!-- 내가 쓴 글 -->
 	<select id="getwrote" resultType="wroteVO" parameterType="userVO">
 		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 

@@ -382,7 +382,7 @@ td {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>${productInfo.productId}내용물 블라블라블라</td>
+                                        <td><a href="">${productInfo.productId}내용물 블라블라블라</a></td>
                                         <td>${productInfo.productName}내용물 블라블라블라</td>
                                         <td>${productInfo.price}내용물 블라블라블라</td>
                                         <td>${productInfo.stock}내용물 블라블라블라</td>

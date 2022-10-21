@@ -221,6 +221,10 @@ th {
 }
 td {
     padding: 10px 1px 10px 1px;
+    text-align: center;
+}
+.text_left {
+	text-align: left;
 }
 
 #insert_btn {
@@ -371,25 +375,32 @@ td {
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
+                                    	<th>번호</th>
                                         <th>상품ID</th>
+                                        <th>상품 코드</th>
                                         <th>상품명</th>
                                         <th>상품가격</th>
                                         <th>재고</th>
                                         <th>조회수</th>
                                         <th>상품 등록일</th>
-                                        <th>최종 수정일</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                	<c:forEach var="productVO" items="${productList}">
+                                	<c:set var="cnt" value="${i=i+1}"/>
                                     <tr>
-                                        <td><a href="">${productInfo.productId}내용물 블라블라블라</a></td>
-                                        <td>${productInfo.productName}내용물 블라블라블라</td>
-                                        <td>${productInfo.price}내용물 블라블라블라</td>
-                                        <td>${productInfo.stock}내용물 블라블라블라</td>
-                                        <td>${productInfo.productView}내용물 블라블라블라</td>
-                                        <td><fmt:formatDate value="${productInfo.regDate}" type="date" pattern="yyyy-MM-dd"/> </td>
-                                        <td><fmt:formatDate value="${productInfo.updateDate}" type="date" pattern="yyyy-MM-dd"/></td>
+                                    	<td>${cnt}</td>
+                                        <td>${productVO.id}</td>
+                                        <td><a href="${pageContext.request.contextPath}/admin/productUpdate/${productVO.pro_num}">${productVO.pro_num}</a></td>
+                                        <td class="text_left">${productVO.NAME}</td>
+                                        <td><fmt:parseNumber var="n" type="number" value="${productVO.price}" />
+                                        <fmt:formatNumber value="${n}" pattern="#,###"></fmt:formatNumber>
+                                        </td>
+                                        <td>${productVO.stock}</td>
+                                        <td>${productVO.view}</td>
+                                        <td><fmt:formatDate value="${productVO.create_date}" type="date" pattern="yyyy-MM-dd"/></td>
                                     </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                             <button id="insert_btn">상품 등록</button>

@@ -132,10 +132,10 @@ public class MoveController {
 
 	
 	// 관리자 페이지 - 상품정보
-	@GetMapping("/admin_product_list")
-	public String adminProductList() {
-		return "adminProduct/product_list";
-	}
+//	@GetMapping("/admin_product_list")
+//	public String adminProductList() {
+//		return "adminProduct/product_list";
+//	}
 	
 	// 관리자 페이지 - 상품등록
 	@GetMapping("/admin_product_insert")

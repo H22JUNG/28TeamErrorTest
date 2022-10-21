@@ -216,6 +216,19 @@ h1 {
 	width: 400px;
 }
 
+.clearfix {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 40px;
+}
+
+.imgli{
+	height: 150px;
+	width: 150px;
+}
+
+
 /* 오른쪽 영역 */
 form {
 	display: flex;
@@ -400,83 +413,80 @@ form div label {
 
 					<div class="container admin_container">
 						<div class="h1_container">
-						<h1 class="jumbotron" style="text-align: center;">${productInfo.productId}제목블라블라</h1>
+						<h1 class="jumbotron" style="text-align: center;">${productUpdateList.get(0).pro_num}</h1>
 						</div>
 						<div class="row">
 							<!--form태그의 위치를 옮겼음--><!-- /admin/product/update -->
-							<form action="" method="post">
+							<form action="${pageContext.request.contextPath}/admin/updateInfo/${productUpdateList.get(0).pro_num}" method="post">
 								<div class="form-group hidden-xs" id="fileDrop">
 									<label>DB에서 이미지 파일들을 불러와서 수정해야하는데???????어떻게 불러오지</label>
 									<div class="fileDrop"></div>
-									<ul class="clearfix uploadedList col-xs-12"></ul>
+									<ul class="clearfix uploadedList col-xs-12">
+										<!-- <li><input type="file" name="" id="" /></li>  -->
+										<li><img class="imgli" src="${productUpdateList.get(0).pic1}" alt="" /></li>
+										<li><img class="imgli" src="${productUpdateList.get(0).pic2}" alt="" /></li>
+										<li><img class="imgli" src="${productUpdateList.get(0).pic3}" alt="" /></li>
+										<li><img class="imgli" src="${productUpdateList.get(0).pic4}" alt="" /></li>
+									</ul>
 								</div>
-
 								<div class="form-group productInfo">
-									<!-- 상품id는 auto_increment로 들어가야 하니까 필요없지 않을까........? -->
-									<!-- <div>
-                                        <label>상품 ID</label> <input name="productId" value="${productInfo.productId}" class="form-control productId" readonly>
-                                    </div> -->
 									<div>
-										<label>상품명</label> <input name="productName"
-											value="${productInfo.productName}" class="form-control">
+										<label>상품명</label> <input name="name"
+											value="${productUpdateList.get(0).NAME}" class="form-control">
 									</div>
 									<div>
 										<label>상품가격</label> <input name="price"
-											value="${productInfo.price}" class="form-control">
+											value="${productUpdateList.get(0).price}" class="form-control">
 									</div>
 									<div>
 										<label>할인율</label> <input name="discount"
-											value="${productInfo.discount}" class="form-control">
+											value="${productUpdateList.get(0).discount}" class="form-control">
 									</div>
 									<div>
 										<!--대분류가 뭐가 선택되느냐에 따라서 소분류가 달라져야 하는데?-->
 										<label>대분류</label>
 										<div class="form-inline">
-											<select class="form-control form_input" id="productDist">
+											<select class="form-control form_input" id="category1">
 												<option value="furniture">1. 가구</option>
 												<option value="fabric">2. 패브릭</option>
 												<option value="storage">3. 수납용품</option>
 												<option value="supplies">4. 생활용품</option>
 											</select>
 											<button class="btn btn-default btn_productDist input_btn">입력</button>
-											<input name="productDist" value="${productInfo.productDist}"
+											<input name="category1" value="${productUpdateList.get(0).category1}"
 												class="form-control input_input" readonly>
 										</div>
 										<div>
 											<label>소분류</label>
 											<div class="form-inline">
-												<select class="form-control form_input" id="productDist">
+												<select class="form-control form_input" id="category2">
 													<option value="bed">1. 침대</option>
 													<option value="sofa">2. 소파</option>
 													<option value="mirror">3. 거울</option>
 													<option value="chair">4. 의자</option>
 												</select>
 												<button class="btn btn-default btn_productDist input_btn">입력</button>
-												<input name="productDist" value="${productInfo.productDist}"
+												<input name="category2" value="${productUpdateList.get(0).category2}"
 													class="form-control input_input" readonly>
 											</div>
 										</div>
 										<div>
 											<label>재고</label> <input name="stock"
-												value="${productInfo.stock}" class="form-control">
+												value="${productUpdateList.get(0).stock}" class="form-control">
 										</div>
-										<!-- <div>
-                                        <label>상품정보</label> <input name="productInfo" value="${productInfo.productInfo}" class="form-control" required>
-                                    </div> -->
 										<div>
-											<label>사이즈</label><input value="${productInfo.regDate}"
+											<label>사이즈</label><input name="size" value="${productUpdateList.get(0).size}"
 												class="form-control">
 										</div>
 										<div>
-										<label>컬러</label> <input value="${productInfo.regDate}"
+										<label>컬러</label> <input name="color" value="${productUpdateList.get(0).color}"
 												class="form-control">
 										</div>
-										<!-- <div>
-                                        <label>최종 수정일</label> <input value="${productInfo.updateDate}" class="form-control" readonly>
-                                    </div> -->
 										<div class="btns">
 											<button class="btn btn-default final_btn"
 												id="btn_product_update">수정하기</button>
+											<button class="btn btn-default final_btn"
+												id="btn_product_delete">삭제하기</button>
 											<button class="btn btn-default final_btn"
 												id="btn_product_back">돌아가기</button>
 										</div>
@@ -492,10 +502,10 @@ form div label {
 	<footer> </footer>
 	
 	<script type="text/javascript">
-    	// 등록하기 버튼
-		document.getElementById("btn_product_update").addEventListener("click",function(){
-        	location.href = "${pageContext.request.contextPath}/";
-    	});
+    	// 수정하기 버튼
+		//document.getElementById("btn_product_update").addEventListener("click",function(){
+        	//location.href = "${pageContext.request.contextPath}/";
+    	//});
     	
     	// 돌아가기 버튼
     	document.getElementById("btn_product_back").addEventListener("click",function(e){
