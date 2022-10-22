@@ -57,7 +57,9 @@
 		where pro_num = #{pro_num};
 	 </select>
 	
-	<!-- update를 서비스에 한번에 담아준다. -->
+	<!-- update를 서비스에 한번에 담아준다.
+		product category_id 업데이트 안되는데..나중에 고치자 ?
+	 -->
 	<update id="update1">
 		UPDATE product INNER JOIN option o
 		ON product.id = o.id
@@ -89,7 +91,11 @@
 		SET o.pro_num = CONCAT(o.id,category_code1,category_code2,UPPER(ifnull(size,'')),UPPER(left(ifnull(color,''),1)))
 	</update>
 	
-	
+		<!-- 관리자 페이지 product 삭제 - 윤정 -->
+	<delete id="productDelete">
+		delete from option
+		where pro_num = #{pro_num}
+	</delete>
 	
 	
 	

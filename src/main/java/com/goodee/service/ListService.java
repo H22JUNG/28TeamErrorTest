@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.goodee.dao.ProjectDAO;
+import com.goodee.vo.OptionVO;
 import com.goodee.vo.ProductListVO;
 
 @Service
@@ -35,9 +36,9 @@ public class ListService {
 			List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 			list = dao.selectProductList();
 			// 키 이름이 틀려서 출력이 안된거였음........
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i).keySet()); 
-			}
+//			for (int i = 0; i < list.size(); i++) {
+//				System.out.println(list.get(i).keySet()); 
+//			}
 			model.addAttribute("productList", list);
 		}
 		
@@ -47,10 +48,17 @@ public class ListService {
 			list = dao.selectUpdateList(pro_num);
 			model.addAttribute("productUpdateList", list);
 		}
-			
+		
+		// 상품 수정하기
 		public void update(ProductListVO vo) {
 			dao.update1(vo);
 			dao.update2(vo);
 			dao.update3(vo);
+		}
+		
+		// 상품 삭제하기
+		public void productDelete(String pro_num) {
+			dao.productDelete(pro_num);
+			System.out.println(pro_num);
 		}
 }

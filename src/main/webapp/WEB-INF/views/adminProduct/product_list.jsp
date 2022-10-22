@@ -348,7 +348,7 @@ td {
 						</li>
 						<li>
 							<h4>
-								<a href="${pageContext.request.contextPath}/admin_product_delete">상품정보 삭제</a>
+								<a href="${pageContext.request.contextPath}/admin_product_list">상품정보 삭제</a>
 							</h4>
 						</li>
 					</ul>

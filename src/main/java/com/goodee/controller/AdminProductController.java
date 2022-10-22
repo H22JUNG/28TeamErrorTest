@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.goodee.service.ListService;
+import com.goodee.vo.OptionVO;
 import com.goodee.vo.ProductListVO;
 import com.goodee.vo.ProductVO;
 
@@ -37,7 +38,7 @@ public class AdminProductController {
 		return "adminProduct/product_update";
 	}
 	
-	//
+	// 상품 수정하기
 	@PostMapping("/admin/updateInfo/{pro_num}")
 	public String updateInfo(@PathVariable("pro_num") String pro_num, ProductListVO vo) {
 		vo.setProNum(pro_num);
@@ -45,6 +46,12 @@ public class AdminProductController {
 		return "redirect:/admin_product_list";
 	}
 	
-	
+	// 상품 삭제하기
+	@GetMapping("/admin/deleteInfo/{pro_num}")
+	public String productDelete(@PathVariable("pro_num") String pro_num) {
+		service.productDelete(pro_num);
+		System.out.println("상품 삭제하기 되나? 컨트롤러");
+		return "redirect:/admin_product_list";
+	}
 	
 }

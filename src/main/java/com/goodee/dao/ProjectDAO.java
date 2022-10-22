@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.goodee.vo.OptionVO;
 import com.goodee.vo.PageVO;
 import com.goodee.vo.ProductListVO;
 import com.goodee.vo.ProductVO;
@@ -30,12 +31,14 @@ public interface ProjectDAO {
 	
 	//product List 출력 - 윤정
 	public List<Map<String,Object>> selectProductList();
-	//productUpdateList 출력
+	//product 수정페이지 리스트 불러오기
 	public List<Map<String,Object>> selectUpdateList(String pro_num);
-	
+	//product 수정하기
 	public void update1(ProductListVO vo);
 	public void update2(ProductListVO vo);
 	public void update3(ProductListVO vo);
+	//product 지우기
+	public void productDelete(String pro_num);
 	
 	//내가 쓴 글
 	public List<WrotebbsVO> getwrote(UserVO vo);

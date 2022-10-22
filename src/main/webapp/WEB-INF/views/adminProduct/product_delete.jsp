@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
+﻿<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
 * {
 	margin: 0;
@@ -175,66 +175,148 @@ main section {
 	margin: 10px;
 }
 /* 본문 */
-#search {
-	/* align-self: flex-end; */
-    float: right;
-    padding: 20px;
-}
-
-#search button {
-	color: #616161;
-	font-size: 12px;
-	width: 40px;
-}
-
-#search select {
-	color: #616161;
-	font-size: 13px;
-	width: 100px;
-}
-
-.row {
+.admin_container {
+	/* border: 1px solid black; */
+	width: 100%;
 	display: flex;
-    flex-direction: column;
-    align-items: end;
+	flex-direction: column;
+	justify-content: center;
+	/* align-items: center; */
+	background-color: rgb(255, 255, 255);
+}
+
+.h1_container {
+	display: flex;
+	justify-content: center;
+    margin-bottom: 20px;
+    color: white;
+    font-weight: bold;
 }
 
 h1 {
-    border: none;
-    border-radius: 10px;
-    padding: 20px;
-    color: white;
-    background-color: #21A5B5;
-}
-table, th, td {
-    border-collapse: collapse;
+	padding: 20px;
+	background-color: #21A5B5;
+	width: 800px;
+	border-radius: 10px;
 }
 
-table {
-	width: 100%
+.row {
+	/* border: 1px solid green; */
+	display: flex;
+	justify-content: space-around;
 }
 
-th {
-    border-bottom: 1px solid rgb(183, 183, 183);
-    padding-bottom: 10px;
-    color: gray;
-}
-td {
-    padding: 10px 1px 10px 1px;
+.form-group {
+	/* width: 50%; */
+	
 }
 
-#insert_btn {
-    border: none;
-    background-color: #64d6e4;
-    color: white;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 5px;
-    float: right;
-    margin-top: 20px;
-    cursor: pointer;
+#fileDrop {
+	/*border: 1px solid blue;*/
+	height: 500px;
+	width: 400px;
 }
 
+.fileDrop {
+	/*border: 1px solid blue;*/
+	height: 500px;
+	width: 400px;
+}
+
+.clearfix {
+	display: flex;
+	flex-direction: row;
+    flex-wrap: wrap;
+	height: 480px;
+	width: 400px;
+	/*border: 1px solid green;*/
+    /* padding: 20px; */
+}
+
+.clearfix li {
+	display: flex;
+    flex-direction: column;
+    padding: 8px;
+	/* height: 200px; */
+}
+
+.clearfix li input {
+    width: 180px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.imgli{
+	height: 180px;
+	width: 180px;
+}
+
+/* 오른쪽 영역 */
+form {
+	display: flex;
+	align-items: center;
+}
+
+form div {
+	display: flex;
+	flex-direction: column;
+}
+
+form div label {
+	font-size: 1.1rem;
+	font-weight: bold;
+	color: #21A5B5;
+}
+
+#productDist {
+	width: 100px;
+}
+
+.input_btn {
+	width: 100px;
+	cursor: pointer;
+}
+
+.input_input {
+	width: 180px;
+}
+
+.form-control {
+	border: none;
+	background-color: rgb(255, 245, 233);
+	border-radius: 10px;
+	height: 30px;
+}
+
+.form-inline {
+	/* display: inline; */
+	display: flex;
+	flex-direction: row;
+}
+
+.btn {
+	border: none;
+	color: white;
+	font-weight: bold;
+	background-color: #44cedd;
+	border-radius: 10px;
+}
+
+.btns {
+	display: flex;
+	flex-direction: row;
+	padding: 10px;
+	margin: 2px;
+}
+
+.final_btn {
+	width: 50%;
+	height: 40px;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	margin-right: 5px;
+}
 
 /* 컨텐츠 메뉴 */
 .side-menu {
@@ -263,8 +345,8 @@ td {
 			<div class="side">
 				<ul>
 					<c:if test="${admin != null}">
-                    <li><a href="${pageContext.request.contextPath}/adminpage">관리자페이지</a></li>
-                    </c:if>
+						<li><a href="${pageContext.request.contextPath}/adminpage">관리자페이지</a></li>
+					</c:if>
 					<li><a href=""><img src="" alt="">검색</a></li>
 					<li><a href=""><img src="" alt="">장바구니</a></li>
 					<li><a href="${pageContext.request.contextPath}/loginpage">로그인</a></li>
@@ -327,7 +409,7 @@ td {
 			<div class="content-box">
 				<section>
 					<ul class="side-menu">
-                        <li>
+						<li>
 							<h4>
 								<a href="${pageContext.request.contextPath}/admin_product_list">상품정보 조회</a>
 							</h4>
@@ -350,58 +432,215 @@ td {
 					</ul>
 				</section>
 				<section>
-                    
-                    <div class="container admin_container">
-                            <h1 class="jumbotron" style="text-align: center;">상품 리스트</h1>
-                        <div class="row">
-                            
-                            <div id="search">
-                                <form action="" method="get">
-                                    <select name="" id="">
-                                        <option value="">첫번째</option>
-                                        <option value="">두번째</option>
-                                        <option value="">세번째</option>
-                                        <option value="">네번째</option>
-                                        <option value="">첫번째</option>
-                                    </select> <input type="text" placeholder="검색어를 입력하세요">
-                                    <button>검색</button>
-                                </form>
-                            </div>
 
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>상품ID</th>
-                                        <th>상품명</th>
-                                        <th>상품가격</th>
-                                        <th>재고</th>
-                                        <th>조회수</th>
-                                        <th>상품 등록일</th>
-                                        <th>최종 수정일</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="">${productInfo.productId}내용물 블라블라블라</a></td>
-                                        <td>${productInfo.productName}내용물 블라블라블라</td>
-                                        <td>${productInfo.price}내용물 블라블라블라</td>
-                                        <td>${productInfo.stock}내용물 블라블라블라</td>
-                                        <td>${productInfo.productView}내용물 블라블라블라</td>
-                                        <td><fmt:formatDate value="${productInfo.regDate}" type="date" pattern="yyyy-MM-dd"/> </td>
-                                        <td><fmt:formatDate value="${productInfo.updateDate}" type="date" pattern="yyyy-MM-dd"/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- class = row -->
-                    </div>
+					<div class="container admin_container">
+						<div class="h1_container">
+						<h1 class="jumbotron" style="text-align: center;">${productUpdateList.get(0).pro_num}</h1>
+						</div>
+						<div class="row">
+							<!--form태그의 위치를 옮겼음--><!-- /admin/product/update -->
+							<form action="${pageContext.request.contextPath}/admin/deleteInfo/${productUpdateList.get(0).pro_num}" method="post">
+								<div id="fileDrop">
+									<label>상품 이미지</label>
+									<div class="fileDrop">
+									<ul class="clearfix">
+										<!-- <li><input type="file" name="" id="" /></li>  -->
+										<li>
+											<img class="imgli" src="${productUpdateList.get(0).pic1}" alt="" />
+											<input type="text" name="pic1" id="" value="${productUpdateList.get(0).pic1}"/>
+										</li>
+										<li>
+											<img class="imgli" src="${productUpdateList.get(0).pic2}" alt="" />
+											<input type="text" name="pic2" id="" value="${productUpdateList.get(0).pic2}"/>
+										</li>
+										<li>
+											<img class="imgli" src="${productUpdateList.get(0).pic3}" alt="" />
+											<input type="text" name="pic3" id="" value="${productUpdateList.get(0).pic3}"/>
+										</li>
+										<li>
+											<img class="imgli" src="${productUpdateList.get(0).pic4}" alt="" />
+											<input type="text" name="pic4" id="" value="${productUpdateList.get(0).pic4}"/>
+										</li>
+									</ul>
+									</div>
+								</div>
+								<div class="form-group productInfo">
+									<div>
+										<label>상품명</label> <input name="name"
+											value="${productUpdateList.get(0).NAME}" class="form-control">
+									</div>
+									<div>
+										<label>상품가격</label> <input name="price"
+											value="${productUpdateList.get(0).price}" class="form-control">
+									</div>
+									<div>
+										<label>할인율</label> <input name="discount"
+											value="${productUpdateList.get(0).discount}" class="form-control">
+									</div>
+									<div>
+										<!--대분류가 뭐가 선택되느냐에 따라서 소분류가 달라져야 하는데?-->
+										<label>대분류</label>
+										<div class="form-inline">
+											<select class="form-control form_input" id="category1">
+												<!--  <option value="furniture">1. 가구</option>
+												<option value="fabric">2. 패브릭</option>
+												<option value="storage">3. 수납용품</option>
+												<option value="supplies">4. 생활용품</option>-->
+											</select>
+											<button class="btn btn-default btn_productDist1 input_btn">입력</button>
+											<input name="category1" value="${productUpdateList.get(0).category1}"
+												class="form-control input_input" readonly>
+										</div>
+										<div>
+											<label>소분류</label>
+											<div class="form-inline">
+												<select class="form-control form_input" id="category2">
+													<!--<option value="bed">1. 침대</option>
+													<option value="sofa">2. 소파</option>
+													<option value="mirror">3. 거울</option>
+													<option value="chair">4. 의자</option>-->
+												</select>
+												<button class="btn btn-default btn_productDist2 input_btn">입력</button>
+												<input name="category2" value="${productUpdateList.get(0).category2}"
+													class="form-control input_input" readonly>
+											</div>
+										</div>
+										<div>
+											<label>재고</label> <input name="stock"
+												value="${productUpdateList.get(0).stock}" class="form-control">
+										</div>
+										<div>
+											<label>사이즈</label><input name="size" value="${productUpdateList.get(0).size}"
+												class="form-control">
+										</div>
+										<div>
+										<label>컬러</label> <input name="color" value="${productUpdateList.get(0).color}"
+												class="form-control">
+										</div>
+										<div class="btns">
+											<button class="btn btn-default final_btn" id="btn_product_delete">삭제하기</button>
+											<button class="btn btn-default final_btn" id="btn_product_back">돌아가기</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
 				</section>
 			</div>
 		</div>
 	</main>
-	<footer>
-	</footer>
+	<footer> </footer>
 	
+	<script type="text/javascript">
+    	
+    	// 삭제하기 버튼
+    	//document.getElementById("btn_product_delete").addEventListener("click",function(e){
+    		//e.preventDefault;
+    		//var isOk = confirm("상품을 삭제하시겠습니까?");
+    		//if(isOk){
+        		//location.href = "${pageContext.request.contextPath}/admin/deleteInfo";
+       		//};
+    	//});
+
+  		//$("#btn_product_delete").click(function(){
+    		//var isOk = confirm("상품을 삭제하시겠습니까?");
+    		//if(isOk){
+    			//location.assign("/admin/deleteInfo/"+${productUpdateList.get(0).pro_num})
+    		//}
+    	//});
+    	
+    	// 돌아가기 버튼
+    	document.getElementById("btn_product_back").addEventListener("click",function(e){
+    		e.preventDefault;
+        	location.href = "${pageContext.request.contextPath}/admin_product_list";
+    	});
+    	
+    	
+    	// 대분류 소분류
+    	// 대분류는 key가 되고, 소분류는 value로
+    	const objTest = {
+    		furniture: ['bed','sofa','mirror','chair'],
+    		fabric: ['curtain','bedding','rug'],
+    		storage: ['storage store','organization'],
+    		supplies: ['supplies']
+    	};
+    	
+    	$(function() {
+    		  init();
+
+    		  $(document).on('change', 'select[id=category1]', function() {
+    		    const classVal = $(this).val();
+    		    $('select[id=category2] option').each(function(idx, item) {
+    		      if ($(this).data('class') == classVal || $(this).val() == '') {
+    		        $(this).show();
+    		      } else {
+    		        $(this).hide();
+    		      }
+    		    });
+    		    $('select[id=category2]').val('');
+    		  })
+    		});
+
+    		// Selectbox option 생성
+    		function init() {
+    		  let sClassHtml = '<option value="">선택하세요.</option>';
+    		  let sItemHtml = '<option value="">선택하세요.</option>';
+
+    		  for (const key in objTest) {
+    		    sClassHtml += "<option value='"+key+"'>"+key+"</option>";
+
+    		    const list = objTest[key];
+    		    for (let i = 0; i < list.length; i++) {
+    		      sItemHtml += "<option value='"+list[i]+"' data-class='"+key+"'>"+list[i]+"</option>";
+    		    }
+    		  }
+    		  $('select[id=category1]').html(sClassHtml);
+    		  $('select[id=category2]').html(sItemHtml);
+
+    		  $('select[id=category2] option').each(function(idx, item) {
+    		    if ($(this).val() == '') return true;
+    		    $(this).hide();
+    		  });
+    		}
+
+        	// 중분류 change 이벤트
+        	$(document).on('change', 'select[id=category1]', function() {
+        		const classVal = $(this).val();
+        		// 소분류에서 'data-class' 속성 값을 확인하여 대분류 값이 있을 때에만 보여준다.
+        		$('select[id=category2] option').each(function(idx, item) {
+        			if ($(this).data('class') == classVal || $(this).val() == ''){
+        				$(this).show();
+        			}else {
+        				$(this).hide();
+        			}
+        		});
+        		$('select[id=category2]').val('');
+        	});
+    	
+    	
+    	// select 버튼 설정
+		$(document).ready(function(){
+			$(".btn_productDist1").on('click', function(event) {
+				event.preventDefault();
+				var productDist1 = $("#category1 option:selected").val();
+				$("input[name='category1']").val(productDist1);
+	            /* 상품구분을 선택하고 입력 버튼을 누르면 input란에 해당하는 값이 출력됨 */
+			});
+			
+			$(".btn_productDist2").on('click', function(event) {
+				event.preventDefault();
+				var productDist2 = $("#category2 option:selected").val();
+				$("input[name='category2']").val(productDist2);
+	            /* 상품구분을 선택하고 입력 버튼을 누르면 input란에 해당하는 값이 출력됨 */
+			});
+		});
+		
+    	
+    	
+
+		
+	</script>
 </body>
 
 </html>
