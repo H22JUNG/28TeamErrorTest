@@ -212,13 +212,13 @@ h1 {
 }
 
 #fileDrop {
-	/*border: 1px solid blue;*/
+	/* border: 1px solid blue; */
 	height: 500px;
 	width: 400px;
 }
 
 .fileDrop {
-	/*border: 1px solid blue;*/
+	/* border: 1px solid blue; */
 	height: 500px;
 	width: 400px;
 }
@@ -229,7 +229,7 @@ h1 {
     flex-wrap: wrap;
 	height: 480px;
 	width: 400px;
-	/*border: 1px solid green;*/
+	/* border: 1px solid green; */
     /* padding: 20px; */
 }
 
@@ -241,7 +241,7 @@ h1 {
 }
 
 .clearfix li input {
-    width: 180px;
+    width: 350px;
     height: 30px;
     margin-top: 10px;
 }
@@ -435,47 +435,38 @@ form div label {
 
 					<div class="container admin_container">
 						<div class="h1_container">
-						<h1 class="jumbotron" style="text-align: center;">${productUpdateList.get(0).pro_num}</h1>
+						<h1 class="jumbotron" style="text-align: center;">상품 등록</h1>
 						</div>
 						<div class="row">
-							<!--form태그의 위치를 옮겼음--><!-- /admin/product/update -->
-							<form action="${pageContext.request.contextPath}/admin/insertInfo/${productUpdateList.get(0).pro_num}" method="post">
+							<!--form태그의 위치를 옮겼음-->
+							<form action="${pageContext.request.contextPath}/admin/insertInfo" method="post">
 								<div id="fileDrop">
-									<label>상품 이미지</label>
+									<label>상품 이미지 url을 입력하세요.</label>
+                                    <label>(최대 4장까지 가능)</label>
 									<div class="fileDrop">
 									<ul class="clearfix">
-										<!-- <li><input type="file" name="" id="" /></li>  -->
 										<li>
-											<img class="imgli" src="${productUpdateList.get(0).pic1}" alt="" />
-											<input type="text" name="pic1" id="" value="${productUpdateList.get(0).pic1}"/>
-										</li>
-										<li>
-											<img class="imgli" src="${productUpdateList.get(0).pic2}" alt="" />
-											<input type="text" name="pic2" id="" value="${productUpdateList.get(0).pic2}"/>
-										</li>
-										<li>
-											<img class="imgli" src="${productUpdateList.get(0).pic3}" alt="" />
-											<input type="text" name="pic3" id="" value="${productUpdateList.get(0).pic3}"/>
-										</li>
-										<li>
-											<img class="imgli" src="${productUpdateList.get(0).pic4}" alt="" />
-											<input type="text" name="pic4" id="" value="${productUpdateList.get(0).pic4}"/>
+                                            <h4>사진1</h4>
+											<input type="text" name="pic1" id=""/>
+                                            <h4>사진2</h4>
+											<input type="text" name="pic2" id=""/>
+                                            <h4>사진3</h4>
+											<input type="text" name="pic3" id=""/>
+                                            <h4>사진4</h4>
+											<input type="text" name="pic4" id=""/>
 										</li>
 									</ul>
 									</div>
 								</div>
 								<div class="form-group productInfo">
 									<div>
-										<label>상품명</label> <input name="name"
-											value="${productUpdateList.get(0).NAME}" class="form-control">
+										<label>상품명</label> <input name="name" class="form-control">
 									</div>
 									<div>
-										<label>상품가격</label> <input name="price"
-											value="${productUpdateList.get(0).price}" class="form-control">
+										<label>상품가격</label> <input name="price" class="form-control">
 									</div>
 									<div>
-										<label>할인율</label> <input name="discount"
-											value="${productUpdateList.get(0).discount}" class="form-control">
+										<label>할인율</label> <input name="discount" class="form-control">
 									</div>
 									<div>
 										<!--대분류가 뭐가 선택되느냐에 따라서 소분류가 달라져야 하는데?-->
@@ -488,8 +479,7 @@ form div label {
 												<option value="supplies">4. 생활용품</option>-->
 											</select>
 											<button class="btn btn-default btn_productDist1 input_btn">입력</button>
-											<input name="category1" value="${productUpdateList.get(0).category1}"
-												class="form-control input_input" readonly>
+											<input name="category1" class="form-control input_input" readonly>
 										</div>
 										<div>
 											<label>소분류</label>
@@ -501,21 +491,17 @@ form div label {
 													<option value="chair">4. 의자</option>-->
 												</select>
 												<button class="btn btn-default btn_productDist2 input_btn">입력</button>
-												<input name="category2" value="${productUpdateList.get(0).category2}"
-													class="form-control input_input" readonly>
+												<input name="category2" class="form-control input_input" readonly>
 											</div>
 										</div>
 										<div>
-											<label>재고</label> <input name="stock"
-												value="${productUpdateList.get(0).stock}" class="form-control">
+											<label>재고</label> <input name="stock" class="form-control">
 										</div>
 										<div>
-											<label>사이즈</label><input name="size" value="${productUpdateList.get(0).size}"
-												class="form-control">
+											<label>사이즈</label><input name="size" class="form-control">
 										</div>
 										<div>
-										<label>컬러</label> <input name="color" value="${productUpdateList.get(0).color}"
-												class="form-control">
+										<label>컬러</label> <input name="color" class="form-control">
 										</div>
 										<div class="btns">
 											<button class="btn btn-default final_btn" id="btn_product_insert">등록하기</button>

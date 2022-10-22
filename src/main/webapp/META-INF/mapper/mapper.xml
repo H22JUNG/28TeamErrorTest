@@ -91,11 +91,27 @@
 		SET o.pro_num = CONCAT(o.id,category_code1,category_code2,UPPER(ifnull(size,'')),UPPER(left(ifnull(color,''),1)))
 	</update>
 	
-		<!-- 관리자 페이지 product 삭제 - 윤정 -->
+	<!-- 관리자 페이지 product 삭제 - 윤정 -->
 	<delete id="productDelete">
 		delete from option
 		where pro_num = #{pro_num}
 	</delete>
+	<!-- option에 존재하지 않는 id가 product에 있으면 삭제 -->
+	<delete id="optionNullId">
+		DELETE FROM product
+		USING product
+		LEFT JOIN option
+		ON product.id = option.id
+		WHERE option.id IS NULL;
+	</delete>
+	
+	<!-- product insert - 윤정-->
+	<insert id="productInsert">
+		INSERT ALL INTO product(category1, category2, pic1, pic2, pic3, pic4, name, price, discount)
+		VALUES (#{category1}, #{category2}, #{pic1}, #{pic2}, #{pic3}, #{pic4}, #{name}, #{price}, #{discount})
+		INTO option (size, color, stock)
+		VALUES (#{size}, #{color}, #{stock})
+	</insert>
 	
 	
 	

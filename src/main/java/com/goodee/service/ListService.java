@@ -59,6 +59,13 @@ public class ListService {
 		// 상품 삭제하기
 		public void productDelete(String pro_num) {
 			dao.productDelete(pro_num);
+			dao.optionNullId();
 			System.out.println(pro_num);
+		}
+		
+		// 상품 insert
+		public void productInsert(ProductListVO vo) {
+			dao.productInsert(vo);
+			System.out.println("product insert 타니?");
 		}
 }

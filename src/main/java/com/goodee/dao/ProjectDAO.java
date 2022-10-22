@@ -39,6 +39,10 @@ public interface ProjectDAO {
 	public void update3(ProductListVO vo);
 	//product 지우기
 	public void productDelete(String pro_num);
+	public void optionNullId();
+	//product insert
+	public void productInsert(ProductListVO vo);
+	
 	
 	//내가 쓴 글
 	public List<WrotebbsVO> getwrote(UserVO vo);
