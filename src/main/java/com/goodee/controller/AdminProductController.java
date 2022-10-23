@@ -57,6 +57,7 @@ public class AdminProductController {
 	@PostMapping("/admin/insertInfo")
 	public String productInsert(ProductListVO vo) {
 		service.productInsert(vo);
+		System.out.println("상품 등록 컨트롤러 타니?");
 		return "redirect:/admin_product_list";
 	}
 	

@@ -54,6 +54,7 @@ public class ListService {
 			dao.update1(vo);
 			dao.update2(vo);
 			dao.update3(vo);
+			dao.update4(vo);
 		}
 		
 		// 상품 삭제하기
@@ -66,6 +67,9 @@ public class ListService {
 		// 상품 insert
 		public void productInsert(ProductListVO vo) {
 			dao.productInsert(vo);
+			dao.optionInsert(vo);
+			dao.categoryIdUpdate();
+			dao.proNumUpdate();
 			System.out.println("product insert 타니?");
 		}
 }
