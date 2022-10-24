@@ -114,7 +114,7 @@ main .mypage-container {
 	display: flex;
 	width: 80%;
 	justify-content: center;
-	align-items: center;
+	align-items: start;
 }
 
 /* 마이페이지 메뉴 */
