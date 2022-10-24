@@ -90,7 +90,7 @@ tr:nth-child(6) td, tr:nth-child(6) th, tr:nth-child(7) td, tr:nth-child(7) th
           </tr>
           <tr>
             <th>회원이메일</th>
-            <td><input type="email" id="email" name="email" value="${list[0].email}"/></td>
+            <td><input type="email" id="email" name="email" value="${list[0].email}" required/></td>
           </tr>
           <tr>
             <th>적립금</th>
@@ -98,7 +98,7 @@ tr:nth-child(6) td, tr:nth-child(6) th, tr:nth-child(7) td, tr:nth-child(7) th
           </tr>
           <tr>
             <td></td>
-            <td><button type="button" id="modi" >수정하기</button></td>
+            <td><button type="button" id="modi" type="submit">수정하기</button></td>
           </tr>
         </table>
       </div>
@@ -126,29 +126,16 @@ tr:nth-child(6) td, tr:nth-child(6) th, tr:nth-child(7) td, tr:nth-child(7) th
     			body : JSON.stringify(simple_data)
     		}).then(response => response.json())
     		.then(data => {
-    			opener.document.querySelector(`#modiusername`).innerText = data.username;
-    			opener.document.querySelector(`#moditel`).innerText = data.tel;
-    			opener.document.querySelector(`#modiaddress`).innerText = data.address;
-    			opener.document.querySelector(`#modiemail`).innerText = data.email;
-    			opener.document.querySelector(`#modipoint`).innerText = data.point;
-    			
-    			opener.document.querySelector(`#delusername`).innerText = data.username;
-    			opener.document.querySelector(`#deltel`).innerText = data.tel;
-    			opener.document.querySelector(`#deladdress`).innerText = data.address;
-    			opener.document.querySelector(`#delemail`).innerText = data.email;
-    			opener.document.querySelector(`#delpoint`).innerText = data.point;
-    			
-    			opener.document.querySelector(`#username`).innerText = data.username;
-    			opener.document.querySelector(`#tel`).innerText = data.tel;
-    			opener.document.querySelector(`#address`).innerText = data.address;
-    			opener.document.querySelector(`#email`).innerText = data.email;
-    			opener.document.querySelector(`#point`).innerText = data.point; 
+    			opener.document.querySelector(`#modiusername${list[0].id}`).innerText = data.username;
+    			opener.document.querySelector(`#moditel${list[0].id}`).innerText = data.tel;
+    			opener.document.querySelector(`#modiaddress${list[0].id}`).innerText = data.address;
+    			opener.document.querySelector(`#modiemail${list[0].id}`).innerText = data.email;
+    			opener.document.querySelector(`#modipoint${list[0].id}`).innerText = data.point;
     		}).then(() => {
     			window.close();	
     		});
     		
         });
-
     </script>
 </body>
 </html>

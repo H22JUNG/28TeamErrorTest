@@ -54,15 +54,6 @@ public class MoveController {
 		}
 	}
 	
-	@GetMapping("/adminpage")
-	public String adiminpage(Model model,@RequestParam int page, PageVO vo) {
-		if(page == 0) {
-			vo.setNowPage(1);
-		}
-		vo.setNowPage(page);
-		userservice.userlist(model, vo, page);
-		return "admin-user";
-	}
 	
 	@GetMapping("/movemypage/{path}")
 	public String movemypage(@PathVariable("path") int path, Model model, HttpSession session) {
@@ -80,9 +71,10 @@ public class MoveController {
 	}
 	
 	//내가 쓴 글
-	@GetMapping("/search") 
-	public String search(@RequestParam String category, Model model) {
-		bbsservice.getsearch(model, category);
+	@GetMapping("/search") //카테고리별 검색
+	public String search(@RequestParam String category, Model model, HttpSession session) {
+		bbsservice.getsearch(model, category, session);
+		bbsservice.getRewrote(model);
 		return "wrote";
 	}
 	@GetMapping("/wrotedetail")
@@ -99,29 +91,100 @@ public class MoveController {
 		bbsservice.getdelete(id);
 		return "redirect:/movemypage/3";
 	}
-	@GetMapping("/modify/{id}")
+	@GetMapping("/modify/{id}")	//수정하기버튼
 	public String modify(@PathVariable("id") int id, @ModelAttribute("detail") WrotebbsVO vo, Model model) {
 		bbsservice.getdetail(id, model);
 		return "wroteModify";
 	}
-	@PostMapping("/modify")
+	@PostMapping("/modify")	//수정완료버튼
 	public String modifydone(@ModelAttribute("detail")WrotebbsVO vo, @RequestParam("id") int id) {
 		vo.setId(id);
 		bbsservice.modify(vo);
 		return "redirect:/wrotedetail?id="+vo.getId();
 	}
-
+	
 	//관리자페이지 -회원관리
+	//관리자페이지 - 회원조회
+	@GetMapping("/adminpage/{page}")
+	public String adiminpage(Model model, @PathVariable("page") int page,
+							@RequestParam String searchUser,
+							@RequestParam String userInfo, PageVO vo) {
+		if(page == 0) {
+			vo.setNowPage(1);
+		}
+		vo.setNowPage(page);
+		
+		if((searchUser.equals("") || searchUser == null) && (userInfo.equals("") || userInfo == null)) {
+			userservice.userlist(model, vo, page, "", "");
+		} else if((!searchUser.equals("") || searchUser != null) && (userInfo.equals("")|| userInfo == null )){
+			userservice.userlist(model, vo, page, searchUser, "");
+		} else if((searchUser.equals("") || searchUser == null) && (!userInfo.equals("")|| userInfo != null )) {
+			userservice.userlist(model, vo, page, "", userInfo);
+		} else {
+			userservice.userlist(model, vo, page, searchUser, userInfo);
+			model.addAttribute("searchUser", searchUser);
+			model.addAttribute("userInfo", userInfo);
+		};
+		return "adminUser/adminUser";
+	}
+	
+	//회원정보 수정
+	@GetMapping("/adminpagemodi/{page}")
+	public String adiminpagemodi(Model model, @PathVariable("page") int page,
+							@RequestParam String searchUser,
+							@RequestParam String userInfo, PageVO vo) {
+		if(page == 0) {
+			vo.setNowPage(1);
+		}
+		vo.setNowPage(page);
+		
+		if((searchUser.equals("") || searchUser == null) && (userInfo.equals("") || userInfo == null)) {
+			userservice.userlist(model, vo, page, "", "");
+		} else if((!searchUser.equals("") || searchUser != null) && (userInfo.equals("")|| userInfo == null )){
+			userservice.userlist(model, vo, page, searchUser, "");
+		} else if((searchUser.equals("") || searchUser == null) && (!userInfo.equals("")|| userInfo != null )) {
+			userservice.userlist(model, vo, page, "", userInfo);
+		} else {
+			userservice.userlist(model, vo, page, searchUser, userInfo);
+			model.addAttribute("searchUser", searchUser);
+			model.addAttribute("userInfo", userInfo);
+		};
+		return "adminUser/adminUserModify";
+	}
 	@GetMapping("/adminuserpopup")
 	public String adminuserpopup(int id, Model model) {
 		userservice.userlistmodi(model, id);
-		return "admin-user-popup";
+		return "adminUser/adminUserPopup";
 	}
 	@PatchMapping("/adminUserModify")
 	@ResponseBody
 	public UserVO adminUserModify(@RequestBody UserVO vo) {
 		userservice.adminUserUpdate(vo);
 		return vo;
+	}
+	
+	//회원정보 삭제
+	@GetMapping("/adminpagedel/{page}")
+	public String adiminpagedel(Model model, @PathVariable("page") int page,
+							@RequestParam String searchUser,
+							@RequestParam String userInfo, PageVO vo) {
+		if(page == 0) {
+			vo.setNowPage(1);
+		}
+		vo.setNowPage(page);
+		
+		if((searchUser.equals("") || searchUser == null) && (userInfo.equals("") || userInfo == null)) {
+			userservice.userlist(model, vo, page, "", "");
+		} else if((!searchUser.equals("") || searchUser != null) && (userInfo.equals("")|| userInfo == null )){
+			userservice.userlist(model, vo, page, searchUser, "");
+		} else if((searchUser.equals("") || searchUser == null) && (!userInfo.equals("")|| userInfo != null )) {
+			userservice.userlist(model, vo, page, "", userInfo);
+		} else {
+			userservice.userlist(model, vo, page, searchUser, userInfo);
+			model.addAttribute("searchUser", searchUser);
+			model.addAttribute("userInfo", userInfo);
+		};
+		return "adminUser/adminUserDelete";
 	}
 	@DeleteMapping("/adminUserDelete")
 	@ResponseBody

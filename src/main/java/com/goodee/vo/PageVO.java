@@ -4,32 +4,81 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("pageVO")
 public class PageVO {
-
+	//현재페이지
 	private int nowPage;
-		
 	//시작페이지
 	private int startPage;
-		
 	//종료페이지
 	private int endPage;
-		
 	//전체페이지
 	private int totalPage;
-		
 	//총 row 개수
 	private int total;
-		
-	//블럭당 row 개수 (15)
+	//블럭당 row 개수 (12)
 	private int cntPerPage;
-
 	//처음 row
 	private int start;
-		
 	//현재 블록
 	private int nowBlock;
-		
 	//블록 당 페이지
 	private int cntPerBlock;
+
+	// 검색 변수
+	private String userInfo;
+	private String userid;
+	private String username;
+	private String tel;
+	private String address;
+	private String email;
+	
+	
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(String userInfo) {
+		this.userInfo = userInfo;
+	}
 
 	public int getNowPage() {
 		return nowPage;

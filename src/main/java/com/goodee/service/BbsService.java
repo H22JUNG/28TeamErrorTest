@@ -1,6 +1,7 @@
 package com.goodee.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +29,9 @@ public class BbsService {
 	public List<WrotebbsVO> getwrote(Model model, HttpSession session) {
 		UserVO uservo = (UserVO)session.getAttribute("user");
 		model.addAttribute("list", dao.getwrote(uservo));
+		if(session.getAttribute("admin")!=null) {
+			model.addAttribute("allList", dao.getwrote());
+		}
 		return dao.getwrote(uservo);
 	}
 	
@@ -36,9 +40,11 @@ public class BbsService {
 		return dao.getRewrote();
 	}
 	
-	public List<WrotebbsVO> getsearch(Model model, String category) {
-		model.addAttribute("list", dao.getsearch(category));
-		return dao.getsearch(category);
+	public List<WrotebbsVO> getsearch(Model model, String category, HttpSession session) {
+		UserVO vo = (UserVO)session.getAttribute("user");
+		String id = Integer.toString(vo.getId());
+		model.addAttribute("list", dao.getsearch(category, id));
+		return dao.getsearch(category, id);
 	}
 	
 	public WrotebbsVO getdetail(@RequestParam int id, Model model) {

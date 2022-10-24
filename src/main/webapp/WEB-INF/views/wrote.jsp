@@ -364,11 +364,10 @@
 			<section>
 				<h2>내가 쓴 글</h2>
 				<div id="ca-search">
-					<form action="${pageContext.request.contextPath}/search"
-						method="get">
+					<form action="${pageContext.request.contextPath}/search" method="get">
 						<p>카테고리별 조회</p>
 						<select name="category" id="category">
-							<option value="Q&A">Q&A</option>
+							<option value="QnA">QnA</option>
 							<option value="review">review</option>
 						</select>
 						<button>검색</button>
@@ -407,38 +406,35 @@
 								</c:forEach>
 						</c:forEach>
 					</tbody>
+					
+					
+					<!-- 관리자 내가 쓴 글 -->
+					<c:if test="${allList != null}">
+					<tbody>
+						<c:forEach var="item" items="${allList}">
+							<tr>
+								<td>${item.id}</td>
+								<td>${item.category}</td>
+								<td><a href="${pageContext.request.contextPath }/wrotedetail?id=${item.id}">${item.title}</a></td>
+								<td>${item.owner}</td>
+								<td>${item.createDate}</td>
+							</tr>
+								<c:forEach var="item2" items="${Relist}">
+								<c:if test="${item2.reId eq item.id}">
+									<tr>
+										<td>${item2.id}</td>
+										<td>${item2.category}</td>
+										<td> └ <a href="${pageContext.request.contextPath }/wrotedetail?id=${item2.id}">${item2.title}</a></td>
+										<td>${item2.owner}</td>
+										<td>${item2.createDate}</td>
+									</tr>
+								</c:if>
+								</c:forEach>
+								<!-- 관리자 마이페이지 -->
+						</c:forEach>
+					</tbody>
+					</c:if>
 				</table>
-				<%-- <div id="paging">
-					<% %>
-					<c:choose>
-						<c:when test="${1==page.nowPage}">
-							<span>◀</span>
-						</c:when>
-						<c:otherwise>
-							<a href="${pageContext.request.contextPath}/paging?page=${page.nowPage-1}">◀</a>
-						</c:otherwise>
-					</c:choose>
-					<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
-						<c:choose>
-							<c:when test="${page.nowPage eq i}">
-								<span>${i}</span>
-							</c:when>
-							<c:otherwise>
-								<a
-									href="${pageContext.request.contextPath}/paging?page=${i}">${i}</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<c:choose>
-						<c:when test="${page.totalPage == page.nowPage}">
-							<span>▶</span>
-						</c:when>
-						<c:otherwise>
-							<a
-								href="${pageContext.request.contextPath}/paging?page=${page.nowPage+1}">▶</a>
-						</c:otherwise>
-					</c:choose>
-				</div> --%>
 			</section>
 		</div>
 	</main>

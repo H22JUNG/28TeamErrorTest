@@ -152,7 +152,7 @@
             <div class="side">
                 <ul>
                     <c:if test="${admin != null}">
-                    <li><a href="${pageContext.request.contextPath}/adminpage?page=1">관리자페이지</a></li>
+                    <li><a href="${pageContext.request.contextPath}/adminpage/1?searchUser=&userInfo=">관리자페이지</a></li>
                     </c:if>
                     <li><a href=""><img src="" alt="">검색</a></li>
                     <li><a href="${pageContext.request.contextPath}/cart">장바구니</a></li>

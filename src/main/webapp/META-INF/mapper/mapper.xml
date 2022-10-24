@@ -152,7 +152,10 @@
 	<!-- 내가 쓴 글 -->
 	<select id="getwrote" resultType="wroteVO" parameterType="userVO">
 		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
-		from wrotebbs where re_id=0 and owner_id=#{id}
+		from wrotebbs where re_id=0
+		<if test="id != null">
+			and owner_id=#{id}
+		</if>
 	</select>
 	<select id="getRewrote" resultType="wroteVO">
 		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
@@ -162,6 +165,9 @@
 		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
 		from wrotebbs 
 		where category = #{category}
+		<if test="id != null">
+			and owner_id=#{id}
+		</if>
 	</select>
 	<select id="getdetail" resultType="wroteVO" parameterType="wroteVO">
 		select id, category, title, owner, date_format(create_date, '%Y-%m-%d') createDate, content
@@ -177,14 +183,46 @@
 	</delete>
 	
 	<!-- 관리자페이지 회원조회 -->
-	<select id="usercount" resultType="int">
-		select count(id) from user
+	<select id="usercount" resultType="int" parameterType="pageVO">
+		select count(id) from user where admin=0
+		<if test="userid != null">
+			and userid = #{userInfo}
+		</if>
+		<if test="username != null">
+			and username = #{userInfo}
+		</if>
+		<if test="tel != null">
+			and tel like #{userInfo}
+		</if>
+		<if test="address != null">
+			and address like #{userInfo}
+		</if>
+		<if test="email != null">
+			and email like #{userInfo}
+		</if>
 	</select>
-	
+
 	<select id="userList" resultType="userVO" parameterType="pageVO">
-		select id, userid, username, tel, address, email, point from user where admin=0
+		select id, userid, username, tel, address, email, point from user
+		where admin=0
+		<if test="userid != null">
+			and userid = #{userInfo}
+		</if>
+		<if test="username != null">
+			and username = #{userInfo}
+		</if>
+		<if test="tel != null">
+			and tel like #{userInfo}
+		</if>
+		<if test="address != null">
+			and address like #{userInfo}
+		</if>
+		<if test="email != null">
+			and email like #{userInfo}
+		</if>
 		limit #{start}, #{cntPerPage}
 	</select>
+	
 	<select id="userListdetail" resultType="userVO">
 		select id, userid, username, tel, address, email, point from user where admin=0
 		and id=#{id}

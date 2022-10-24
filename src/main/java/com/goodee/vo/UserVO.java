@@ -13,7 +13,14 @@ public class UserVO {
 	private String address;
 	private String email;
 	private int point;
-	
+	private int usercount;
+
+	public UserVO() {
+		// TODO Auto-generated constructor stub
+	}
+	public UserVO(String key, String value) {
+		// options 설정
+	}
 	public int getId() {
 		return id;
 	}
@@ -61,6 +68,12 @@ public class UserVO {
 	}
 	public void setPoint(int point) {
 		this.point = point;
+	}
+	public int getUsercount() {
+		return usercount;
+	}
+	public void setUsercount(int usercount) {
+		this.usercount = usercount;
 	}
 	
 	
