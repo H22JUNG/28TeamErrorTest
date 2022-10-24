@@ -274,6 +274,9 @@
 	#rightBottom h4{
 	display:inline-block;
 	}
+	#userPointDiv{
+	display:flex;
+	}
 
         @media  (max-width : 700px){
             *{
@@ -430,7 +433,7 @@
                 <h3>결제 방법 선택</h3>
                <label for="cash">무통장입금<input type="radio" class="pay" name="pay" value="cash" id="cash"></label>
                <label for="card">카드결제<input type="radio" class="pay" name="pay" value="card" id="card"></label>
-               <p>사용가능 적립금 : </p><label for="point">사용할 적립금 <input type="text" class="pay" id="point" name="point"></label>
+               <p>사용가능 적립금 : ${user.point}</p><label for="point">사용할 적립금 <input type="text" class="pay" id="point" name="point" onkeyup='printName()'></label>
             </div>
             <!--여기 까지 결제 할 물건-->
             <div id="messageContainer">
@@ -450,7 +453,7 @@
                 <h3>총 결제 금액 : </h3>
                 <p>총 상품 금액 : </p>
                 <button id="nowButton">바로 결제 하기</button>
-                <p>적립금 : - 원 사용</p>
+               <div id="userPointDiv"><p id="usePoint"></p><p>원 사용</p></div>
                 <p>배송비 : 2500원</p>
             </div>
             <div id="rightBottom">
@@ -510,7 +513,12 @@
                 document.getElementById("detailAddress").focus();
             }
         }).open();
-    }
+    };
+    function printName()  {
+    	  const point = document.getElementById("point").value;
+    	  document.getElementById("usePoint").innerText = point;
+    	};
+  
 </script>
     </body>
 </html>
