@@ -33,11 +33,11 @@ public class MoveController {
 	
 	@GetMapping("/loginpage")
 	public String loginpage() {
-		return "login";
+		return "login/login";
 	}
 	@GetMapping("/signuppage")
 	public String signuppage() {
-		return "sign_up";
+		return "login/sign_up";
 	}	
 	
 	@GetMapping("/cart")
@@ -50,7 +50,7 @@ public class MoveController {
 		if(session.getAttribute("user")!=null) {
 		return "my_page";
 		} else {
-			return "login";
+			return "login/login";
 		}
 	}
 	

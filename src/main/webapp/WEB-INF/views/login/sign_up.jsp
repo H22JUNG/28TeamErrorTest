@@ -196,7 +196,7 @@
     </div>
     <div class="signup-container">
         <div class="signup-box">
-            <form action="${pageContext.request.contextPath}/adduser" method="post">
+            <form action="${pageContext.request.contextPath}/adduser" method="post" id="signup-form">
                 <span>╳</span>
                 <h3>회원가입</h3>
                 <ul class="signupinput">
@@ -204,8 +204,8 @@
                         <input type="text" name="username" id="username" placeholder="이름">
                     </li>
                     <li class="idli">
-                        <input type="text" name="userid" id="userid" placeholder="아이디">
-                        <button class="idcheck" id="idcheck">아이디 중복 확인</button>
+                        <input type="text" name="userid" id="userid" placeholder="아이디" readonly required>
+                        <button type="button" class="idcheck" id="idcheck">아이디 중복 확인</button>
                     </li>
                     <li>
                         <input type="password" name="password" id="password" placeholder="비밀번호">
@@ -214,34 +214,34 @@
                         <input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인">
                     </li>
                     <li>
-                        <input type="tel" name="tel" id="tehl" placeholder="휴대폰 번호">
+                        <input type="tel" name="tel" id="tel" placeholder="휴대폰 번호">
                     </li>
                     <li>
-                        <input type="email" name="email" id="email" placeholder="이메일">
+                        <input type="email" name="email" id="=email" placeholder="이메일">
                     </li>
                     <li>
-                        <input type="checkbox" name="agree" id="agree"><label for="agree" class="saveck">회원정보약관에
-                            동의합니다</label>
+                        <input type="checkbox" name="agree" id="agree" onclick="return false;"><label for="agree" class="saveck">회원가입약관에 동의합니다</label>
                     </li>
                 </ul>
-                <button class="btn">회원가입</button>
+                <button id="btn" class="btn">회원가입</button>
             </form>
         </div>
     </div>
 
-     <script>
+    <script>
+    
+//		회원가입약관    
         const agree = document.getElementById("agree");
         let ischeck = document.querySelectorAll(".saveck");
-        agree.addEventListener("click", function () {
-            if (agree.checked) {
-                var style = document.head.appendChild(document.createElement("style"));
-                style.innerHTML = ".saveck:after {display: block;}";
-            } else {
-                var style = document.head.appendChild(document.createElement("style"));
-                style.innerHTML = ".saveck:after {display: none;}";
-            }
-        });
         
+        agree.addEventListener("click",function(){
+        	var url = "${pageContext.request.contextPath}/terms";
+            var name = "term";
+            var option = "width = 801, height = 601, left = 280, top = 150";
+            window.open(url,name,option);
+        });
+  
+//		아이디 중복
         document.getElementById("idcheck").addEventListener("click",function(){
         	popup();
         });
@@ -255,14 +255,21 @@
             var option = "width = 401, height = 301, left = 280, top = 250";
             window.open(url,name,option);
         }
-        document.getElementById()
-
         
+//		null 체크
+
+		let id = document.getElementById("userid");
         document.getElementById("btn").addEventListener("click",function(e){
         	e.preventDefault();
-        	if(document.getElementById("userid").value != null) {
-        		
+        	if(id.value != "") {
+        		document.getElementById("signup-form").submit();
+        	} else {
+        		let warning = document.createElement("p");
+        		warning.innerText = "아이디를 입력해 주세요";
+        		warning.style = "color : red;";
+        		id.style = "border: 2px solid red;";
         	}
+        	
         });
     </script>
 </body>

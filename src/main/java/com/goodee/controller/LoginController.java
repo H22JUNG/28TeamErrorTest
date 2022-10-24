@@ -33,7 +33,7 @@ public class LoginController {
 			return "redirect:/";
 		}else {
 			session.invalidate();
-			return "login";
+			return "login/login";
 		}
 	}
 	
@@ -48,7 +48,7 @@ public class LoginController {
 //	아이디 중복
 	@GetMapping("/idcheck")
 	public String idcheck() {
-		return "idcheck";
+		return "login/idcheck";
 	}
 	@PostMapping("/checkid")
 	@ResponseBody
@@ -60,5 +60,11 @@ public class LoginController {
 	public String adduser(UserVO vo) {
 		service.addUser(vo);
 		return "add_user";
+	}
+	
+//	약관 페이지
+	@GetMapping("/terms")
+	public String terms() {
+		return "login/terms";
 	}
 }
