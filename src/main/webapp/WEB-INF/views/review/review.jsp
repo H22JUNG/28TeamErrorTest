@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,11 +172,12 @@
     </div>
 
     <div class="review">
-        <button>황철순</button>
-        <button>박철순</button>
-        <button>이상순</button>
+        <button>추천순</button>
+        <button>최신순</button>
+        <button>별점순</button>
 
         <div class="review-container">
+        
             <div class="reviewContent">
                 <p id="stars">★★★★★제목이에요</p>
                 <div>내용임내용임내용임내용임내용임내용임내용임내용임내용임</div>
@@ -186,7 +189,7 @@
                 <p>따봉 도움돼요</p>
                 댓글(몇개)
                 <div class="dropdown">
-
+                
                 </div>
             </div>
         </div>
