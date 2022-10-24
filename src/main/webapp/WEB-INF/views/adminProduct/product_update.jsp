@@ -419,16 +419,6 @@ form div label {
 								<a href="${pageContext.request.contextPath}/admin_product_insert">상품정보 등록</a>
 							</h4>
 						</li>
-						<li>
-							<h4>
-								<a href="${pageContext.request.contextPath}/admin_product_update">상품정보 수정</a>
-							</h4>
-						</li>
-						<li>
-							<h4>
-								<a href="${pageContext.request.contextPath}/admin_product_delete">상품정보 삭제</a>
-							</h4>
-						</li>
 					</ul>
 				</section>
 				<section>
@@ -519,7 +509,7 @@ form div label {
 										</div>
 										<div class="btns">
 											<button class="btn btn-default final_btn" id="btn_product_update">수정하기</button>
-											<button class="btn btn-default final_btn" id="btn_product_delete">삭제하기</button>
+											<button class="btn btn-default final_btn" id="btn_product_delete" type="button">삭제하기</button>
 											<button class="btn btn-default final_btn" id="btn_product_back">돌아가기</button>
 										</div>
 									</div>
@@ -543,13 +533,6 @@ form div label {
         		location.href = "${pageContext.request.contextPath}/admin/deleteInfo/${productUpdateList.get(0).pro_num}";
        		};
     	});
-
-  		//$("#btn_product_delete").click(function(){
-    		//var isOk = confirm("상품을 삭제하시겠습니까?");
-    		//if(isOk){
-    			//location.assign("/admin/deleteInfo/"+${productUpdateList.get(0).pro_num})
-    		//}
-    	//});
     	
     	// 돌아가기 버튼
     	document.getElementById("btn_product_back").addEventListener("click",function(e){

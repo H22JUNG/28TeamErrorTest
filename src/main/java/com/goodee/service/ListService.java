@@ -62,6 +62,7 @@ public class ListService {
 			dao.productDelete(pro_num);
 			dao.optionNullId();
 			System.out.println(pro_num);
+			System.out.println("삭제하기 서비스타나");
 		}
 		
 		// 상품 insert

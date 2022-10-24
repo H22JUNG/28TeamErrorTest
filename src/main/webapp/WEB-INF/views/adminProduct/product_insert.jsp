@@ -419,16 +419,6 @@ form div label {
 								<a href="${pageContext.request.contextPath}/admin_product_insert">상품정보 등록</a>
 							</h4>
 						</li>
-						<li>
-							<h4>
-								<a href="${pageContext.request.contextPath}/admin_product_update">상품정보 수정</a>
-							</h4>
-						</li>
-						<li>
-							<h4>
-								<a href="${pageContext.request.contextPath}/admin_product_delete">상품정보 삭제</a>
-							</h4>
-						</li>
 					</ul>
 				</section>
 				<section>

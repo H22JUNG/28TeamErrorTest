@@ -50,6 +50,8 @@ public class AdminProductController {
 	@GetMapping("/admin/deleteInfo/{pro_num}")
 	public String productDelete(@PathVariable("pro_num") String pro_num) {
 		service.productDelete(pro_num);
+		System.out.println(pro_num);
+		System.out.println("삭제하기 컨트롤러 타니?");
 		return "redirect:/admin_product_list";
 	}
 	

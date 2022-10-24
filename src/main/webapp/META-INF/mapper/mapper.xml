@@ -138,16 +138,6 @@
 		SET o.pro_num = CONCAT(o.id,category_code1,category_code2,UPPER(ifnull(size,'')),UPPER(left(ifnull(color,''),1)))
 	</update>
 	
-	<!-- 
-	<insert id="optionInsert">
-		<selectKey keyProperty="id" resultType="int" order="BEFORE">
-			select id from product 
-		</selectKey>
-		insert into option(id, size, color, stock)
-		values(#{id},#{size},#{color},#{stock})
-	</insert>
-	 -->
-	
 	
 	<!-- 내가 쓴 글 -->
 	<select id="getwrote" resultType="wroteVO" parameterType="userVO">
