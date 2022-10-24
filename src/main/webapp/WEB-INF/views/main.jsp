@@ -75,7 +75,7 @@
             color: #21A5B5;
         }
         #main-image{
-            background: url(/resources/image/KakaoTalk_20221013_170149504.webp) fixed;
+            background: url("${pageContext.request.contextPath}/image/KakaoTalk_20221013_170149504.webp") fixed;
             background-size: cover;
             background-position: top;
             width: 100%;
@@ -237,6 +237,7 @@
                 <li>이벤트</li>
             </ul>
         </nav>
+        <div id="main-image"></div>
     </header>
     <main>
         <div class="event">

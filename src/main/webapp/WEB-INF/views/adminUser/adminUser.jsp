@@ -17,21 +17,17 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+
 ul, li {
 	list-style-type: none;
 }
+
 body {
-	background:
-		url("${pageContext.request.contextPath}/image/KakaoTalk_20221013_170149504.webp")
-		0% 300% fixed;
-	background-size: cover;
-	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	z-index: 0;
 	background-color: #FFFAEE;
-	position: relative;
 }
 /* 헤더 */
 header {
@@ -43,43 +39,82 @@ header {
 	align-items: center;
 	min-width: 1200px;
 }
+
 header .header-top {
 	display: flex;
 	width: 100%;
 	justify-content: flex-end;
 }
+
 header .header-top .logo img {
 	width: 265px;
 }
+
 header .header-top .logo {
 	flex: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+
 header .header-top .side {
 	position: absolute;
 }
+
 header .header-top .side ul {
 	display: flex;
 	gap: 10px;
 	margin: 10px;
 }
+/* 헤더 이미지 */
+header .header-top .side ul li a {
+	text-decoration: none;
+	color: #21A5B5;
+}
 
+#search-logo {
+	width: 25px;
+	height: 25px;
+	margin-top: 2px;
+	margin-right: 8px;
+}
+
+#cart-logo {
+	width: 30px;
+	height: 30px;
+	margin-right: 8px;
+}
+
+header .header-top .side ul li {
+	text-decoration: none;
+	color: #21A5B5;
+}
+
+#main-image {
+	background: url(/resources/image/KakaoTalk_20221013_170149504.webp)
+		fixed;
+	background-size: cover;
+	background-position: top;
+	width: 100%;
+	height: 40vh;
+}
 /* 카테고리 */
 header .category {
 	padding: 10px 20px;
 	width: 100%;
 }
+
 header .category ul {
 	display: flex;
 	gap: 30px;
 }
+
 header .category ul li {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+
 header .category ul li:first-child {
 	background: #FFECC8;
 	border-radius: 10px;
@@ -102,12 +137,13 @@ main {
 	padding: 20px;
 	min-width: 1200px;
 }
+
 main .mypage-container {
 	display: flex;
 	width: 80%;
 	justify-content: center;
 	align-items: start;
- 	padding-top : 30px;
+	padding-top: 30px;
 }
 
 /* 사이드 메뉴 */
@@ -121,20 +157,24 @@ main aside {
 	margin: 20px;
 	width: 300px;
 }
+
 main aside ul {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 	width: 100%;
 }
+
 main aside ul li {
 	padding: 15px 0 15px 0;
 }
+
 main aside .menu a {
 	text-decoration: none;
 	color: #000;
 	margin: 20px 0 20px 0;
 }
+
 main aside .menu {
 	border: 1px solid #F0F0F0;
 	border-radius: 25px;
@@ -142,6 +182,7 @@ main aside .menu {
 	padding: 10px;
 	justify-content: space-between;
 }
+
 #sidemenulist h3 {
 	text-align: center;
 }
@@ -149,8 +190,9 @@ main aside .menu {
 /* 내용 컨테이터 */
 .content-box {
 	width: 100%;
-	max-height : 860px;
+	max-height: 860px;
 }
+
 main section {
 	flex: 1.2;
 	height: 100%;
@@ -167,119 +209,122 @@ main section {
 #search {
 	align-self: flex-end;
 }
+
 #search button {
 	color: #616161;
 	font-size: 12px;
 	width: 40px;
-	height : 25px;
+	height: 25px;
 }
+
 #search select {
 	color: #616161;
 	font-size: 13px;
 	width: 110px;
-	height : 25px;
+	height: 25px;
 }
+
 #search input[type="text"] {
 	color: #616161;
 	font-size: 13px;
-	height : 25px;
-	padding-left : 3px;
+	height: 25px;
+	padding-left: 3px;
 }
+
 table {
 	border-collapse: collapse;
 }
+
 th {
 	color: black;
 	padding: 10px 0 10px 0;
 	border-bottom: 3px solid #616161;
 }
+
 td {
 	border-bottom: 1px solid #616161;
 	padding: 10px 0 10px 0;
 	text-align: center;
 }
+
 td:nth-child(5), td:nth-child(6) {
 	text-align: start;
 }
+
 tr:last-child>td, tr:last-child>th {
 	border: none;
 }
-
 
 /* 컨텐츠 메뉴 */
 .side-menu {
 	display: flex;
 }
+
 .side-menu li {
 	padding: 0 20px 0 20px;
 }
+
 .side-menu a {
 	text-decoration: none;
 	color: #000;
 }
 
-
 /* 조회 수정 삭제 선택 */
 .menu2 {
 	color: black;
 }
+
 .btn {
 	color: #616161;
 	font-size: 15px;
 	width: 40px;
 }
-#adminUser{
-	color : #21A5B5;
+
+#adminUser {
+	color: #21A5B5;
 }
 
 /* 페이징 */
-.paging{
-	border-top : 1px solid #CBCBCB;
-	text-align : center;
-	padding-top : 15px;
+.paging {
+	border-top: 1px solid #CBCBCB;
+	text-align: center;
+	padding-top: 15px;
 }
-.arrow{
-	padding : 0 10px;
-	color : black;
+
+.arrow {
+	padding: 0 10px;
+	color: black;
 	text-decoration: none;
 }
-.spanarrow{
-	padding : 0 10px;
-	color:#CBCBCB;
+
+.spanarrow {
+	padding: 0 10px;
+	color: #CBCBCB;
 }
-#nowpage{
+
+#nowpage {
 	text-decoration: underline;
-	color:black;
+	color: black;
 }
 
 #nothing {
-	text-align : center;
-	padding : 20px;
+	text-align: center;
+	padding: 20px;
 	color: #616161;
-}
-#one {
-	text-align : center;
-	padding : 5px 5px 5px 60px;
-	color: #616161;
-	font-size : 14px;
-}
-#two {
-	text-align : center;
-	padding : 5px 5px 5px 50px;
-	color: #616161;
-	font-size : 14px;
 }
 
-/* 푸터 */
-footer {
-	width : 100%;
-	background-color: #f1f1f1;
-	height: 150px;
-    bottom: 50px;
-    left: 0;
-    z-index:5;
-    position : absolute;
-    top:145%;
+#one {
+	text-align: center;
+	padding: 5px 5px 5px 60px;
+	color: #616161;
+	font-size: 14px;
+}
+
+#two {
+	text-align: center;
+	padding: 5px 5px 5px 50px;
+	color: #616161;
+	font-size: 14px;
 }
 </style>
 </head>
@@ -310,6 +355,7 @@ footer {
 				<li>이벤트</li>
 			</ul>
 		</nav>
+		<div id="main-image"></div>
 	</header>
 	<main>
 		<div class="mypage-container">
@@ -473,9 +519,6 @@ footer {
 			</div>
 		</div>
 	</main>
-	<footer>
-	푸터입ㄴ디ㅏ
-	</footer>
 </body>
 
 </html>
