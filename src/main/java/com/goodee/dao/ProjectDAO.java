@@ -6,10 +6,12 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.goodee.vo.CartVO;
 import com.goodee.vo.OptionVO;
 import com.goodee.vo.PageVO;
 import com.goodee.vo.ProductListVO;
 import com.goodee.vo.ProductVO;
+import com.goodee.vo.QnaVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.WrotebbsVO;
 import com.goodee.vo.orderUser;
@@ -66,4 +68,19 @@ public interface ProjectDAO {
 	
 	//유진 DAO
 	public void orderUserInfor(orderUser vo);
+	
+	//상품 상세페이지 조회
+	public ProductVO selectDetail(String id);
+	public List<OptionVO> selectDetailOption(String id);
+	//장바구니 담기
+	public int addCart(CartVO cartvo);
+		
+	//Q&A 게시판
+	public List<QnaVO> QnaList();
+	//Q&A 타이틀 누르면 이동
+	public QnaVO selectQna(String id);
+	//Q&A 수정, 생성, 삭제
+	public int updateQna(QnaVO qnavo);
+	public int insertQna(QnaVO qnavo);
+	public int deleteQna(QnaVO qnavo);
 }

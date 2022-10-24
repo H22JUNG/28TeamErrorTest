@@ -231,5 +231,48 @@
  	values(#{id},#{orderName},#{pay},#{address},#{detailAddress},#{extraAddress},#{orderTel},#{point})
 	</insert>
 	
+	<!-- 상품 상세페이지 조회 -->
+	<select id="selectDetail" resultType="ProductVO">
+  		select id, pic1, pic2, pic3, pic4, name, price, discount from product where id = #{id}
+  	</select>
+  	
+  	<select id="selectDetailOption" resultType="OptionVO">
+  		select id, pro_num, size, color, stock, name from option where id = #{id}
+  	</select>
+  
+  	<!-- 상세페이지 장바구니 담기 -->
+  	<insert id="insertCart">
+  		insert into cart(cartId, userId, userName, id, name, price, count, color, size) 
+  		values(null, #{userId}, #{userName}, #{id}, #{name}, #{price}, #{count}, #{color}, #{size})
+  	</insert>
+	
+	<!--Q&A 게시글조회 -->
+	<select id="QnaList" resultType="QnaVO">
+  		select id, code, qna_category, password, owner, title, content, date_format(create_date, '%Y-%m-%d') create_date,
+  		owner_id, root, re_id, indent, category from wrotebbs where category = 'QnA'ORDER BY id DESC;
+  	</select>
+	
+	<!--Q&A 타이틀누를때 이동 -->
+  	<select id="selectQna" resultType="QnaVO">
+  		select id, code, qna_category, password, owner, title, content, date_format(create_date, '%Y-%m-%d') create_date,
+  		owner_id, root, re_id, indent, category from wrotebbs where id = #{id}
+  	</select>
+  	
+  	<!-- Q&A update-->
+  	<update id="updateQna">
+		update wrotebbs set qna_category = #{qnaCategory}, password = #{password},owner = #{owner}, title=#{title}, content=#{content}
+		where id = #{id} and owner_id = #{ownerId}
+	</update>
+
+	<!-- Q&A insert-->
+	<insert id="insertQna">
+		insert into wrotebbs(category, qna_category, title, owner_id, owner, content, password)
+		values('QnA', #{qnaCategory}, #{title}, #{ownerId}, #{owner}, #{content}, #{password})
+	</insert>
+	
+	<!-- Q&A delete-->
+	<delete id="deleteQna">
+		delete from wrotebbs where id = #{id} and owner_id = #{ownerId}
+	</delete>
 	
 </mapper>

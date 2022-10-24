@@ -10,7 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodee.dao.ProjectDAO;
-
+import com.goodee.vo.CartVO;
+import com.goodee.vo.QnaVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.WrotebbsVO;
 
@@ -58,5 +59,42 @@ public class BbsService {
 	public void getdelete(int id) {
 		dao.getdelete(id);
 	}
+	
+	// 상품페이지 -> 상세페이지에 데이터 보내기
+		public void getDetailContent(Model model, String id) {
+			model.addAttribute("detailVO", dao.selectDetail(id));
+			model.addAttribute("detailOptionVO", dao.selectDetailOption(id));
+		}
+		
+		// 상세페이지 -> 장바구니에 데이터 보내기
+		// 장바구니에 담기, 구매하기에 담기
+		public void addCart(CartVO cartvo) {
+			dao.addCart(cartvo);
+		}
+		
+		//QnA
+		//QnA 페이지에 리스트출력
+		public void getQnaList(Model model) {
+			model.addAttribute("category", "Q&A");
+			model.addAttribute("list",dao.QnaList());
+		}
+		
+		//content페이지에 데이터 보내기
+		public void getQnaContent(Model model, String id) {
+			model.addAttribute("qnaVO", dao.selectQna(id));
+		}
+		
+		//QnA 수정, 생성, 삭제
+		public boolean updateQna(QnaVO qnavo) {
+			return (dao.updateQna(qnavo)>0)?true:false;
+		}
+		
+		public boolean insertQna(QnaVO qnavo) {
+			return (dao.insertQna(qnavo)>0)?true:false;
+		}
+		
+		public boolean deleteQna(QnaVO qnavo) {
+			return (dao.deleteQna(qnavo)>0)?true:false;
+		}
 	
 }

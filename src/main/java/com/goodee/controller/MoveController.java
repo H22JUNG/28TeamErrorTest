@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.goodee.service.BbsService;
 import com.goodee.service.UserService;
+import com.goodee.vo.CartVO;
 import com.goodee.vo.PageVO;
+import com.goodee.vo.QnaVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.WrotebbsVO;
 
@@ -217,4 +220,138 @@ public class MoveController {
 	public String adminProductDelete() {
 		return "adminProduct/product_delete";
 	}
+	
+	
+	// 상세페이지(수정)
+		// 메인P 상품id -> 상품id 갖고 상세P 가서 DetailVO데이터 넣기
+		@GetMapping("/detail/{id}")
+		public String productId(@PathVariable("id") String id, Model model) {
+			System.out.println("id : " + id);
+			bbsservice.getDetailContent(model, id);
+			return "detail";
+		}
+
+		// 상세페이지 -> 장바구니로 보내기
+		// 장바구니 담기
+		@ResponseBody
+		@PostMapping("/cart")
+		public int addCart(CartVO cartvo, HttpSession session) {
+			int result = 0;
+			UserVO user = (UserVO) session.getAttribute("user");
+			if (user != null) {
+				cartvo.setUserId(user.getUserid());
+				bbsservice.addCart(cartvo);
+				result = 1;
+			}
+			return result;
+		}
+
+		// 장바구니 담기
+		@ResponseBody
+		@PostMapping("/pay")
+		public int addPay(CartVO cartvo, HttpSession session) {
+			int result = 0;
+			UserVO user = (UserVO) session.getAttribute("user");
+			if (user != null) {
+				cartvo.setUserId(user.getUserid());
+				bbsservice.addCart(cartvo);
+				result = 1;
+			}
+			return result;
+		}
+
+		// Qna게시판
+		// 상품리스트P->QNA게시판P
+		@GetMapping("/qna")
+		public String getQna(Model model) {
+			bbsservice.getQnaList(model);
+			return "/qna/qna";
+		}
+
+		// QNA게시판P -> 제목누르면 content
+		@GetMapping("/qna/{id}")
+		public String getContent(@PathVariable("id") String id, Model model) {
+			bbsservice.getQnaContent(model, id);
+			return "/qna/content";
+		}
+
+		// Q&A qna P -> 글쓰기
+		@GetMapping("/write")
+		public String setBBS(@SessionAttribute("user") UserVO user, @ModelAttribute("qnaVO") QnaVO qnavo, Model model) {
+			if (user != null) {
+				String[] categoryList = { "로그인/회원가입문의", "상품문의", "주문/결제문의", "배송문의", "취소/교환/반품문의", "설치/a/s문의", "적립금/이벤트문의" };
+				model.addAttribute("categoryList", categoryList);
+				return "qna/write";
+			} else {
+				return "redirect:/login";
+			}
+		}
+
+		@PostMapping("/write/good")
+		public String setBBSResult(@SessionAttribute("user") UserVO user, QnaVO qnavo) {
+			if (user != null) {
+				qnavo.setOwnerId(user.getId());
+				qnavo.setOwner(user.getUsername());
+				if (bbsservice.insertQna(qnavo)) {
+					return "redirect:/qna";
+				} else {
+					return "qna/write";
+				}
+			} else {
+				return "redirect:/login";
+			}
+		}
+
+		// Q&A 조회P->수정P
+		@GetMapping("/update/{id}")
+		public String setBBS(@SessionAttribute("user") UserVO user, Model model, @PathVariable("id") String id) {
+			if (user != null) {
+				bbsservice.getQnaContent(model, id);
+				String[] categoryList = { "로그인/회원가입문의", "상품문의", "주문/결제문의", "배송문의", "취소/교환/반품문의", "설치/a/s문의", "적립금/이벤트문의" };
+				model.addAttribute("categoryList", categoryList);
+				return "/qna/modify";
+			} else {
+				return "redirect:/login";
+			}
+		}
+
+		// Q&A 수정P 수정완료 버튼 누를 때
+		@PostMapping("/update")
+		public String setBBS(@SessionAttribute("user") UserVO user, @ModelAttribute("qnaVO") QnaVO qnavo) {
+			qnavo.setOwner(user.getUsername());
+			qnavo.setOwnerId(user.getId());
+			if (bbsservice.updateQna(qnavo)) {
+				return "redirect:/qna";
+			} else {
+				return "redirect:/update/" + qnavo.getId();
+			}
+		}
+
+		// Q&A 조회P -> 삭제하기
+		@GetMapping("/remove/{id}")
+		public String deleteBBS(@SessionAttribute("user") UserVO user, @ModelAttribute("qnaVO") QnaVO qnavo,
+				@PathVariable("id") String id) {
+			qnavo.setOwner(user.getUsername());
+			qnavo.setOwnerId(user.getId());
+			if (bbsservice.deleteQna(qnavo)) {
+				return "redirect:/qna";
+			} else {
+				return "redirect:/qna/" + qnavo.getId();
+			}
+		}
+
+
+		// 관리자메인P -> 관리자 정보수정 이동 //유저정보 담아야됨.
+		@GetMapping("/admin_admin")
+		public String adminAdmin() {
+			return "/admin_admin";
+		}
+
+		// 관리자 로그아웃
+		@GetMapping("/admin-logout")
+		public String logout(HttpSession session) {
+			session.invalidate();
+			// session.removeAttribute("user");
+			return "redirect:/";
+		}
 }

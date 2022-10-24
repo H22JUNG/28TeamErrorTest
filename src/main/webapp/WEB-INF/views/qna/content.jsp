@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +10,109 @@
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
 ul, li {
-	list-style: none;
+	list-style-type: none;
+}
+
+body {
+	background:
+		url("${pageContext.request.contextPath}/image/KakaoTalk_20221013_170149504.webp")
+		0% 300% fixed;
+	background-size: cover;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	z-index: 0;
+}
+
+/* 헤더 */
+header {
+	background-color: white;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-width: 1200px;
+}
+
+header .header-top {
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+}
+
+header .header-top .logo img {
+	width: 265px;
+}
+
+header .header-top .logo {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+header .header-top .side {
+	position: absolute;
+}
+
+header .header-top .side ul {
+	display: flex;
+	gap: 10px;
+	margin: 10px;
+}
+
+/* 카테고리 */
+header .category {
+	padding: 10px 20px;
+	width: 100%;
+}
+
+header .category ul {
+	display: flex;
+	gap: 30px;
+}
+
+header .category ul li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+header .category ul li:first-child {
+	background: #FFECC8;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 5px 15px 7px;
+	gap: 10px;
+}
+
+/*main*/
+main {
+	background-color: white;
+	position: relative;
+	top: 33%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	min-width: 1200px;
+}
+
+main .mypage-container {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	justify-content: center;
+	align-items: center;
 }
 
 a {
@@ -125,9 +224,37 @@ a {
 </style>
 </head>
 <body>
-	<div class="container">
-		<header> </header>
-		<main>
+	<header>
+		<div class="header-top">
+			<div class="logo">
+				<a href="${pageContext.request.contextPath}/"><img
+					src="${pageContext.request.contextPath}/image/KakaoTalk_20221012_170414651.png"
+					alt=""></a>
+			</div>
+			<div class="side">
+				<ul>
+					<li><a href=""><img src="" alt="">검색</a></li>
+					<li><a href=""><img src="" alt="">장바구니</a></li>
+					<li><a href="${pageContext.request.contextPath}/loginpage">로그인</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
+				</ul>
+			</div>
+		</div>
+		<nav class="category">
+			<ul>
+				<li>Category</li>
+				<li>가구</li>
+				<li>패브릭</li>
+				<li>수납용품</li>
+				<li>생활용품</li>
+				<li>공지사항</li>
+				<li>Q&A</li>
+				<li>이벤트</li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<div class="mypage-container">
 			<div class="qna_wrap">
 				<div class="qna_title">
 					<strong>Q&A</strong>
@@ -135,52 +262,64 @@ a {
 				</div>
 				<div class="qna_content_wrap">
 					<div class="qna_content">
-						<div class="title">글 제목 입니다.</div>
+						<div class="title">${qnaVO.title}</div>
 						<div class="info">
 							<dl>
 								<dt>번호</dt>
-								<dd>1</dd>
+								<dd>${qnaVO.id}</dd>
 							</dl>
 							<dl>
 								<dt>작성자</dt>
-								<dd>김아름</dd>
+								<dd>${qnaVO.owner}</dd>
 							</dl>
 							<dl>
 								<dt>작성일</dt>
-								<dd>2022.01.16</dd>
+								<dd>${qnaVO.createDate}</dd>
 							</dl>
 							<dl>
 								<dt>조회</dt>
-								<dd>33</dd>
+								<dd>${qnaVO.ownerId}</dd>
 							</dl>
 						</div>
 						<div class="cont">
-
-							내용입니다.<br> 내용입니다.<br> 내용입니다.<br> 내용입니다.<br>
-							내용입니다.<br>
-
+							${qnaVO.content}
 						</div>
 					</div>
 				</div>
 
 				<!--버튼-->
 				<div class="btn_wrap">
-					<a href="qna.html" class="on">목록으로</a> <a href="modify.html">수정</a>
+					<a href="${pageContext.request.contextPath}/qna" class="on" id="return">목록으로</a> 
+					<c:if test="${qnaVO.ownerId eq user.id}">
+					<a href="#" id="modify">수정</a>
+					</c:if>
+					<c:if test="${qnaVO.ownerId eq user.id}">
+					<a href="#" id="del">삭제</a>
+					</c:if>
+					<%-- <c:if test="${userVO.admin == 1}">--%>
+					<a href="#" id="rep">답글</a>
+					 <%-- </c:if>--%>
 				</div>
-
-				<%-- <ul>
-	<c:if test="${로그인중}"
-	<li><a href="${pageContext.request.contextPath}/write">글쓰기</a></li>
-	 </c:if>
-</ul>
-
-페이징페이지를 따로..
-<div class="pagebtn">
-	<jsp:include page="/WEB-INF/views/include/page.jsp"/> --%>
-			
+	</div>
 	</div>
 	</main>
 	<footer> </footer>
-	</div>
+	
+	
+	<script type="text/javascript">
+    	document.getElementById("return").addEventListener("click",function(){
+    		location.href = "${pageContext.request.contextPath}/qna";
+    	});
+    	
+    	document.getElementById("modify").addEventListener("click",function(){
+    		location.href = "${pageContext.request.contextPath}/update/${qnaVO.id}";
+    	})
+    	document.getElementById("del").addEventListener("click",function(){
+    		let result = confirm("정말로 삭제하시겠습니까?");
+    		if(result){
+    			location.href="${pageContext.request.contextPath}/remove/${qnaVO.id}";
+    		}
+    	});
+    </script>
 </body>
 </html>

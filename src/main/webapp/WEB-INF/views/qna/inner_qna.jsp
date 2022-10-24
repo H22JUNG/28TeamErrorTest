@@ -18,94 +18,15 @@ ul, li {
 	list-style-type: none;
 }
 
-body {
-	background:
-		url("${pageContext.request.contextPath}/image/KakaoTalk_20221013_170149504.webp")
-		0% 300% fixed;
-	background-size: cover;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	z-index: 0;
-}
-
-/* 헤더 */
-header {
-	background-color: white;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	min-width: 1200px;
-}
-
-header .header-top {
-	display: flex;
-	width: 100%;
-	justify-content: flex-end;
-}
-
-header .header-top .logo img {
-	width: 265px;
-}
-
-header .header-top .logo {
-	flex: 1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-header .header-top .side {
-	position: absolute;
-}
-
-header .header-top .side ul {
-	display: flex;
-	gap: 10px;
-	margin: 10px;
-}
-
-/* 카테고리 */
-header .category {
-	padding: 10px 20px;
-	width: 100%;
-}
-
-header .category ul {
-	display: flex;
-	gap: 30px;
-}
-
-header .category ul li {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-header .category ul li:first-child {
-	background: #FFECC8;
-	border-radius: 10px;
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	padding: 5px 15px 7px;
-	gap: 10px;
-}
 
 /*main*/
 main {
 	background-color: white;
 	position: relative;
-	top: 33%;
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 20px;
-	min-width: 1200px;
 }
 
 main .mypage-container {
@@ -122,8 +43,7 @@ a {
 }
 
 .qna_wrap {
-	width: 1000px;
-	margin: 100px auto;
+	width: 95%;
 }
 
 .qna_title {
@@ -140,7 +60,6 @@ a {
 }
 
 .btn_wrap {
-	margin-top: 30px;
 	text-align: right;
 	font-size: 0;
 	right: 0;
@@ -249,35 +168,6 @@ a {
 </style>
 </head>
 <body>
-	<header>
-		<div class="header-top">
-			<div class="logo">
-				<a href="${pageContext.request.contextPath}/"><img
-					src="${pageContext.request.contextPath}/image/KakaoTalk_20221012_170414651.png"
-					alt=""></a>
-			</div>
-			<div class="side">
-				<ul>
-					<li><a href=""><img src="" alt="">검색</a></li>
-					<li><a href=""><img src="" alt="">장바구니</a></li>
-					<li><a href="${pageContext.request.contextPath}/loginpage">로그인</a></li>
-					<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
-				</ul>
-			</div>
-		</div>
-		<nav class="category">
-			<ul>
-				<li>Category</li>
-				<li>가구</li>
-				<li>패브릭</li>
-				<li>수납용품</li>
-				<li>생활용품</li>
-				<li>공지사항</li>
-				<li>Q&A</li>
-				<li>이벤트</li>
-			</ul>
-		</nav>
-	</header>
 	<main>
 		<div class="mypage-container">
 			<div class="qna_wrap">
@@ -322,9 +212,9 @@ a {
 
 				<!--버튼-->
 				<div class="btn_wrap">
-				<c:if test="${user != null}">
-				<a href="${pageContext.request.contextPath}/write" class="on">문의하기</a>
-				</c:if>
+				<%-- <c:if test="${qnaVO.ownerId eq userVO.id}"> --%>
+					<a href="${pageContext.request.contextPath}/write" class="on">문의하기</a>
+				<%-- </c:if> --%>
 				</div>
 
 				<!--페이지번호-->
@@ -338,6 +228,5 @@ a {
 			</div>
 			</div>
 		</main>
-		<footer> </footer>
 </body>
 </html>
