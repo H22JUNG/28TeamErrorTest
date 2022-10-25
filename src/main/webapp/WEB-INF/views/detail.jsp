@@ -639,8 +639,8 @@ input {
 				</div>
 				<div class="options">
 					<h2><input type="text" value="${detailVO.name}" id="name"></h2>
-					<form action="${pageContext.request.contextPath}/cart"
-						method="post">
+					<%-- <form action="${pageContext.request.contextPath}/cart"
+						method="post">--%>
 						<table>
 							<colgroup>
 								<!--이름쪽은 변하지 않고, 옵션쪽은 유동적이게-->
@@ -651,10 +651,10 @@ input {
 								<tr>
 									<th><label>가격 </label></th>
 									<td><input type="text"
-										value="<fmt:formatNumber value="${detailVO.price}" pattern="#,###" />&nbsp;원"
-										class="cost"> <label for="dc"></label><input
-										type="text" value="${detailVO.discount}&nbsp;%" name="dc"
-										class="dc"></td>
+										value="<fmt:formatNumber value="${detailVO.price}" pattern="#,###" />"
+										id="cost"><label for="dc"></label><input
+										type="text" value="${detailVO.discount}" name="dc"
+										id="dc"><span id="dc-span">%</span></td>
 								</tr>
 								<tr>
 									<th><label>판매가격 </label></th>
@@ -664,8 +664,14 @@ input {
 								</tr>
 								<tr>
 									<th><label>상품코드 </label></th>
-									<td><input type="text" value="${detailVO.id}"
+									<%--<td><input type="text" value="${detailOptionVO.proNum}"
 										id="product_code"></td>
+									<td>
+									<c:forEach var="vo" items="${detailOptionVO}">
+										<p id="code">${vo.proNum}</p>
+									</c:forEach>
+									</td> --%>
+									<td><input type="text" value="${detailVO.id}" id="id"></td>
 								</tr>
 								<tr>
 									<th>배송비</th>
@@ -679,19 +685,23 @@ input {
 								</tr>
 
 								<tr>
-								<%--<c:if test="${detailVO.pic4 != null}">--%>
+								<%-- <c:choose>
+									<c:when test="${!empty detailOptionVO.color}">--%>
 									 <th>옵션선택(색상)</th>
 									<td><select name="opt_select" id="select_color" class="form-control opt_select_color">
 											<option value="noChoice" selected>--선택없음--</option>
 											<c:forEach var="vo" items="${detailOptionVO}">
-												<option value="${vo.color}">${vo.color}</option>
+												<%-- <c:forTokens var="vo1" items="${vo.color}" delims=",">--%>
+													<option value="${vo.color}">${vo.color}</option>
+												<%--</c:forTokens>--%>
 											</c:forEach>
 									</select></td>
-								<%-- </c:if>--%>
+									<%-- </c:when>
+								</c:choose>--%>
 								</tr>
 
 								<tr>
-								<%-- <c:if test="${detailVO.pic4 != null}">--%>
+									<%-- <c:if test="${detailOptionVO.size != null}">--%>
 									<th>옵션선택(사이즈)</th>
 									<td><select name="opt_select" id="select_size" class="form-control opt_select_size">
 											<option value="noChoice" selected>--선택없음--</option>
@@ -699,7 +709,7 @@ input {
 												<option value="${vo.size}">${vo.size}</option>
 											</c:forEach>
 									</select></td>
-								 <%-- </c:if>--%>
+								 	<%-- </c:if>--%>
 								</tr>
 								<tr>
 									<th><label>구매수량</label></th>
@@ -726,7 +736,7 @@ input {
 							<input type="submit" value="구매하기" id="btn2" />
 						</div>
 						<%--</div>--%>
-					</form>
+					<%-- </form>--%>
 				</div>
 			</div>
 			<hr width="100%" color="black" size="1">
@@ -868,19 +878,25 @@ input {
 			var size = $("#select_size").val();
 			var color = $("#select_color").val();
 			var name = $("#name").val();
+			var code = $("#code").val();
+			var dc = $("#dc").val();
 			
 			console.log("id : " + id);
 			console.log("count : " + count);
 			console.log("size : " + size);
 			console.log("color : " + color);
 			console.log("name : " + name);
+			console.log("code : " + code);
+			console.log("dc : " + dc);
 
 			var data = {
 				id : id,
 				count : count,
 				size : size,
 				color : color,
-				name : name
+				name : name,
+				code : code,
+				dc : dc
 			};
 
 			$.ajax({
@@ -911,19 +927,25 @@ input {
 			var size = $("#select_size").val();
 			var color = $("#select_color").val();
 			var name = $("#name").val();
+			var price = $("#cost").val();
+			var dc = $("#dc").val();
 			
 			console.log("id : " + id);
 			console.log("count : " + count);
 			console.log("size : " + size);
 			console.log("color : " + color);
 			console.log("name : " + name);
+			console.log("price : " + price);
+			console.log("dc : " + dc);
 
 			var data = {
 				id : id,
 				count : count,
 				size : size,
 				color : color,
-				name : name
+				name : name,
+				price : price,
+				dc : dc
 			};
 
 			$.ajax({

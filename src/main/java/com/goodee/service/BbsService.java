@@ -66,12 +66,6 @@ public class BbsService {
 			model.addAttribute("detailOptionVO", dao.selectDetailOption(id));
 		}
 		
-		// 상세페이지 -> 장바구니에 데이터 보내기
-		// 장바구니에 담기, 구매하기에 담기
-		public void addCart(CartVO cartvo) {
-			dao.addCart(cartvo);
-		}
-		
 		//Review
 		public void getReview(Model model, String id) {
 			model.addAttribute("review", dao.getReview(id));

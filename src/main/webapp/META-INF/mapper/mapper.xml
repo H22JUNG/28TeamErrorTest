@@ -241,9 +241,9 @@
   	</select>
   
   	<!-- 상세페이지 장바구니 담기 -->
-  	<insert id="insertCart">
-  		insert into cart(cartId, userId, userName, id, name, price, count, color, size) 
-  		values(null, #{userId}, #{userName}, #{id}, #{name}, #{price}, #{count}, #{color}, #{size})
+  	<insert id="addCart">
+  		insert into cart(cartid, userid, userName, id, name, price, count, color, size) 
+  		values(null, #{userid}, #{userName}, #{id}, #{name}, #{price}, #{count}, #{color}, #{size})
   	</insert>
 	
 	
