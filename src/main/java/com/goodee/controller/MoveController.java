@@ -239,7 +239,7 @@ public class MoveController {
 			int result = 0;
 			UserVO user = (UserVO) session.getAttribute("user");
 			if (user != null) {
-				cartvo.setUserId(user.getUserid());
+				cartvo.setUserid(user.getUserid());
 				bbsservice.addCart(cartvo);
 				result = 1;
 			}
@@ -253,7 +253,7 @@ public class MoveController {
 			int result = 0;
 			UserVO user = (UserVO) session.getAttribute("user");
 			if (user != null) {
-				cartvo.setUserId(user.getUserid());
+				cartvo.setUserid(user.getUserid());
 				bbsservice.addCart(cartvo);
 				result = 1;
 			}

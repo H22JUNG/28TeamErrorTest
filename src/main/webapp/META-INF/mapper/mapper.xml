@@ -40,8 +40,8 @@
 		where category2 = #{category2}
 	</select>
 	
-	
-	<!-- product 전체 list 뽑기 - 윤정 -->
+	<!-- ==================== 관리자 페이지 - 상품 관리 ==================== -->
+	<!-- 관리자 페이지 - product 전체 list 뽑기 - 윤정 -->
 	 <select id="selectProductList" resultType="map">
 	 	SELECT product.id, product.NAME, price, view, create_date, option.pro_num, size, color, stock
 		FROM option INNER JOIN product
@@ -86,7 +86,7 @@
 		UPDATE option o 
 		INNER JOIN (product p INNER JOIN category c ON p.category_id = c.id)
 		ON p.id = o.id
-		SET o.pro_num = CONCAT(o.id,category_code1,category_code2,UPPER(ifnull(size,'')),UPPER(left(ifnull(color,''),1)))
+		SET o.pro_num = CONCAT(o.id,category_code1,category_code2,UPPER(ifnull(size,'')),UPPER(left(ifnull(color,''),3)))
 	</update>
 	
 	<!-- category_id 업데이트 -->
@@ -135,7 +135,7 @@
 		UPDATE option o 
 		INNER JOIN (product p INNER JOIN category c ON p.category_id = c.id)
 		ON p.id = o.id
-		SET o.pro_num = CONCAT(o.id,category_code1,category_code2,UPPER(ifnull(size,'')),UPPER(left(ifnull(color,''),1)))
+		SET o.pro_num = CONCAT(o.id,category_code1,category_code2,UPPER(ifnull(size,'')),UPPER(left(ifnull(color,''),3)))
 	</update>
 	
 	
@@ -275,4 +275,33 @@
 		delete from wrotebbs where id = #{id} and owner_id = #{ownerId}
 	</delete>
 	
+	
+	<!-- ====================장바구니==================== -->
+	<!-- 카트 삭제 -->
+	<delete id="deleteCart">
+		delete from cart where cartId = #{cartId}
+	</delete>
+	
+	<!-- 카트 수량 수정 -->
+	<update id="modifyCount">
+		update cart
+		set
+			count = #{count}
+		where
+			cartId = #{cartId}
+	</update>
+	
+	<!-- 카트 목록 -->
+	<select id="getCart" resultType="cartVO">
+		SELECT c.cartid, c.userid, c.id, c.pro_num, c.count, p.pic1, p.name, p.price, p.discount
+		FROM cart c RIGHT JOIN product p
+		ON c.id = p.id
+		WHERE userid = #{userid}
+	</select>
+	
+	<!-- 카트 확인 -->
+	<select id="checkCart" resultType="cartVO">
+		select * from cart
+		where userId = #{userId} and pro_num = #{proNum}
+	</select>
 </mapper>

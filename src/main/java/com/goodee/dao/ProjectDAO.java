@@ -83,4 +83,8 @@ public interface ProjectDAO {
 	public int updateQna(QnaVO qnavo);
 	public int insertQna(QnaVO qnavo);
 	public int deleteQna(QnaVO qnavo);
+	
+	// ================ 장바구니 ================
+	public List<CartVO> getCart(String userid);	// 장바구니 목록 가져오기
+	public void deleteAll(String userid);	// 장바구니 전체 삭제
 }

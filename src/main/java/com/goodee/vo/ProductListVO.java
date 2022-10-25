@@ -10,7 +10,7 @@ public class ProductListVO {
 	public String pic3;
 	public String pic4;
 	public String name;
-	public String price;
+	public int price;
 	public int discount;
 	public int view;
 	public String createDate;
@@ -20,7 +20,6 @@ public class ProductListVO {
 	private String size;
 	private String color;
 	private int stock;
-	
 	
 	public int getId() {
 		return id;
@@ -70,10 +69,10 @@ public class ProductListVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public int getDiscount() {
@@ -119,5 +118,7 @@ public class ProductListVO {
 		this.stock = stock;
 	}
 	
+	
+
 	
 }
