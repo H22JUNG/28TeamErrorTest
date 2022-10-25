@@ -209,7 +209,7 @@
                 <h3>로그인</h3>
                 <ul class="logininput">
                     <li>
-                        <input type="text" name="userid" id="userid" placeholder="아이디를 입력하세요">
+                        <input type="text" name="userid" id="userid" placeholder="아이디를 입력하세요" value="${cookie.loginCookie.value}">
                     </li>
                     <li>
                         <input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요">
