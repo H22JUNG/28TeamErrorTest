@@ -352,6 +352,11 @@
             border-right: 1px solid white;
         }
 
+		.dbimg {
+			width: 110px;
+			height: 150px;
+		}
+
 		#ct_cont {
 			padding: 0;
 		}
@@ -629,7 +634,8 @@
             </ul>
         </aside>
         <section>
-	<h2>장바구니</h2>
+		<h2>장바구니</h2>
+		<!-- <p>${cartInfo} - 정보 제대로 넘어오는지 확인</p>  -->
 				<div class="cart_container">
 					<!-- 장바구니 header -->
 					<div class="ct_header">
@@ -660,11 +666,11 @@
 									</tr>
 								</thead>
 								<!-- 
-									<c:forEach var="vo" items="${cart}">
-									</c:forEach>
+									
 									 -->
 								<tbody>
 									<!-- 여기에 foreach를 넣자 -->
+									<c:forEach var="vo" items="${cartInfo}">
 										<tr>
 											<td class="td_width_1 cart_info_td">
 		                                        <input type="checkbox" class="individual_checkbox" checked="checked">
@@ -676,12 +682,12 @@
 		                                        <!-- <input type="hidden" class="individual_totalPoint_input" value="${ci.totalPoint}">  -->
 		                                        <input type="hidden" class="individual_proNum_input" value="${vo.proNum}">								
 	                                    	</td>
-											<td><img src="${vo.pic1}" alt="">db이미지</td>
+											<td><img class="dbimg" src="${vo.pic1}" alt=""></td>
 											<td class="main_content right_line">
 												<div class="prod_tit">
 													<!-- <a href="" target="_blank">여기에 상품 링크 걸고</a> -->
 													<div class="prod_name">
-														<strong class="name">${vo.name}상품명</strong>
+														<strong class="name">${vo.itemName}</strong>
 													</div>
 												</div>
 	
@@ -715,14 +721,14 @@
 													<div class="price_inner">
 														<div class="price_cont">
 															<p class="final">
-																<span class="num">${vo.totalPrice}</span>원
+																<span class="num">${vo.resultPrice}</span>원
 															</p>
 														</div>
 													</div>
 												</div> <!-- // 주문 금액 -->
 											</td>
 										</tr>
-
+									</c:forEach>
 									
 								</tbody>
 
@@ -781,23 +787,23 @@
                 <form action="/cart/update" method="post" class="quantity_update_form">
                     <input type="hidden" name="cartId" class="update_cartId">
                     <input type="hidden" name="bookCount" class="update_bookCount">
-                    <input type="hidden" name="memberId" value="${member.memberId}">
+                    <input type="hidden" name="memberId" value="${user.userid}">
                 </form>	
                 
                 <!-- 삭제 form -->
                 <form action="/cart/delete" method="post" class="quantity_delete_form">
                     <input type="hidden" name="cartId" class="delete_cartId">
-                    <input type="hidden" name="memberId" value="${member.memberId}">
+                    <input type="hidden" name="memberId" value="${user.userid}">
                 </form>		
                 <!-- 주문 form -->
-                <form action="/order/${member.memberId}" method="get" class="order_form">
+                <form action="/order/${user.userid}" method="get" class="order_form">
     
                 </form>			
         </section>
         </div>
     </main>
     <footer>
-
+		
     </footer>
 
 	<script>

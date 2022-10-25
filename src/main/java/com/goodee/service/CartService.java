@@ -1,5 +1,7 @@
 package com.goodee.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -16,7 +18,15 @@ public class CartService {
 	}
 	
 	
-	public void getCart(String userid, Model model) {
-		model.addAttribute("cartList", dao.getCart(userid));
+	public List<CartVO> getCart(String userid) {
+		List<CartVO> cart = dao.getCart(userid);
+		
+		// 변수 초기화
+		for (CartVO cartVO : cart) {
+			cartVO.initSaleTotal();
+		}
+		
+		// 값이 모두 세팅된 cart 반환
+		return cart;
 	}
 }

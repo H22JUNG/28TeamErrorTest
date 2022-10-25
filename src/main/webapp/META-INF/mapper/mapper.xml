@@ -318,7 +318,7 @@
 	<!-- ====================장바구니==================== -->
 	<!-- 카트 삭제 -->
 	<delete id="deleteCart">
-		delete from cart where cartId = #{cartId}
+		delete from cart where cart_num = #{cartNum}
 	</delete>
 	
 	<!-- 카트 수량 수정 -->
@@ -327,20 +327,19 @@
 		set
 			count = #{count}
 		where
-			cartId = #{cartId}
+			cart_num = #{cartNum}
 	</update>
 	
-	<!-- 카트 목록 -->
+	<!-- 카트 목록 / 흠 애매해-->
 	<select id="getCart" resultType="cartVO">
-		SELECT c.cartid, c.userid, c.id, c.pro_num, c.count, p.pic1, p.name, p.price, p.discount
-		FROM cart c RIGHT JOIN product p
-		ON c.id = p.id
+		select c.cart_num, c.userid, c.id, c.item_name, c.price, c.discount, c.count, c.color, c.size, c.pic1, c.pro_num
+		FROM cart c
 		WHERE userid = #{userid}
 	</select>
 	
 	<!-- 카트 확인 -->
 	<select id="checkCart" resultType="cartVO">
 		select * from cart
-		where userId = #{userId} and pro_num = #{proNum}
+		where userid = #{userid} and pro_num = #{proNum}
 	</select>
 </mapper>
