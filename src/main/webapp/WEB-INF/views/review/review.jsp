@@ -181,7 +181,7 @@ font-size : 12px;
 <%--     <h3>REVIEW(${review.size}개)</h3>
  --%>    <div class="Allstar">
         <div class="starsScore">
-            <span id="star">★</span><span id="grade">${starGradeAvg.avg}</span>
+            <span id="star">★</span><span id="grade">${starGradeAvg}</span>
             <h3>97( (star 5,4,3)/전체리뷰쓴사람 %의 구매자가 이 상품을 좋아합니다</h3>
             <button>상품 리뷰 작성하기</button>
         </div>

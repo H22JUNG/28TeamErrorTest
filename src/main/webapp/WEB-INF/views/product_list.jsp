@@ -228,6 +228,7 @@ aside>ul>li ul>li>a {
 			<a href="${pageContext.request.contextPath}/detail/${vo.id}"><h4>${vo.name}</h4></a>
 			<p>${vo.price} 원</p>
 			<p>${vo.discount} %</p>
+			<p>${vo.id}</p>
 			</div>
 		</div>	
 	</c:forEach>
