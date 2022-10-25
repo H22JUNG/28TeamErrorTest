@@ -69,7 +69,16 @@ public interface ProjectDAO {
 	public void adminUserDelete(UserVO vo);
 	
 	//유진 DAO
-	public void orderUserInfor(orderUser vo);
+	public List<CartVO> cartList(UserVO vo);
+	public void orderUserInfor(orderUser vo); //입력한 주문자정보 저장
+	public void orderItemInfor(CartVO vo); //상품 정보 저장할예정	
+	public int selectCartNum(int id);
+	//리턴값은 jsp에 출력하기위해서 
+	// 마이페이지에서 주문별(장바구니)로 출력하기
+	public List<orderUser> getOrderList(UserVO vo); 
+	public orderUser orderUserResult(String userid); //위에서 저장한 정보 출력
+	//여기서위까지 유진 DAO
+	
 	
 	//상품 상세페이지 조회
 	public ProductVO selectDetail(String id);

@@ -7,7 +7,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("orderUser")
 public class orderUser {
 	
-	private int id;
+	private String userid;
 	private int cartNum;
 	private String orderName;
 	private String orderDate;
@@ -17,13 +17,14 @@ public class orderUser {
 	private String extraAddress;
 	private String orderTel;
 	private String orderNum;
+	private int totalPrice;
 	private String payResult;
 	private int point;
-	public int getId() {
-		return id;
+	public String getUserid() {
+		return userid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public int getCartNum() {
 		return cartNum;
@@ -79,6 +80,12 @@ public class orderUser {
 	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
 	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	public String getPayResult() {
 		return payResult;
 	}
@@ -91,7 +98,7 @@ public class orderUser {
 	public void setPoint(int point) {
 		this.point = point;
 	}
+	
+	
 
-	
-	
 }

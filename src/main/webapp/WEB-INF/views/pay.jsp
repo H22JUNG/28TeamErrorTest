@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -364,103 +365,92 @@
     <form action="${pageContext.request.contextPath}/InforController" method="get">
         <div class="left">
             <div id="top">
-                <h3>선택한 상품</h3>
-                <div class="itembox">
-                    <div class="smallItembox">
-                    <div class="itemImage">
-                        <img src="${pageContext.request.contextPath}/image/dresser1_2.webp">
-                    </div>
-                    <div class="itemboxText">
-                        <h4>상품 이름 : </h4>
-                        <p>Size : </p>
-                        <h4>상품 가격 : </h4>
-                        
-                    </div>
-                </div>
-
-                </div>
-                <div class="itembox">
-                    <div class="smallItembox">
-                    <div class="itemImage">
-                        <img src="${pageContext.request.contextPath}/image/dresser1_2.webp">
-                    </div>
-                    <div class="itemboxText">
-                        <h4>상품 이름 : </h4>
-                        <p>Size : </p>
-                        <h4>상품 가격 : </h4>
-                        </div>
-
-                    </div>
-                </div>
+            	<c:forEach var="vo" items="${cartList}">
+						<div class="itembox">
+							<div class="smallItembox">
+								<div class="itemImage">
+									<img
+										src="${pageContext.request.contextPath}/image/dresser1_2.webp">
+								</div>
+								<div class="itemboxText">
+									<h4>상품 이름 : ${vo.itemName}</h4>
+									<p>Size : ${vo.size}</p> <p>Color : ${vo.color}</p>
+									<h4>상품 수량 : ${vo.count}</h4>
+									<h4>상품 가격 : ${vo.price}</h4>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
             </div>
             <!--여기까지 top끝-->
              <div id="infor">
-                <h3>고객 정보 입력</h3>
-                <div class="inforBox"> 
-                <div>
-                <input type="text" id="postcode" placeholder="우편번호">
-                <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" id="addBtn"><br>
-                </div>
-               주소<input type="text" class="inforInput" required  id="address" name="address" placeholder="주소"><br>
-               상세 주소<input type="text" class="inforInput"  id="detailAddress" name="detailAddress" required placeholder="상세주소를 입력해주세요"> 
-               <input type="text" id="extraAddress" name="extraAddress" placeholder="(동, 건물)" class="inforInput"></div>
-                <div class="inforBox">
-                주문자  <input type="text" class="inforInput" placeholder="이름을 입력해주세요" required name="orderName"> 
-                연락처 <input type="text" class="inforInput" placeholder="숫자로만 입력해주세요" required name="orderTel"></div>
-            </div>
+               <h3>고객 정보 입력</h3>
+				<div class="inforBox">
+					<div>
+						<input type="text" id="postcode" placeholder="우편번호">
+						<input type="button" onclick="execDaumPostcode()"
+						  value="우편번호 찾기" id="addBtn"><br>
+					</div>
+					주소<input type="text" class="inforInput" required id="address" name="address" placeholder="주소"><br> 
+					상세 주소<input type="text" class="inforInput" id="detailAddress" name="detailAddress" required placeholder="상세주소를 입력해주세요"> 
+					<input type="text" name="extraAddress" id="extraAddress" placeholder="(동, 건물)" class="inforInput">
+				</div>
+				<div class="inforBox">
+					주문자 <input type="text" class="inforInput" placeholder="이름을 입력해주세요"required name="orderName" > 
+					연락처 <input type="text" class="inforInput" placeholder="숫자로만 입력해주세요" required name="orderTel" >
+				</div>
             <!--여기까지 infor끝-->
             <div id="checkItem">
-                <h3>결제 목록</h3>
-                <div class="checkItems">
-                    <h4>물건 이름 </h4>
-                    <p>물건 가격</p>
-                </div>
-                <div class="checkItems">
-                    <h4>물건 이름</h4>
-                    <p>물건 가격</p>
-                </div>
-                <div class="checkItems">
-                    <h4>물건 이름</h4>
-                    <p>물건 가격</p>
-                </div>
-                <div class="checkItems">
-                    <h4>물건 이름</h4>
-                    <p>물건 가격</p>
-                </div>
+             <h3>결제 목록</h3>
+				<c:set var="total" value="0"/>
+				<c:forEach var="vo" items="${cartList}">
+				<div class="checkItems">
+					<h4>${vo.itemName}</h4>
+					<p>${vo.price}</p>
+					<p>수량 : ${vo.count}</p>
+					<p>${vo.size}</p><p>${vo.color}</p>
+				</div>
+				<c:set var="total" value="${total+vo.price}"/>
+				</c:forEach>
             </div>
             <!--여기까지 결제 할 물건 -->
             <div id="selectPay">
                 <h3>결제 방법 선택</h3>
-               <label for="cash">무통장입금<input type="radio" class="pay" name="pay" value="cash" id="cash"></label>
-               <label for="card">카드결제<input type="radio" class="pay" name="pay" value="card" id="card"></label>
-               <p>사용가능 적립금 : ${user.point}</p><label for="point">사용할 적립금 <input type="text" class="pay" id="point" name="point" onkeyup='printName()'></label>
+               <label for="cash">무통장입금<input type="radio" class="pay"
+						name="pay" value="cash" id="cash"></label> <label for="card">카드결제<input
+						type="radio" class="pay" name="pay" value="card" id="card"></label>
+					<p>사용가능 적립금 :${user.point}</p>
+					
+					<label for="point">사용할 적립금 <input type="text" class="pay" id="point" name="point" onkeyup='printName()' value="0" autocomplete="off"></label>
             </div>
             <!--여기 까지 결제 할 물건-->
             <div id="messageContainer">
-                <h3>배송 요청 사항</h3>
-                <textarea name="" id="message" cols="100" rows="10" >
+              	<h3>배송 요청 사항</h3>
+				<textarea name="" id="message" cols="100" rows="10">
             </textarea>
-                <div id="allPay">
-                    <h3>총 결제 금액 : </h3>
-                    <p>돈 내놔</p>
-                </div>
+				<div id="allPay">
+					<h3>총 결제 금액 :</h3>
+					<p>${total+2500}원</p>
+				</div>
             </div>
             <!--여기까지 총 결제 끝-->
         </div>
 
+
         <div id="right">
             <div id="rightPrice">
-                <h3>총 결제 금액 : </h3>
-                <p>총 상품 금액 : </p>
-                <button id="nowButton">바로 결제 하기</button>
-               <div id="userPointDiv"><p id="usePoint"></p><p>원 사용</p></div>
-                <p>배송비 : 2500원</p>
+               <h3>총 결제 금액 : ${total+2500}</h3>
+				<p>총 상품 금액 : ${total}</p>
+				<button id="nowButton">바로 결제 하기</button>
+				<div id="userPointDiv"><p id="usePoint"></p><p>원 사용</p></div>
+				<p>배송비 : 2500원</p>
             </div>
             <div id="rightBottom">
              <div><input type="checkbox" /><h4>주문내역확인동의</h4></div>
 				<p>주문할 상품의 상품명, 상품가격, 배송정보를 확인하였으며,
 				구매에 동의 하시겠습니까?(전자상거래법 제8조, 제2항)</p>
             </div>
+        </div>
         </div>
         </form>
     </div>
@@ -518,7 +508,16 @@
     	  const point = document.getElementById("point").value;
     	  document.getElementById("usePoint").innerText = point;
     	};
-  
+    	document.getElementById("point").addEventListener("focus",function(){
+      		if(this.value==0){
+      			this.value="";
+      		};
+      	});
+      	document.getElementById("point").addEventListener("blur",function(){
+      		if(this.value==""){
+      			this.value=0;
+      		};
+      	});
 </script>
     </body>
 </html>

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.goodee.service.BbsService;
+import com.goodee.service.LoginService;
+import com.goodee.service.PayService;
 import com.goodee.service.UserService;
 import com.goodee.vo.CartVO;
 import com.goodee.vo.PageVO;
@@ -27,13 +29,19 @@ import com.goodee.vo.WrotebbsVO;
 public class MoveController {
 	public BbsService bbsservice;
 	public UserService userservice;
+	public LoginService loginservice; //유진쓰가 추가
+	public PayService payservice; //이것도 유진쓰가 추가
 
-	public MoveController(BbsService bbsservice, UserService userservice) {
+	
+	
+	public MoveController(BbsService bbsservice, UserService userservice, LoginService loginservice,
+			PayService payservice) {
 		super();
 		this.bbsservice = bbsservice;
 		this.userservice = userservice;
+		this.loginservice = loginservice;
+		this.payservice = payservice;
 	}
-	
 	@GetMapping("/loginpage")
 	public String loginpage() {
 		return "login/login";
@@ -63,9 +71,16 @@ public class MoveController {
 		if(path == 0) {
 			return "my_page";
 		} else if(path == 1) {
+			//아래 두줄 유진쓰 추가 
+			session.setAttribute("cartList", payservice.cartList((UserVO)session.getAttribute("user")));
+			session.setAttribute("payresult", model.getAttribute("model"));
+			
 			return "pay";
 		} else if(path == 2) {
-			return "pay_result";
+			//order_list 페이지에서 사용 - 유진 추가
+			payservice.getOrderList(model, session);
+			
+			return "order_list";
 		} else {
 			bbsservice.getwrote(model, session);
 			bbsservice.getRewrote(model);

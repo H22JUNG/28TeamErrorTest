@@ -1,10 +1,16 @@
 package com.goodee.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.goodee.dao.ProjectDAO;
+import com.goodee.vo.CartVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.orderUser;
 
@@ -17,10 +23,54 @@ public class PayService {
 		super();
 		this.dao = dao;
 	}
-	public void orderUserInfor(orderUser vo, HttpSession session) {
-		vo.setId(((UserVO)session.getAttribute("user")).getId());
-		dao.orderUserInfor(vo);
+	
+	
+	public List<CartVO> cartList(UserVO vo) {
+		return dao.cartList(vo);
 	}
 	
+	public void orderInfor(orderUser vo, List<CartVO> volist, HttpSession session,Model model) {
+		int cartNum = dao.selectCartNum(((UserVO)session.getAttribute("user")).getId());
+		vo.setUserid(((UserVO)session.getAttribute("user")).getUserid());
+		vo.setCartNum(cartNum);
+		
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String formatedNow = now.format(formatter);
+		
+		String orderNum = formatedNow + "-";
+		for (int i = 0; i < 6; i++) {
+			int math = (int)Math.floor(Math.random()*10);
+			orderNum+=math;
+		}
+		vo.setOrderNum(orderNum);
+		
+		
+		formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		formatedNow = now.format(formatter);
+		vo.setOrderDate(formatedNow);
+
+		dao.orderUserInfor(vo);
+		for (int i = 0; i < volist.size(); i++) {
+			volist.get(i).setId(((UserVO)session.getAttribute("user")).getId());
+			volist.get(i).setCartNum(cartNum);
+		}
+		for (int i = 0; i < volist.size(); i++) {
+			dao.orderItemInfor(volist.get(i));
+		}
+		model.addAttribute("orderUser",vo); //주문자정보
+		model.addAttribute("orderItem",(List<CartVO>)session.getAttribute("cartList"));
+		
+//		session.removeAttribute("cartList"); 결제후 세션 초기화 
+	}
+
+	//저장한 내용 출력
+	public void getOrderList(Model model, HttpSession session) {
+		model.addAttribute("orderList", dao.getOrderList((UserVO)session.getAttribute("user")));
+	}
+	
+	public void orderUserResult(String userid,Model model) {
+		model.addAttribute("orderUsermodel",dao.orderUserResult(userid));	
+	}
 	
 }

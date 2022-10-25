@@ -225,11 +225,47 @@
 		delete from user where userid=#{userid}
 	</delete>
 	
+	
 	<!-- 유진 mapper, 주문페이지에서 입력한 정보 전송 -->
-	<insert id="orderUserInfor" parameterType="orderUser"> 
- 	insert into orderUserbbs(id,order_name,pay,address,detailAddress,extraAddress,order_tel,point)
- 	values(#{id},#{orderName},#{pay},#{address},#{detailAddress},#{extraAddress},#{orderTel},#{point})
+	<select id="cartList" resultType="CartVO" parameterType="userVO">
+	select item_name, size, price,count,color
+	from cart
+	where userid = #{userid}
+	</select>
+	
+	<!-- 주문자 정보입력한것 추가해보기ㅇ -->
+ 	<insert id="orderUserInfor" parameterType="orderUser"> 
+ 	INSERT INTO orderuser
+	(userid, cart_num, order_name, order_date,pay, address, detailAddress, extraAddress, order_tel,order_num, POINT)
+	VALUES(#{userid}, #{cartNum}, #{orderName}, NOW(), #{pay}, #{address},#{detailAddress},#{extraAddress},#{orderTel},#{orderNum},#{point});
+		</insert>
+	
+	<!-- 주문한 상품 저장할 매퍼 하나더  -->
+	<insert id="orderItemInfor" parameterType="CartVO">
+	INSERT INTO orderitem
+	(userid, cart_num, item_name, size, item_price, color)
+	VALUES(#{userid},#{cartNum},#{itemName},#{size},#{price},#{color});
 	</insert>
+	
+	<select id="selectCartNum" resultType="int" >
+		SELECT ifnull(max(cart_num),0)+1 FROM orderuser WHERE userid = #{userid}
+	</select>
+
+	<!-- 결제완료 페이지에 출력되는 내용 -->
+	<select id="orderUserResult" resultType="orderUser" parameterType="String">
+		select order_name,date_format(order_date,'%Y-%m-%d') 'orderDate',pay,order_num
+		from orderuser
+		where userid = #{userid}
+	</select>
+	
+	<!-- 마이페이지에서 주문별(장바구니)로 출력하기 -->
+	<select id="getOrderList" resultType="orderUser">
+		select cart_num, date_format(order_date,'%Y-%m-%d') 'orderDate', order_num, total_price
+		from orderuser
+		where userid = #{userid}
+	</select>
+	<!-- 위까지 유진 mapper -->
+	
 	
 	<!-- 상품 상세페이지 조회 -->
 	<select id="selectDetail" resultType="productVO">
@@ -257,6 +293,7 @@
 	<select id="getReviewCount" parameterType="String" resultType="int">
 		SELECT COUNT(id) reviewCount FROM review WHERE CODE=#{id}
 	</select>
+	
 	<!-- Review 별점 별 리뷰 갯수 뽑아오기 -->
 <!-- 	<select id="getStarGradeCount" parameterType="int" >
 		SELECT COUNT(id) star5 FROM review WHERE CODE=#{id} and stargrade=

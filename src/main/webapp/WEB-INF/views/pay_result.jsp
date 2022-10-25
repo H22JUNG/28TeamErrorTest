@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -377,61 +378,41 @@
 					<div id="rightTop">
 						<div id="inleft">
 							<h4>주문자 이름</h4>
-							<p>신유진</p>
+							<p>${orderUser.orderName}</p>
 							<h4>주문 날짜</h4>
-							<p>20221017</p>
-							<h4>주문 수량</h4>
-							<p>3</p>
+							<p>${orderUser.orderDate}</p>
 							<h4>결제 수단</h4>
-							<p>무통장입금</p>
+							<c:choose>
+							<c:when test="${orderUser.pay eq 'cash'}">
+							<p>
+								무통장입금
+							</p>							
+							</c:when>
+							<c:otherwise>
+							<p>
+								카드
+							</p>
+							</c:otherwise>
+							</c:choose>
 
 						</div>
 						<div id="inRight">
-							<div class="Itembox">
-								<div class="smallItembox">
-									<div class="itemImage">
-										<img src="${pageContext.request.contextPath}/image/dresser1_2.webp">
-									</div>
-									<div class="itemboxText">
-										<h4>상품 이름</h4>
-										<p>선택한 상품사이즈</p>
-										<h4>주문 상태</h4>
-										<p>배송준비중</p>
-										<h4>상품 가격</h4>
-										<p class="number">상품 갯수 : 1</p>
-									</div>
+						<c:forEach var="vo" items="${orderItem}">
+						<div class="itembox">
+							<div class="smallItembox">
+								<div class="itemImage">
+									<img
+										src="${pageContext.request.contextPath}/image/dresser1_2.webp">
+								</div>
+								<div class="itemboxText">
+									<h4>상품 이름 : ${vo.itemName}</h4>
+									<p>Size : ${vo.size}</p> 
+									<p>Color : ${vo.color}</p>
+									<h4>상품 가격 : ${vo.price}</h4>
 								</div>
 							</div>
-							<div class="Itembox">
-								<div class="smallItembox">
-									<div class="itemImage">
-										<img src="${pageContext.request.contextPath}/image/dresser1_2.webp">
-									</div>
-									<div class="itemboxText">
-										<h4>상품 이름</h4>
-										<p>선택한 상품사이즈</p>
-										<h4>주문 상태</h4>
-										<p>배송준비중</p>
-										<h4>상품 가격</h4>
-										<p class="number">상품 갯수 : 1</p>
-									</div>
-								</div>
-							</div>
-							<div class="Itembox">
-								<div class="smallItembox">
-									<div class="itemImage">
-										<img src="${pageContext.request.contextPath}/image/dresser1_2.webp">
-									</div>
-									<div class="itemboxText">
-										<h4>상품 이름</h4>
-										<p>선택한 상품사이즈</p>
-										<h4>주문 상태</h4>
-										<p>배송준비중</p>
-										<h4>상품 가격</h4>
-										<p class="number">상품 갯수 : 1</p>
-									</div>
-								</div>
-							</div>
+						</div>
+					</c:forEach>
 							<div id="bottom">
 								<h3>결제 금액</h3>
 							</div>
@@ -439,7 +420,7 @@
 						<!--inRight끝-->
 					</div>
 					<div id="lastBottom">
-						<h3>주문 번호</h3>
+							<h3>주문 번호 : ${orderUser.orderNum}</h3>
 					</div>
 				</div>
 				<!--컨테이너 끝-->
