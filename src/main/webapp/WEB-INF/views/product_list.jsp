@@ -225,7 +225,7 @@ aside>ul>li ul>li>a {
 		<div class="itembox">
 			<img src="${vo.pic1}" alt="" />
 			<div class="itemname">
-			<h4>${vo.name}</h4>
+			<a href="${pageContext.request.contextPath}/detail/${vo.id}"><h4>${vo.name}</h4></a>
 			<p>${vo.price} 원</p>
 			<p>${vo.discount} %</p>
 			</div>
