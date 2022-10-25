@@ -22,18 +22,18 @@ main {
     flex-direction: column;
     gap: 20px;
 }
-.container .title{
+.container .head{
 	display:flex;
 }
-.container .title h1{
+.container .head h1{
 	flex: 1;
 }
 
-.container .title nav {
+.container .head nav {
 	display: flex;
 	align-items: center;
 }
-.container .title nav ul {
+.container .head nav ul {
 	display: flex;
 	gap: 5px;
 }
@@ -62,14 +62,18 @@ main {
 	flex: 1;
 }
 
+.important {
+	background-color: #F4F7FF;
+}
+
 .tr {
 	display: flex;
-	border-top: 1px solid black;
+	border-top: 1px solid #CACACA;
 	padding: 5px;
 	gap: 20px;
 }
 .tr:last-child {
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #CACACA;
 }
 
 .tr .td {
@@ -118,11 +122,11 @@ input,select {
 </head>
 <body>
 
-<%-- 	<jsp:include page="header.jsp"></jsp:include> --%>
+	<jsp:include page="../header.jsp"></jsp:include>
 	<main>
 		<div class="container">
 
-			<div class="title">
+			<div class="head">
 			<h1>공지사항</h1>
 			<nav>
 				<ul>
@@ -139,12 +143,20 @@ input,select {
 					<div class="th">작성일</div>
 					<div class="th">조회</div>
 				</div>
+				<c:forEach var="impvo" items="${impnotice}">
+					<div class="tr important">
+						<div class="td">[공지]</div>
+						<div class="td"><a href="${pageContext.request.contextPath}/notice/${impvo.id}">${impvo.title}</a></div>
+						<div class="td">${impvo.createDate}</div>
+						<div class="td">${impvo.view}</div>
+					</div>
+				</c:forEach>
 				<c:forEach var="vo" items="${notice}" varStatus="status">
 					<div class="tr">
 						<div class="td">${notice.size() - status.index}</div>
-						<div class="td"><a href="${pageContext.request.contextPath}/notice/1">${vo.title}</a></div>
+						<div class="td"><a href="${pageContext.request.contextPath}/notice/${vo.id}">${vo.title}</a></div>
 						<div class="td">${vo.createDate}</div>
-						<div class="td">0</div>
+						<div class="td">${vo.view}</div>
 					</div>
 				</c:forEach>
 			</div>
@@ -160,6 +172,6 @@ input,select {
 			</div>
 		</div>
 	</main>
-<%-- 	<jsp:include page="footer.jsp"></jsp:include> --%>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

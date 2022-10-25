@@ -232,7 +232,7 @@
                 <li><a href="${pageContext.request.contextPath}/category/fabric">패브릭</a></li>
                 <li><a href="${pageContext.request.contextPath}/category/storage">수납용품</a></li>
                 <li><a href="${pageContext.request.contextPath}/category/supplies">생활용품</a></li>
-                <li><a href="">공지사항</a></li>
+                <li><a href="${pageContext.request.contextPath}/notice">공지사항</a></li>
                 <li><a href="${pageContext.request.contextPath}/qna">Q&A</a></li>
                 <li><a href="">이벤트</a></li>
             </ul>

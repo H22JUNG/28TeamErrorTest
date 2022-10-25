@@ -340,6 +340,19 @@ public class MoveController {
 			}
 		}
 
+		
+		// 공지사항
+		
+		@GetMapping("/notice")
+		public String moveNotice(Model model) {
+		bbsservice.selectNotice(model);
+			return "notice/notice";
+		}
+		@GetMapping("/notice/{page}")
+		public String moveDetailNotice(@PathVariable("page") int page, Model model) {
+		bbsservice.selectDetailNotice(model, page);
+			return "notice/notice_detail";
+		}
 
 		// 관리자메인P -> 관리자 정보수정 이동 //유저정보 담아야됨.
 		@GetMapping("/admin_admin")

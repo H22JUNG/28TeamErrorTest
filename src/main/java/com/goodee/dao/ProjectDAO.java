@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.goodee.vo.CartVO;
+import com.goodee.vo.NoticeVO;
 import com.goodee.vo.OptionVO;
 import com.goodee.vo.PageVO;
 import com.goodee.vo.ProductListVO;
@@ -83,6 +84,10 @@ public interface ProjectDAO {
 	public int updateQna(QnaVO qnavo);
 	public int insertQna(QnaVO qnavo);
 	public int deleteQna(QnaVO qnavo);
+	
+	// 공지사항 게시판
+		public List<NoticeVO> selectNotice(int important);
+		public NoticeVO selectDetailNotice(int id);
 	
 	// ================ 장바구니 ================
 	public List<CartVO> getCart(String userid);	// 장바구니 목록 가져오기

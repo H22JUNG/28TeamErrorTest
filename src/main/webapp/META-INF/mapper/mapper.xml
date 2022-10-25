@@ -275,6 +275,23 @@
 		delete from wrotebbs where id = #{id} and owner_id = #{ownerId}
 	</delete>
 	
+	<!-- 공지 list -->
+	<select id="selectNotice" resultType="noticeVO">
+		select id, title, date_format(create_date, "%Y-%m-%d %T") 'createDate', view, important from notice
+		where important = #{important}
+		order by createDate desc
+	</select>
+	
+	<select id="selectDetailNotice" resultType="noticeVO">
+		select id, title, content, date_format(create_date, "%Y-%m-%d %T") 'createDate', view, important from notice
+		where id = #{id}
+	</select>
+	
+	<!-- 공지 insert -->
+	<insert id="insertNotice">
+		insert into notice (title, content, create_date, important)
+		values(#{title}, #{content}, now(), #{important})
+	</insert>
 	
 	<!-- ====================장바구니==================== -->
 	<!-- 카트 삭제 -->

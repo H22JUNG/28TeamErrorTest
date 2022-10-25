@@ -96,5 +96,17 @@ public class BbsService {
 		public boolean deleteQna(QnaVO qnavo) {
 			return (dao.deleteQna(qnavo)>0)?true:false;
 		}
+		
+		// 공지사항
+		public void selectNotice(Model model) {
+			 model.addAttribute("impnotice",dao.selectNotice(1));
+			 model.addAttribute("notice",dao.selectNotice(0));
+		}
+				
+		public void selectDetailNotice(Model model, int id) {
+			model.addAttribute("notice", dao.selectDetailNotice(id));
+			model.addAttribute("prevnotice",dao.selectDetailNotice(id-1));
+			model.addAttribute("nextnotice",dao.selectDetailNotice(id+1));
+		}
 	
 }
