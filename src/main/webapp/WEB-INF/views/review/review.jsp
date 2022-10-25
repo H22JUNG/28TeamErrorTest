@@ -8,17 +8,37 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+h2{
+	text-align: center;
+	font-size : 25px;
+}
+h3{
+	font-size : 20px;
+	text-align: start;
+}
+p {
+font-size : 12px;
+}
 #REVIEW {
 	text-align: center;
+	padding : 50px; 
+}
+#REVIEW p{
+	text-align: center;
+	font-size:15px;
+}
+#reviewContainer{
+	width:100%;
 }
 .Allstar {
 	border-top: 1px solid gray;
 	border-bottom: 1px solid gray;
 	display: flex;
+   flex-direction : row;
 }
 .starsScore {
 	align-self: center;
-	width: 30%;
+	width: 40%;
 	text-align: center;
 	padding: 20px;
 	border-right: 1px solid gray;
@@ -26,6 +46,8 @@
 .starsScore h3 {
 	font-weight: 500;
 	margin-bottom: 20px;
+	font-size : 14px;
+	text-align: center;
 }
 .starsScore button {
 	font-size: large;
@@ -33,6 +55,8 @@
 	background: linear-gradient(90deg, #21A5B5 0%, #71B2B4 100%);
 	border-radius: 20px;
 	border: none;
+	color : white;
+	font-weight: 800;
 }
 #star {
 	font-size: 50px;
@@ -45,12 +69,14 @@
 }
 .starsGrade {
 	width: 60%;
-	padding: 40px;
+	padding: 20px;
+	align-items : center;
 }
 .starsGrade-detail {
 	display: flex;
 	align-items: center;
 	width: 100%;
+	padding: 10px 0;
 }
 .starsBack {
 	width: 70%;
@@ -65,17 +91,19 @@
 }
 .starsGrade-detail-p {
 	min-width: 50px;
-	font-size: 15px;
+	font-size : 14px;
 	padding: 0px 15px;
 }
 .image span {
 	display: flex;
+	padding : 20px 0;
 }
 .image a {
 	margin-left: auto;
 	align-self: center;
 	text-decoration: none;
 	color: gray;
+	font-size : 15px;
 }
 .imgPreview img {
 	width: 200px;
@@ -86,7 +114,7 @@
 }
 .review {
 	border-top: 1px solid gray;
-	padding-top: 20px;
+	text-align: start;
 }
 .review button {
 	border: 1px solid #71B2B4;
@@ -97,62 +125,101 @@
 	font-size: 15px;
 	color: gray;
 	background-color: white;
+	cursor:pointer;
 }
-.reviewContent {
+.reviewContentBox {
 	width: 70%;
+	padding : 20px;
 }
-.reviewContent img {
+.reviewContentBox img {
 	width: 100px;
+}
+#review-title {
+	font-size : 20px;
+}
+#title-star {
+	font-size: 25px;
+	color : #21A5B5;
+	padding-right : 10px;
+}
+#review-content {
+	padding : 20px 0;
+	font-size: 22px;
+	color : gray;
+}
+.reviewComment {
+	border-left : 1px solid gray;
+	padding : 20px;
+}
+.reviewComment p {
+	font-size : 15px;
+	padding : 10px;
+}
+.dropdown {
+	border-top : 1px dotted gray;
+}
+.dropdown textarea{
+	margin : 15px 0 0 10px;
+	padding:10px;
+}
+.dropdown button{
+	width : 20%;
+	height : 30px;
+	border-radius: 10px;
+	margin : 10px;
+	padding : 0;
+	vertical-align : text-top;
 }
 </style>
 </head>
 <body>
+	<div id="reviewContainer">
     <div id="REVIEW">
         <h2>REVIEW</h2>
         <p>상품의 사용후기를 적어주세요</p>
     </div>
-    <h3>REVIEW(개수)</h3>
-    <div class="Allstar">
+<%--     <h3>REVIEW(${review.size}개)</h3>
+ --%>    <div class="Allstar">
         <div class="starsScore">
-            <span id="star">★</span><span id="grade">4.8(백)</span>
-            <h3>97(백)%의 구매자가 이 상품을 좋아합니다</h3>
+            <span id="star">★</span><span id="grade">${starGradeAvg.avg}</span>
+            <h3>97( (star 5,4,3)/전체리뷰쓴사람 %의 구매자가 이 상품을 좋아합니다</h3>
             <button>상품 리뷰 작성하기</button>
         </div>
         <div class="starsGrade">
             <div class="starsGrade-detail">
                 <p class="starsGrade-detail-p">아주 좋아요</p>
                 <div class="starsBack">
-                    <div class="starsfront" style="width: 80%;"></div>
+                    <div class="starsfront" style="width: ${starGradeCount.star5 / reviewCount}%;"></div>
                 </div>
-                <p class="starsGrade-detail-p">count(백)</p>
+                <p class="starsGrade-detail-p">${starGradeCount.star5}</p>
             </div>
             <div class="starsGrade-detail">
                 <p class="starsGrade-detail-p">맘에 들어요</p>
                 <div class="starsBack">
-                    <div class="starsfront" style="width: 20%;"></div>
+                    <div class="starsfront" style="width: ${starGradeCount.star4 / reviewCount};"></div>
                 </div>
-                <p class="starsGrade-detail-p">count(백)</p>
+                <p class="starsGrade-detail-p">${starGradeCount.star4}</p>
             </div>
             <div class="starsGrade-detail">
                 <p class="starsGrade-detail-p">보통이에요&nbsp;</p>
                 <div class="starsBack">
-                    <div class="starsfront" style="width: 10%;"></div>
+                    <div class="starsfront" style="width: ${starGradeCount.star3 / reviewCount}%;"></div>
                 </div>
-                <p class="starsGrade-detail-p">count(백)</p>
+                <p class="starsGrade-detail-p">${starGradeCount.star3}</p>
             </div>
             <div class="starsGrade-detail">
                 <p class="starsGrade-detail-p">그냥 그래요</p>
                 <div class="starsBack">
-                    <div class="starsfront" style="width: 3%;"></div>
+                    <div class="starsfront" style="width: ${starGradeCount.star2 / reviewCount}%;"></div>
                 </div>
-                <p class="starsGrade-detail-p">count(백)</p>
+                <p class="starsGrade-detail-p">${starGradeCount.star2}</p>
             </div>
             <div class="starsGrade-detail">
                 <p class="starsGrade-detail-p">별로에요&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <div class="starsBack">
-                    <div class="starsfront" style="width: 5%;"></div>
+                    <div class="starsfront" style="width: ${starGradeCount.star1 / reviewCount}%;"></div>
                 </div>
-                <p class="starsGrade-detail-p">count(백)</p>
+                <p class="starsGrade-detail-p">${starGradeCount.star1}</p>
             </div>
         </div>
     </div>
@@ -178,22 +245,31 @@
 
         <div class="review-container">
         
-            <div class="reviewContent">
-                <p id="stars">★★★★★제목이에요</p>
-                <div>내용임내용임내용임내용임내용임내용임내용임내용임내용임</div>
+            <div class="reviewContentBox">
+                <p id="review-title"><span id="title-star">★★★★★</span>제목이에요</p>
+                <div id="review-content"><p>내용임내용임내용임내용임내용임내용임내용임내용임내용임</p></div>
+                <c:if test="이미지가 널이 아니면">
                 <img src="./6ee56f3c13ea76016434adea614a155e.jpg" alt="">
                 <img src="./6ee56f3c13ea76016434adea614a155e.jpg" alt="">
                 <img src="./6ee56f3c13ea76016434adea614a155e.jpg" alt="">
+                </c:if>
             </div>
             <div class="reviewComment">
-                <p>따봉 도움돼요</p>
-                댓글(몇개)
+                <p>👍🏻 도움돼요</p>
+                <p>댓글보기(몇개)</p>
                 <div class="dropdown">
-                
+           		<%-- <c:foreach 댓글 반복> --%>
+                	<p>작성자 : 드롭다운해서 펼쳐진 댓글입니다.</p>
+           <%--      </c:foreach> --%>
+                	<form action="" method="post">
+               	 		<textarea name="recomm" id="" cols="40" rows="5" placeholder="ㅇㅇ님에게 댓글을 남겨주세요"></textarea>
+               	 		<button>등록</button>
+                	</form>
                 </div>
             </div>
         </div>
 
+    </div>
     </div>
 </body>
 </html>

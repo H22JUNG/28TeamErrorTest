@@ -72,6 +72,15 @@ public class BbsService {
 			dao.addCart(cartvo);
 		}
 		
+		//Review
+		public void getReview(Model model, String id) {
+			model.addAttribute("review", dao.getReview(id));
+			model.addAttribute("reviewCount", dao.getReviewCount(id));
+			int[] num= {1,2,3,4,5};
+		//	model.addAttribute("starGradeCount", dao.getStarGradCount(num));
+		//	model.addAttribute("starGradeAvg", dao.getStarGradeAvg(id));
+		}
+		
 		//QnA
 		//QnA 페이지에 리스트출력
 		public void getQnaList(Model model) {

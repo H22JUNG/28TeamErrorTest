@@ -13,6 +13,7 @@ import com.goodee.vo.PageVO;
 import com.goodee.vo.ProductListVO;
 import com.goodee.vo.ProductVO;
 import com.goodee.vo.QnaVO;
+import com.goodee.vo.ReviewVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.WrotebbsVO;
 import com.goodee.vo.orderUser;
@@ -75,7 +76,13 @@ public interface ProjectDAO {
 	public List<OptionVO> selectDetailOption(String id);
 	//장바구니 담기
 	public int addCart(CartVO cartvo);
-		
+
+	//Review 게시판
+	public List<ReviewVO> getReview(String id);
+	public int getReviewCount(String id);
+	public int[] getStarGradCount(int num[]);
+	public double getStarGradeAvg(String id);
+	
 	//Q&A 게시판
 	public List<QnaVO> QnaList();
 	//Q&A 타이틀 누르면 이동

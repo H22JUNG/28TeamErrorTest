@@ -142,34 +142,34 @@
 	<!-- 내가 쓴 글 -->
 	<select id="getwrote" resultType="wroteVO" parameterType="userVO">
 		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
-		from wrotebbs where re_id=0
+		from qna where re_id=0
 		<if test="id != null">
 			and owner_id=#{id}
 		</if>
 	</select>
 	<select id="getRewrote" resultType="wroteVO">
 		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
-		from wrotebbs where re_id !=0
+		from qna where re_id !=0
 	</select>
 	<select id="getsearch" resultType="wroteVO" parameterType="String">
 		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
-		from wrotebbs 
-		where category = #{category}
+		from qna 
+		
 		<if test="id != null">
 			and owner_id=#{id}
 		</if>
 	</select>
 	<select id="getdetail" resultType="wroteVO" parameterType="wroteVO">
 		select id, category, title, owner, date_format(create_date, '%Y-%m-%d') createDate, content
-		from wrotebbs 
+		from qna 
 		where id=#{id}
 	</select>
 	<update id="modify" parameterType="wroteVO">
-		update wrotebbs set title=#{title}, content=#{content}
+		update qna set title=#{title}, content=#{content}
 		where id=#{id}
 	</update>
 	<delete id="getdelete">
-		delete from wrotebbs where re_id=#{id} or id=#{id};
+		delete from qna where re_id=#{id} or id=#{id};
 	</delete>
 	
 	<!-- 관리자페이지 회원조회 -->
@@ -246,33 +246,55 @@
   		values(null, #{userId}, #{userName}, #{id}, #{name}, #{price}, #{count}, #{color}, #{size})
   	</insert>
 	
+	
+	<!-- Review 게시글 조회-->
+	<select id="getReview" parameterType="String" resultType="reviewVO">
+		select id, title, content, pic1, pic2, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, code, stargrade, hits
+		from review
+		where code=#{id}
+	</select>
+	<!-- Reviwe 총 갯수 뽑아오기 -->
+	<select id="getReviewCount" parameterType="String" resultType="int">
+		SELECT COUNT(id) reviewCount FROM review WHERE CODE=#{id}
+	</select>
+	<!-- Review 별점 별 리뷰 갯수 뽑아오기 -->
+<!-- 	<select id="getStarGradeCount" parameterType="int" >
+		SELECT COUNT(id) star5 FROM review WHERE CODE=#{id} and stargrade=
+		<foreach collection="array" index="index" item="i">#{i}</foreach>
+	</select> -->
+	<!-- Review 별점 평균 뽑아오기 -->
+<!-- 	<select id="getStarGradeAvg" parameterType="String" resultType="double">
+		SELECT round(AVG(stargrade),1) avg FROM review WHERE CODE=#{id}
+	</select> -->
+	
+	
 	<!--Q&A 게시글조회 -->
 	<select id="QnaList" resultType="QnaVO">
   		select id, code, qna_category, password, owner, title, content, date_format(create_date, '%Y-%m-%d') create_date,
-  		owner_id, root, re_id, indent, category from wrotebbs where category = 'QnA'ORDER BY id DESC;
+  		owner_id, root, re_id, indent from qna ORDER BY id DESC;
   	</select>
 	
 	<!--Q&A 타이틀누를때 이동 -->
   	<select id="selectQna" resultType="QnaVO">
   		select id, code, qna_category, password, owner, title, content, date_format(create_date, '%Y-%m-%d') create_date,
-  		owner_id, root, re_id, indent, category from wrotebbs where id = #{id}
+  		owner_id, root, re_id, indent from qna where id = #{id}
   	</select>
   	
   	<!-- Q&A update-->
   	<update id="updateQna">
-		update wrotebbs set qna_category = #{qnaCategory}, password = #{password},owner = #{owner}, title=#{title}, content=#{content}
+		update qna set qna_category = #{qnaCategory}, password = #{password},owner = #{owner}, title=#{title}, content=#{content}
 		where id = #{id} and owner_id = #{ownerId}
 	</update>
 
 	<!-- Q&A insert-->
 	<insert id="insertQna">
-		insert into wrotebbs(category, qna_category, title, owner_id, owner, content, password)
+		insert into qna(qna_category, title, owner_id, owner, content, password)
 		values('QnA', #{qnaCategory}, #{title}, #{ownerId}, #{owner}, #{content}, #{password})
 	</insert>
 	
 	<!-- Q&A delete-->
 	<delete id="deleteQna">
-		delete from wrotebbs where id = #{id} and owner_id = #{ownerId}
+		delete from qna where id = #{id} and owner_id = #{ownerId}
 	</delete>
 	
 	<!-- 공지 list -->

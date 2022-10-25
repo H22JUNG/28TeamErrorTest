@@ -21,17 +21,11 @@ ul, li {
 	list-style-type: none;
 }
 body {
-	background:
-		url("${pageContext.request.contextPath}/image/KakaoTalk_20221013_170149504.webp")
-		0% 300% fixed;
-	background-size: cover;
-	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	z-index: 0;
 	background-color: #FFFAEE;
-	position: relative;
 }
 /* 헤더 */
 header {
@@ -64,6 +58,15 @@ header .header-top .side ul {
 	display: flex;
 	gap: 10px;
 	margin: 10px;
+}
+#main-image {
+	background:
+		url("${pageContext.request.contextPath}/image/KakaoTalk_20221013_170149504.webp")
+		0% 300% fixed;
+	background-size: cover;
+	background-position: top;
+	width: 100%;
+	height: 40vh;
 }
 
 /* 카테고리 */
@@ -330,6 +333,7 @@ tr:last-child>td, tr:last-child>th {
 				<li>이벤트</li>
 			</ul>
 		</nav>
+		<div id="main-image"></div>	
 	</header>
 	<main>
 		<div class="mypage-container">
@@ -495,7 +499,7 @@ tr:last-child>td, tr:last-child>th {
 		</div>
 	</main>
 	<footer>
-	푸터입ㄴ디ㅏ
+
 	</footer>
 	<script>
     

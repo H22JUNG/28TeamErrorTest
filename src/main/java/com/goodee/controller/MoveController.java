@@ -228,6 +228,7 @@ public class MoveController {
 		public String productId(@PathVariable("id") String id, Model model) {
 			System.out.println("id : " + id);
 			bbsservice.getDetailContent(model, id);
+			bbsservice.getReview(model, id);
 			return "detail";
 		}
 

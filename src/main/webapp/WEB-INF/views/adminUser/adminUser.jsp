@@ -91,8 +91,9 @@ header .header-top .side ul li {
 }
 
 #main-image {
-	background: url(/resources/image/KakaoTalk_20221013_170149504.webp)
-		fixed;
+	background:
+		url("${pageContext.request.contextPath}/image/KakaoTalk_20221013_170149504.webp")
+		0% 300% fixed;
 	background-size: cover;
 	background-position: top;
 	width: 100%;
@@ -519,6 +520,9 @@ tr:last-child>td, tr:last-child>th {
 			</div>
 		</div>
 	</main>
+	<footer>
+
+	</footer>
 </body>
 
 </html>

@@ -473,6 +473,15 @@ hr {
 	width: 70%;
 }
 
+/* 리뷰 */
+#content2 {
+	width: 70vw;
+}
+
+#content3 {
+	width: 70%;
+}
+
 #delivery{
 	margin-top : 20px;
 }
@@ -780,7 +789,9 @@ input {
 						</details>
 					</caption>
 				</div>
-				<div id="content2">Review 내용</div>
+				<div id="content2">
+					<jsp:include page="../views/review/review.jsp" flush="true" />
+				</div>
 				<div id="content3">
 					<jsp:include page="../views/qna/inner_qna.jsp" flush="true" />
 				</div>
