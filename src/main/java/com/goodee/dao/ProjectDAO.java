@@ -77,6 +77,7 @@ public interface ProjectDAO {
 	// 마이페이지에서 주문별(장바구니)로 출력하기
 	public List<orderUser> getOrderList(UserVO vo); 
 	public orderUser orderUserResult(String userid); //위에서 저장한 정보 출력
+	public UserVO payUserInfor(String userid);
 	//여기서위까지 유진 DAO
 	
 	

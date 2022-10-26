@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,6 +58,7 @@
 
         .itemImage img {
             width: 100px;
+            height : 130px;
         }
 
         .itemImage {
@@ -254,7 +256,7 @@
 <jsp:include page="header.jsp"></jsp:include>
     <div id="coverContainer">
     <div id="container">
-    <form action="${pageContext.request.contextPath}/InforController" method="get">
+    <form action="${pageContext.request.contextPath}/InforController" method="get" id="payform">
         <div class="left">
             <div id="top">
             	<c:forEach var="vo" items="${cartList}">
@@ -262,7 +264,7 @@
 							<div class="smallItembox">
 								<div class="itemImage">
 									<img
-										src="${pageContext.request.contextPath}/image/dresser1_2.webp">
+										src="${vo.pic1}">
 								</div>
 								<div class="itemboxText">
 									<h4>상품 이름 : ${vo.itemName}</h4>
@@ -288,8 +290,8 @@
 					<input type="text" name="extraAddress" id="extraAddress" placeholder="(동, 건물)" class="inforInput">
 				</div>
 				<div class="inforBox">
-					주문자 <input type="text" class="inforInput" placeholder="이름을 입력해주세요"required name="orderName" > 
-					연락처 <input type="text" class="inforInput" placeholder="숫자로만 입력해주세요" required name="orderTel" >
+					주문자 <input type="text" id="ordername" class="inforInput" placeholder="이름을 입력해주세요"required name="orderName" > 
+					연락처 <input type="text" id="orderTel" class="inforInput" placeholder="숫자로만 입력해주세요" required name="orderTel" >
 				</div>
             <!--여기까지 infor끝-->
             <div id="checkItem">
@@ -302,7 +304,7 @@
 					<p>수량 : ${vo.count}</p>
 					<p>${vo.size}</p><p>${vo.color}</p>
 				</div>
-				<c:set var="total" value="${total+vo.price}"/>
+				<c:set var="total" value="${total+vo.price*(vo.count)}"/>
 				</c:forEach>
             </div>
             <!--여기까지 결제 할 물건 -->
@@ -400,6 +402,10 @@
     function printName()  {
     	  const point = document.getElementById("point").value;
     	  document.getElementById("usePoint").innerText = point;
+    	  if (${user.point} < point) {
+    	  		var notice = '보유포인트보다 입력한 포인트값이 더 큽니다';
+    	        alert(notice);
+    			}
     	};
     	document.getElementById("point").addEventListener("focus",function(){
       		if(this.value==0){
@@ -412,5 +418,56 @@
       		};
       	});
 </script>
+<!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+  <script type="text/javascript">
+
+  const usertel = document.getElementById("orderTel").value;
+  const address = document.getElementById("address").value;
+  const postcode = document.getElementById("postcode").value;
+  const point = document.getElementById("point").value;
+  
+  var IMP = window.IMP; // 생략 가능
+  IMP.init("imp28442011"); // 예: imp00000000
+ 
+  function requestPay() {
+      // IMP.request_pay(param, callback) 결제창 호출
+      IMP.request_pay({ // param
+          pg: "html5_inicis",
+          pay_method: "card", 
+          merchant_uid: "merchant-"+new Date().getTime(), //가맹점 주문번호(아임포트를 사용하는 가맹점에서 중복되지않은 임의의 문자열)
+          name: "${cartList[0].itemName} 외 ${fn:length(cartList)}건", //결제창에 노출될 상품명
+          amount: "${total+2500}"-document.getElementById("point").value, //금액 (적립금사용한 만큼 빠지게 적용되었음)
+          buyer_email: "${payInfor.email}",	// 이메일 -> payInfor로 끌어와서 씀
+          buyer_name: "${payInfor.username}", // 위에 input에 입력한 값
+          buyer_tel: document.getElementById("orderTel").value,	// 전화번호 -> payInfor
+          buyer_addr: document.getElementById("address").value,	// 주소 위에 input에 입력한 값
+          buyer_postcode: document.getElementById("postcode").value	// 우편번호 위에 input에 입력된 값
+      }, function (rsp) { // callback
+          if (rsp.success) {
+    	  	var msg = '주문해주셔서 감사합니다';
+              	alert(msg); 
+              	document.getElementById("payform").submit();
+              	
+          } else {
+              // 결제 실패 시 로직,
+              var msg = '결제에 실패하였습니다';
+              alert(msg);
+          }
+      });
+    }
+	
+  	document.getElementById("nowButton").addEventListener("click",function(e){
+  		if(document.querySelector('input[name="pay"]:checked').value == "card") {
+  			e.preventDefault();
+  			requestPay();
+  		};
+  	});
+
+  
+  </script>
+  
     </body>
 </html>

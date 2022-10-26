@@ -227,8 +227,15 @@
 	
 	
 	<!-- 유진 mapper, 주문페이지에서 입력한 정보 전송 -->
+	<!-- 결제하기위해 DB에서 내 정보 받아옴 -->
+	<select id="payUserInfor" resultType="userVO" parameterType="String">
+		select userid, username, tel, address, email 
+		from user
+		where userid = #{userid}
+	</select>
+	
 	<select id="cartList" resultType="CartVO" parameterType="userVO">
-	select item_name, size, price,count,color
+	select item_name, size, price,count,color,pic1
 	from cart
 	where userid = #{userid}
 	</select>
@@ -243,8 +250,8 @@
 	<!-- 주문한 상품 저장할 매퍼 하나더  -->
 	<insert id="orderItemInfor" parameterType="CartVO">
 	INSERT INTO orderitem
-	(userid, cart_num, item_name, size, item_price, color)
-	VALUES(#{userid},#{cartNum},#{itemName},#{size},#{price},#{color});
+	(userid, cart_num, item_name, size, item_price, color,pic1,count)
+	VALUES(#{userid},#{cartNum},#{itemName},#{size},#{price},#{color},#{pic1},#{count});
 	</insert>
 	
 	<select id="selectCartNum" resultType="int" >

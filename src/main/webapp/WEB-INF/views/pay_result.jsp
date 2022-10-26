@@ -294,7 +294,7 @@
 							<div class="smallItembox">
 								<div class="itemImage">
 									<img
-										src="${pageContext.request.contextPath}/image/dresser1_2.webp">
+										src="${vo.pic1}">
 								</div>
 								<div class="itemboxText">
 									<h4>상품 이름 : ${vo.itemName}</h4>

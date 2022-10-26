@@ -8,10 +8,12 @@ public class orderItem {
 	private String userid;
 	private int cartNum;
 	private String itemName;
+	private int count;
 	private String size;
 	private int itemPrice;
 	private String color;
 	private String itemCode;
+	private String pic1;
 	public String getUserid() {
 		return userid;
 	}
@@ -53,6 +55,18 @@ public class orderItem {
 	}
 	public void setItemCode(String itemCode) {
 		this.itemCode = itemCode;
+	}
+	public String getPic1() {
+		return pic1;
+	}
+	public void setPic1(String pic1) {
+		this.pic1 = pic1;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 	

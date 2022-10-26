@@ -72,5 +72,8 @@ public class PayService {
 	public void orderUserResult(String userid,Model model) {
 		model.addAttribute("orderUsermodel",dao.orderUserResult(userid));	
 	}
+	public void payUserInfor(HttpSession session,Model model) {
+		model.addAttribute("payInfor",dao.payUserInfor(((UserVO)session.getAttribute("user")).getUserid()));
 	
+	}
 }
