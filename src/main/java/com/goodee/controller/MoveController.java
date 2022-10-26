@@ -71,21 +71,32 @@ public class MoveController {
 		if(path == 0) {
 			return "my_page";
 		} else if(path == 1) {
+			//장바구니
+			
+			return "";
+		} else if(path == 2) {
+			
 			//아래 두줄 유진쓰 추가 
 			session.setAttribute("cartList", payservice.cartList((UserVO)session.getAttribute("user")));
 			session.setAttribute("payresult", model.getAttribute("model"));
 			
-			return "pay";
-		} else if(path == 2) {
-			//order_list 페이지에서 사용 - 유진 추가
-			payservice.getOrderList(model, session);
+			//아래꺼order_list 페이지에서 사용 - 유진 추가
+			//payservice.getOrderList(model, session);
 			
-			return "order_list";
+			return "pay"; // "order_list";
 		} else {
 			bbsservice.getwrote(model, session);
 			bbsservice.getRewrote(model);
 			return "wrote";
 		}
+	}
+	
+	//유진 임시 이동 컨트롤러
+	@GetMapping("/practice")
+	public String practice(Model model,HttpSession session) {
+		//아래꺼order_list 페이지에서 사용 - 유진 추가
+		payservice.getOrderList(model, session);
+		return"order_list";
 	}
 	
 	//내가 쓴 글

@@ -312,7 +312,9 @@
 						<!--inRight끝-->
 					</div>
 					<div id="lastBottom">
-							<h3>주문 번호 : ${orderUser.orderNum}</h3>
+						<!--다시 살려야함 <h3>주문 번호 : ${orderUser.orderNum}</h3> -->	
+						<a href="${pageContext.request.contextPath}/practice">주문번호 : ${orderUser.orderNum}</a>
+							
 					</div>
 				</div>
 				<!--컨테이너 끝-->
