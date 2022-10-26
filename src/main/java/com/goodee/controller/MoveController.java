@@ -228,36 +228,8 @@ public class MoveController {
 		public String productId(@PathVariable("id") String id, Model model) {
 			System.out.println("id : " + id);
 			bbsservice.getDetailContent(model, id);
+			bbsservice.getReview(model, id);
 			return "detail";
-		}
-
-		// 상세페이지 -> 장바구니로 보내기
-		// 장바구니 담기
-		@ResponseBody
-		@PostMapping("/cart")
-		public int addCart(CartVO cartvo, HttpSession session) {
-			int result = 0;
-			UserVO user = (UserVO) session.getAttribute("user");
-			if (user != null) {
-				cartvo.setUserid(user.getUserid());
-				bbsservice.addCart(cartvo);
-				result = 1;
-			}
-			return result;
-		}
-
-		// 장바구니 담기
-		@ResponseBody
-		@PostMapping("/pay")
-		public int addPay(CartVO cartvo, HttpSession session) {
-			int result = 0;
-			UserVO user = (UserVO) session.getAttribute("user");
-			if (user != null) {
-				cartvo.setUserid(user.getUserid());
-				bbsservice.addCart(cartvo);
-				result = 1;
-			}
-			return result;
 		}
 
 		// Qna게시판

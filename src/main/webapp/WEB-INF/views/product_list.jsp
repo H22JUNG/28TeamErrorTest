@@ -159,7 +159,7 @@ aside>ul>li ul>li>a {
 			<div class="side">
 				<ul>
 					<c:if test="${admin != null}">
-						<li><a href="${pageContext.request.contextPath}/adminpage?page=1">관리자페이지</a></li>
+						<li><a href="${pageContext.request.contextPath}/adminpage/1?searchUser=&userInfo=">관리자페이지</a></li>
 					</c:if>
 					<li><a href=""><img src="" alt="">검색</a></li>
 					<li><a href=""><img src="" alt="">장바구니</a></li>
@@ -228,6 +228,7 @@ aside>ul>li ul>li>a {
 			<a href="${pageContext.request.contextPath}/detail/${vo.id}"><h4>${vo.name}</h4></a>
 			<p>${vo.price} 원</p>
 			<p>${vo.discount} %</p>
+			<p>${vo.id}</p>
 			</div>
 		</div>	
 	</c:forEach>

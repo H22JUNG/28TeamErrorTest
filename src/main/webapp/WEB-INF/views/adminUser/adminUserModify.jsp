@@ -15,7 +15,6 @@
 	href="${pageContext.request.contextPath}/css/common.css">
 <style>
 
-
 /* 컨테이너 */
 main {
 	background-color: #FFFAEE;
@@ -230,7 +229,9 @@ tr:last-child>td, tr:last-child>th {
 </head>
 
 <body>
+
 	<jsp:include page="../header.jsp"></jsp:include>
+
 	<main>
 		<div class="mypage-container">
 			<aside>
@@ -394,7 +395,10 @@ tr:last-child>td, tr:last-child>th {
 			</div>
 		</div>
 	</main>
+
 	<jsp:include page="../footer.jsp"></jsp:include>
+
+
 	<script>
     
   	var openWin;

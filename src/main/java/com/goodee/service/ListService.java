@@ -20,11 +20,11 @@ public class ListService {
 		this.dao = dao;
 	}
 
-	public void selectCategory (String category1, Model model) {
+	public void selectCategory(String category1, Model model) {
 		model.addAttribute("list" , dao.selectCategory(category1));
 		System.out.println("service" + category1);
 	}
-	public void selectInnerCategory (String category2, Model model) {
+	public void selectInnerCategory(String category2, Model model) {
 		model.addAttribute("list" , dao.selectInnerCategory(category2));
 		System.out.println("service" + category2);
 	}

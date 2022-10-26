@@ -15,7 +15,6 @@
 	href="${pageContext.request.contextPath}/css/common.css">
 <style>
 
-
 /* 컨테이너 */
 main {
 	background-color: #FFFAEE;

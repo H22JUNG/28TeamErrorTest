@@ -61,7 +61,10 @@
 </head>
 
 <body>
+
     <jsp:include page="header.jsp"></jsp:include>
+
+  
     <main>
         <div class="event">
 			<img src="image/event.png" alt="">

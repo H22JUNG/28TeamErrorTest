@@ -13,6 +13,7 @@ import com.goodee.vo.PageVO;
 import com.goodee.vo.ProductListVO;
 import com.goodee.vo.ProductVO;
 import com.goodee.vo.QnaVO;
+import com.goodee.vo.ReviewVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.WrotebbsVO;
 import com.goodee.vo.orderUser;
@@ -75,7 +76,13 @@ public interface ProjectDAO {
 	public List<OptionVO> selectDetailOption(String id);
 	//장바구니 담기
 	public int addCart(CartVO cartvo);
-		
+
+	//Review 게시판
+	public List<ReviewVO> getReview(String id);
+	public int getReviewCount(String id);
+	public int[] getStarGradCount(int num[]);
+	public double getStarGradeAvg(String id);
+	
 	//Q&A 게시판
 	public List<QnaVO> QnaList();
 	//Q&A 타이틀 누르면 이동
@@ -90,6 +97,14 @@ public interface ProjectDAO {
 		public NoticeVO selectDetailNotice(int id);
 	
 	// ================ 장바구니 ================
-	public List<CartVO> getCart(String userid);	// 장바구니 목록 가져오기
-	public void deleteAll(String userid);	// 장바구니 전체 삭제
+	// 장바구니 삭제 - 지정한 row를 삭제하는 메서드
+	public int deleteCart(int cartNum);
+	// 장바구니 수량 수정 - 지정한 row의 수량을 변경하는 메서드(cartNum, count 필요)
+	public int modifyCount(CartVO cvo);
+	// 장바구니 목록
+	public List<CartVO> getCart(String userid);
+	// 장바구니 확인 - 회원정보와 상품정보를 넘겨서 해당하는 row가 있는지 확인하기 위해 작성한 메서드(userid, itemid 필요)
+	public CartVO checkCart(CartVO cvo);
+	// 장바구니 전체 삭제
+	public void deleteAll(String userid);
 }
