@@ -327,7 +327,7 @@
             </div>
             <!--여기까지 총 결제 끝-->
         </div>
-
+ </div><!-- left 닫기 -->
 
         <div id="right">
             <div id="rightPrice">
@@ -343,7 +343,7 @@
 				구매에 동의 하시겠습니까?(전자상거래법 제8조, 제2항)</p>
             </div>
         </div>
-        </div>
+       
         </form>
     </div>
 </div>

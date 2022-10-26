@@ -30,7 +30,6 @@ public class LoginController {
 			session = request.getSession();
 			session.setAttribute("user", service.getUser(vo));
 			
-			System.out.println(request.getParameter("saveid") != null);
 			if(request.getParameter("saveid") != null) {
 				Cookie cookie = new Cookie("loginCookie", vo.getUserid());
 				cookie.setMaxAge(60*60);
