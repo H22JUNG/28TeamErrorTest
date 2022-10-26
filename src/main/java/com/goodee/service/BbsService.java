@@ -30,16 +30,17 @@ public class BbsService {
 	public List<WrotebbsVO> getwrote(Model model, HttpSession session) {
 		UserVO uservo = (UserVO)session.getAttribute("user");
 		model.addAttribute("list", dao.getwrote(uservo));
+		//관리자계정일 경우 모두 보이게
 		if(session.getAttribute("admin")!=null) {
 			model.addAttribute("allList", dao.getwrote());
 		}
 		return dao.getwrote(uservo);
 	}
 	
-	public List<WrotebbsVO> getRewrote(Model model) {
-		model.addAttribute("Relist", dao.getRewrote());
-		return dao.getRewrote();
-	}
+	/*
+	 * public List<WrotebbsVO> getRewrote(Model model) {
+	 * model.addAttribute("Relist", dao.getRewrote()); return dao.getRewrote(); }
+	 */
 	
 	public List<WrotebbsVO> getsearch(Model model, String category, HttpSession session) {
 		UserVO vo = (UserVO)session.getAttribute("user");
@@ -48,32 +49,42 @@ public class BbsService {
 		return dao.getsearch(category, id);
 	}
 	
-	public WrotebbsVO getdetail(@RequestParam int id, Model model) {
-		model.addAttribute("detail", dao.getdetail(id));
-		return dao.getdetail(id);
+	public WrotebbsVO getdetail(@RequestParam int id, String category, Model model) {
+		WrotebbsVO vo = new WrotebbsVO();
+		vo.setId(id);
+		vo.setCategory(category);
+		model.addAttribute("detail", dao.getdetail(vo));
+		return dao.getdetail(vo);
 	}
 	
 	public void modify(WrotebbsVO vo) {
-		dao.modify(vo);
+		dao.modifyReview(vo);
+		dao.modifyQna(vo);
 	}
-	public void getdelete(int id) {
-		dao.getdelete(id);
+	public void getdelete(WrotebbsVO vo) {
+		dao.deleteReview(vo);
+		dao.deleteMyPageQna(vo);
 	}
 	
-	// 상품페이지 -> 상세페이지에 데이터 보내기
-		public void getDetailContent(Model model, String id) {
-			model.addAttribute("detailVO", dao.selectDetail(id));
-			model.addAttribute("detailOptionVO", dao.selectDetailOption(id));
-		}
-		
-		//Review
-		public void getReview(Model model, String id) {
-			model.addAttribute("review", dao.getReview(id));
-			model.addAttribute("reviewCount", dao.getReviewCount(id));
-			int[] num= {1,2,3,4,5};
-		//	model.addAttribute("starGradeCount", dao.getStarGradCount(num));
-		//	model.addAttribute("starGradeAvg", dao.getStarGradeAvg(id));
-		}
+	//Review
+	public void getReview(Model model, String id) {
+		model.addAttribute("review", dao.getReview(id));
+		model.addAttribute("reviewCount", dao.getReviewCount(id));
+		int[] num = {dao.getStarGradeCount1(id),
+					dao.getStarGradeCount2(id),
+					dao.getStarGradeCount3(id),
+					dao.getStarGradeCount4(id),
+					dao.getStarGradeCount5(id)};
+		model.addAttribute("starGradeCount", num);
+		model.addAttribute("starGradeAvg", dao.getStarGradeAvg(id));
+		model.addAttribute("pic", dao.getPic(id));
+		model.addAttribute("picCount", dao.getPicCount(id));
+	}
+	
+	public void getComment(Model model, String id) {
+		//상품id 보내서 댓글들 가져온다음에 프론트에서 댓글id랑 review_id랑 일치하면 가져오기
+		model.addAttribute("comment", dao.getComment(id));
+	}
 		
 		//QnA
 		//QnA 페이지에 리스트출력

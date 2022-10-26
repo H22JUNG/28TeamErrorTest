@@ -86,7 +86,7 @@ public class MoveController {
 			return "pay"; // "order_list";
 		} else {
 			bbsservice.getwrote(model, session);
-			bbsservice.getRewrote(model);
+			//답글가져오기
 			return "wrote";
 		}
 	}
@@ -100,37 +100,42 @@ public class MoveController {
 	}
 	
 	//내가 쓴 글
-	@GetMapping("/search") //카테고리별 검색
-	public String search(@RequestParam String category, Model model, HttpSession session) {
-		bbsservice.getsearch(model, category, session);
-		bbsservice.getRewrote(model);
-		return "wrote";
-	}
-	@GetMapping("/wrotedetail")
-	public String wrotedetail(@RequestParam int id, Model model) {
-		bbsservice.getdetail(id, model);
-		return "wrotedetail";
-	}
-	@PostMapping("/list")
-	public String list() {
-		return "redirect:/movemypage/3";
-	}
-	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable("id") int id) {
-		bbsservice.getdelete(id);
-		return "redirect:/movemypage/3";
-	}
-	@GetMapping("/modify/{id}")	//수정하기버튼
-	public String modify(@PathVariable("id") int id, @ModelAttribute("detail") WrotebbsVO vo, Model model) {
-		bbsservice.getdetail(id, model);
-		return "wroteModify";
-	}
-	@PostMapping("/modify")	//수정완료버튼
-	public String modifydone(@ModelAttribute("detail")WrotebbsVO vo, @RequestParam("id") int id) {
-		vo.setId(id);
-		bbsservice.modify(vo);
-		return "redirect:/wrotedetail?id="+vo.getId();
-	}
+		@GetMapping("/search") //카테고리별 검색
+		public String search(@RequestParam String category, Model model, HttpSession session) {
+			bbsservice.getsearch(model, category, session);
+			//bbsservice.getRewrote(model); 답글
+			return "wrote";
+		}
+		@GetMapping("/wrotedetail")
+		public String wrotedetail(@RequestParam int id, @RequestParam String category, Model model) {
+			bbsservice.getdetail(id, category, model);
+			return "wrotedetail";
+		}
+		@PostMapping("/list")
+		public String list() {
+			//상세보기->목록으로 돌아가기
+			return "redirect:/movemypage/3";
+		}
+		@GetMapping("/modify/{id}")	//수정하기버튼
+		public String modify(@PathVariable("id") int id, @RequestParam String category, @ModelAttribute("detail") WrotebbsVO vo, Model model) {
+			bbsservice.getdetail(id, category, model);
+			return "wroteModify";
+		}
+		@PostMapping("/modify")	//수정완료버튼
+		public String modifydone(@ModelAttribute("detail")WrotebbsVO vo, @RequestParam("category") String category, @RequestParam("id") int id) {
+			vo.setId(id);
+			vo.setCategory(category);
+			bbsservice.modify(vo);
+			return "redirect:/wrotedetail?id="+vo.getId()+"&category="+vo.getCategory();
+		}
+		@GetMapping("/delete/{id}")
+		public String delete(@PathVariable("id") int id, @RequestParam("category") String category) {
+			WrotebbsVO vo = new WrotebbsVO();
+			vo.setId(id);
+			vo.setCategory(category);
+			bbsservice.getdelete(vo);
+			return "redirect:/movemypage/3";
+		}
 	
 	//관리자페이지 -회원관리
 	//관리자페이지 - 회원조회
@@ -252,9 +257,10 @@ public class MoveController {
 		// 메인P 상품id -> 상품id 갖고 상세P 가서 DetailVO데이터 넣기
 		@GetMapping("/detail/{id}")
 		public String productId(@PathVariable("id") String id, Model model) {
-			System.out.println("id : " + id);
-			bbsservice.getDetailContent(model, id);
+			//System.out.println("id : " + id);
+			//bbsservice.getDetailContent(model, id);
 			bbsservice.getReview(model, id);
+			bbsservice.getComment(model, id);
 			return "detail";
 		}
 

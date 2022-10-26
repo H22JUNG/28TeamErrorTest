@@ -138,38 +138,65 @@
 		SET o.pro_num = CONCAT(o.id,category_code1,category_code2,UPPER(ifnull(size,'')),UPPER(left(ifnull(color,''),3)))
 	</update>
 	
-	
+	<!-- =======================희정=============== -->
 	<!-- 내가 쓴 글 -->
 	<select id="getwrote" resultType="wroteVO" parameterType="userVO">
-		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
-		from qna where re_id=0
+		SELECT id, category, title, content, owner_id, OWNER, date_format(create_date, '%Y-%m-%d') createDate FROM qna
 		<if test="id != null">
-			and owner_id=#{id}
+			where owner_id=#{id}
 		</if>
+		UNION
+		SELECT id, category, title, content, owner_id, OWNER, DATE_FORMAT(create_date, '%Y-%m-%d') createDate FROM review
+		<if test="id != null">
+			where owner_id=#{id}
+		</if>
+		ORDER BY createDate desc;
+
 	</select>
-	<select id="getRewrote" resultType="wroteVO">
+<!-- 	<select id="getRewrote" resultType="wroteVO">
 		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
 		from qna where re_id !=0
-	</select>
+	</select> -->
 	<select id="getsearch" resultType="wroteVO" parameterType="String">
-		select id, category, title, content, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, re_id 
-		from qna 
-		
+		SELECT id, category, title, content, owner_id, OWNER, date_format(create_date, '%Y-%m-%d') createDate FROM qna
 		<if test="id != null">
-			and owner_id=#{id}
+			where owner_id=#{id} and category=#{category}
 		</if>
+		UNION
+		SELECT id, category, title, content, owner_id, OWNER, DATE_FORMAT(create_date, '%Y-%m-%d') createDate FROM review
+		<if test="id != null">
+			where owner_id=#{id} and category=#{category}
+		</if>
+		ORDER BY createDate desc;
 	</select>
+	
 	<select id="getdetail" resultType="wroteVO" parameterType="wroteVO">
-		select id, category, title, owner, date_format(create_date, '%Y-%m-%d') createDate, content
-		from qna 
-		where id=#{id}
+		SELECT id, category, title, content, owner_id, OWNER, date_format(create_date, '%Y-%m-%d') createDate FROM qna
+		<if test="id != null">
+			where id=#{id} and category=#{category}
+		</if>
+		UNION
+		SELECT id, category, title, content, owner_id, OWNER, DATE_FORMAT(create_date, '%Y-%m-%d') createDate FROM review
+		<if test="id != null">
+			where id=#{id} and category=#{category}
+		</if>
+		ORDER BY createDate desc;
 	</select>
-	<update id="modify" parameterType="wroteVO">
-		update qna set title=#{title}, content=#{content}
-		where id=#{id}
+	
+	<update id="modifyReview" parameterType="wroteVO">
+		update review set title=#{title}, content=#{content}
+		where id=#{id} and category=#{category}
 	</update>
-	<delete id="getdelete">
-		delete from qna where re_id=#{id} or id=#{id};
+	<update id="modifyQna" parameterType="wroteVO">
+		update qna set title=#{title}, content=#{content}
+		where id=#{id} and category=#{category}
+	</update>
+	
+   	<delete id="deleteReview" parameterType="wroteVO">
+		delete from review where id=#{id} and category=#{category}
+	</delete>
+   	<delete id="deleteMyPageQna">
+		delete from qna where id=#{id} and category=#{category}
 	</delete>
 	
 	<!-- 관리자페이지 회원조회 -->
@@ -224,6 +251,56 @@
 	<delete id="adminUserDelete" parameterType="userVO">
 		delete from user where userid=#{userid}
 	</delete>
+	
+	
+		<!-- Review 게시글 조회-->
+	<select id="getReview" parameterType="string" resultType="reviewVO">
+		select id, title, content, pic1, pic2, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, code, stargrade, hits
+		from review
+		where code=#{id}
+	</select>
+	
+	<!-- Reviwe 총 갯수 뽑아오기 -->
+	<select id="getReviewCount" parameterType="string" resultType="int">
+		SELECT COUNT(id) reviewCount FROM review WHERE CODE=#{id}
+	</select> 
+	<!-- Review 별점 별 리뷰 갯수 뽑아오기 -->
+ 	<select id="getStarGradeCount1" parameterType="string" resultType="int">
+		SELECT COUNT(id) star1 FROM review WHERE CODE=#{id} and stargrade=1
+	</select> 
+ 	<select id="getStarGradeCount2" parameterType="string" resultType="int">
+		SELECT COUNT(id) star2 FROM review WHERE CODE=#{id} and stargrade=2
+	</select> 
+ 	<select id="getStarGradeCount3" parameterType="string" resultType="int">
+		SELECT COUNT(id) star3 FROM review WHERE CODE=#{id} and stargrade=3
+	</select> 
+ 	<select id="getStarGradeCount4" parameterType="string" resultType="int">
+		SELECT COUNT(id) star4 FROM review WHERE CODE=#{id} and stargrade=4
+	</select> 
+ 	<select id="getStarGradeCount5" parameterType="string" resultType="int">
+		SELECT COUNT(id) star5 FROM review WHERE CODE=#{id} and stargrade=5
+	</select> 
+	<!-- Review 별점 평균 뽑아오기 -->
+ 	<select id="getStarGradeAvg" parameterType="string" resultType="double">
+		SELECT round(AVG(stargrade),1) avg FROM review WHERE CODE=#{id}
+	</select> 
+	<!-- 전체 사진  -->
+	<select id="getPic" parameterType="string" resultType="reviewVO">
+		SELECT pic1 frOM review WHERE CODE=#{id} AND pic1 IS NOT NULL
+		union
+		SELECT pic2 frOM review WHERE CODE=#{id} AND pic2 is nOT NULL
+	</select>
+	<!-- 사진 갯수 뽑아오기 -->
+	<select id="getPicCount" parameterType="string" resultType="int">
+		SELECT COUNT(pic1) + COUNT(pic2) FROM review WHERE CODE=#{id}
+	</select> 
+	<!-- 댓글 가져오기 -->
+	<select id="getComment" parameterType="string" resultType="commentVO">
+		select product_id, review_id, userid, username, content from review_comment where product_id=#{id}
+	</select>
+	<!-- 댓글 몇갠지 가져오기 -->
+		
+	
 	
 	
 	<!-- 유진 mapper, 주문페이지에서 입력한 정보 전송 -->

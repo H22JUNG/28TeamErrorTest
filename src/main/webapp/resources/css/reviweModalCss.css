@@ -1,0 +1,242 @@
+h2{
+	text-align: center;
+	font-size : 25px;
+}
+h3{
+	font-size : 20px;
+	text-align: start;
+}
+p {
+font-size : 12px;
+}
+#REVIEW {
+	text-align: center;
+	padding : 50px; 
+}
+#REVIEW p{
+	text-align: center;
+	font-size:15px;
+}
+#reviewContainer{
+	width:100%;
+}
+.Allstar {
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	display: flex;
+   flex-direction : row;
+}
+.starsScore {
+	align-self: center;
+	width: 40%;
+	text-align: center;
+	padding: 20px;
+	border-right: 1px solid gray;
+}
+.starsScore h3 {
+	font-weight: 500;
+	margin-bottom: 20px;
+	font-size : 14px;
+	text-align: center;
+}
+.starsScore button {
+	font-size: large;
+	padding: 10px 12px;
+	background: linear-gradient(90deg, #21A5B5 0%, #71B2B4 100%);
+	border-radius: 20px;
+	border: none;
+	color : white;
+	font-weight: 800;
+}
+#star {
+	font-size: 50px;
+	color: #21A5B5;
+}
+#grade {
+	font-size: 30px;
+	color: black;
+	padding-left: 10px;
+}
+.starsGrade {
+	width: 60%;
+	padding: 20px;
+	align-items : center;
+}
+.starsGrade-detail {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 10px 0;
+}
+.starsBack {
+	width: 70%;
+	height: 20px;
+	background-color: #f1f1f1;
+	border-radius: 10px;
+}
+.starsfront {
+	height: 20px;
+	background-color: gray;
+	border-radius: 10px;
+}
+.starsGrade-detail-p {
+	min-width: 50px;
+	font-size : 14px;
+	padding: 0px 15px;
+}
+.image span {
+	display: flex;
+	padding : 20px 0;
+}
+#allpic {
+	margin-left: auto;
+	align-self: center;
+	text-decoration: none;
+	color: gray;
+	font-size : 15px;
+}
+.imgPreview {
+	padding-bottom: 20px;
+	text-align : start;
+	max-height : 220px;
+	overflow : hidden;
+}
+
+.imgPreview img {
+	width: 200px;
+	height : 200px;
+	margin-bottom : 20px;
+}
+.review-container {
+	display: flex;
+	border-bottom : 0.5px solid gray;
+}
+.review {
+	border-top: 1px solid gray;
+	text-align: start;
+}
+.review button {
+	border: 1px solid #71B2B4;
+	width: 80px;
+	height: 50px;
+	margin: 0px;
+	padding: 0px;
+	font-size: 15px;
+	color: gray;
+	background-color: white;
+	cursor:pointer;
+}
+.reviewContentBox {
+	width: 60%;
+	padding : 20px;
+}
+.reviewContentBox img {
+	width: 180px;
+	height : 180px;
+}
+#review-title {
+	font-size : 20px;
+}
+.title-star {
+	font-size: 25px;
+	color : #21A5B5;
+	padding-right : 10px;
+}
+#review-content {
+	padding : 20px 0;
+	font-size: 22px;
+	color : gray;
+}
+.reviewComment {
+	border-left : 1px solid gray;
+	padding : 20px;
+}
+.reviewComment p {
+	font-size : 15px;
+	padding : 10px;
+}
+.dropdown {
+	border-top : 1px dotted gray;
+	display : none;
+}
+.dropdown form {
+	height : 150px;
+}
+.dropdown textarea{
+	margin : 15px 0 0 10px;
+	padding:10px;
+}
+.dropdown button{
+	width : 20%;
+	height : 30px;
+	border-radius: 10px;
+	margin : 10px;
+	padding : 0;
+	vertical-align : text-top;
+}
+
+#modal {
+    position: absolute;
+	top: 50%;
+    left: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+    height: 90vh;
+	display: none;
+	background-color: white;
+    z-index: 1000;
+	border: 1px solid gray;
+}
+#photo {
+	width: 75%;
+	display: grid;
+	place-items: center;
+	justify-content: center;
+	grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+	grid-template-rows: repeat(auto-fill, minmax(210px, 1fr));
+  	grid-gap: 15px;
+	border-right: 1px solid gray;
+	overflow-y: scroll;
+	padding : 20px;
+}
+#photo img {
+    width: 100%;
+    height: 100%;
+}
+#review {
+	width: 30%;
+	height: 100%;
+	overflow-y: scroll;
+	padding: 20px;
+}
+#image-box {
+	width: 100%;
+	height: 50%;
+	overflow: hidden;
+}
+#review img{
+	width: 100%;
+	height: 100%;
+	overflow-y: hidden;
+}
+#review-productInfo {
+	display: flex;
+	text-align: start;
+	padding : 10px;
+}
+#x {
+	margin-left: auto;
+	font-size: 20px;
+	cursor: pointer;
+}
+#review-productInfo	h6 {
+	font-size: 20px;
+	padding: 0;
+	margin: 0;
+}
+#review-productInfo	p {
+	font-size: 15px;
+}
+#review-star {
+	color : #21A5B5;
+}

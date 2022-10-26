@@ -13,6 +13,7 @@ import com.goodee.vo.PageVO;
 import com.goodee.vo.ProductListVO;
 import com.goodee.vo.ProductVO;
 import com.goodee.vo.QnaVO;
+import com.goodee.vo.ReviewCommentVO;
 import com.goodee.vo.ReviewVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.WrotebbsVO;
@@ -57,9 +58,11 @@ public interface ProjectDAO {
 	public List<WrotebbsVO> getwrote(UserVO vo);
 	public List<WrotebbsVO> getRewrote();
 	public List<WrotebbsVO> getsearch(@Param("category")String category, @Param("id")String id);
-	public WrotebbsVO getdetail(@Param("id") int id);
-	public void getdelete(int id);
-	public void modify(WrotebbsVO vo);
+	public WrotebbsVO getdetail(WrotebbsVO vo);
+	public void modifyReview(WrotebbsVO vo);
+	public void modifyQna(WrotebbsVO vo);
+	public void deleteReview(WrotebbsVO vo);
+	public void deleteMyPageQna(WrotebbsVO vo);
 	
 	//관리자페이지 회원조회
 	public int usercount(PageVO vo);
@@ -90,8 +93,17 @@ public interface ProjectDAO {
 	//Review 게시판
 	public List<ReviewVO> getReview(String id);
 	public int getReviewCount(String id);
-	public int[] getStarGradCount(int num[]);
+	public int getStarGradeCount1(String id);
+	public int getStarGradeCount2(String id);
+	public int getStarGradeCount3(String id);
+	public int getStarGradeCount4(String id);
+	public int getStarGradeCount5(String id);
 	public double getStarGradeAvg(String id);
+	public List<ReviewVO> getPic(String id);
+	public int getPicCount(String id);
+	//리뷰 게시판 댓글
+	public List<ReviewCommentVO> getComment(String id);
+	
 	
 	//Q&A 게시판
 	public List<QnaVO> QnaList();
