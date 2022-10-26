@@ -10,23 +10,28 @@ import com.goodee.vo.CartVO;
 
 @Service
 public class CartService {
-	
+
 	public ProjectDAO dao;
 
 	public CartService(ProjectDAO dao) {
 		this.dao = dao;
 	}
-	
-	
+
 	public List<CartVO> getCart(String userid) {
 		List<CartVO> cart = dao.getCart(userid);
-		
+
 		// 변수 초기화
 		for (CartVO cartVO : cart) {
 			cartVO.initSaleTotal();
 		}
-		
+
 		// 값이 모두 세팅된 cart 반환
 		return cart;
+	}
+
+	// 상세페이지 -> 장바구니에 데이터 보내기
+	// 장바구니에 담기, 구매하기에 담기
+	public void addCart(CartVO cartvo) {
+		dao.addCart(cartvo);
 	}
 }

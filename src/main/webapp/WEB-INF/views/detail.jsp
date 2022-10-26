@@ -17,98 +17,10 @@
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Neucha'
 	rel='stylesheet' type='text/css'>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/common.css">
 <style type="text/css">
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
 
-ul, li {
-	list-style-type: none;
-}
-
-body {
-	background:
-		url("${pageContext.request.contextPath}/image/KakaoTalk_20221013_170149504.webp")
-		0% 300% fixed;
-	background-size: cover;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	z-index: 0;
-}
-
-.container {
-	width: 100%;
-	display: flex;
-}
-
-/* 헤더 */
-header {
-	background-color: white;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	min-width: 1200px;
-}
-
-header .header-top {
-	display: flex;
-	width: 100%;
-	justify-content: flex-end;
-}
-
-header .header-top .logo img {
-	width: 265px;
-}
-
-header .header-top .logo {
-	flex: 1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-header .header-top .side {
-	position: absolute;
-}
-
-header .header-top .side ul {
-	display: flex;
-	gap: 10px;
-	margin: 10px;
-}
-
-/* 카테고리 */
-header .category {
-	padding: 10px 20px;
-	width: 100%;
-}
-
-header .category ul {
-	display: flex;
-	gap: 30px;
-}
-
-header .category ul li {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-header .category ul li:first-child {
-	background: #FFECC8;
-	border-radius: 10px;
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	padding: 5px 15px 7px;
-	gap: 10px;
-}
 
 /*main*/
 main {
@@ -575,35 +487,7 @@ input {
 </head>
 <body>
 
-	<header>
-		<div class="header-top">
-			<div class="logo">
-				<a href="${pageContext.request.contextPath}/"><img
-					src="${pageContext.request.contextPath}/image/KakaoTalk_20221012_170414651.png"
-					alt=""></a>
-			</div>
-			<div class="side">
-				<ul>
-					<li><a href=""><img src="" alt="">검색</a></li>
-					<li><a href=""><img src="" alt="">장바구니</a></li>
-					<li><a href="${pageContext.request.contextPath}/loginpage">로그인</a></li>
-					<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
-				</ul>
-			</div>
-		</div>
-		<nav class="category">
-			<ul>
-				<li>Category</li>
-				<li>가구</li>
-				<li>패브릭</li>
-				<li>수납용품</li>
-				<li>생활용품</li>
-				<li>공지사항</li>
-				<li>Q&A</li>
-				<li>이벤트</li>
-			</ul>
-		</nav>
-	</header>
+	<jsp:include page="header.jsp"></jsp:include>
 	<main>
 		<div class="mypage-container">
 			<!--상세페이지 상단(사진슬라이드+옵션부분)-->
@@ -639,8 +523,8 @@ input {
 				</div>
 				<div class="options">
 					<h2><input type="text" value="${detailVO.name}" id="name"></h2>
-					<form action="${pageContext.request.contextPath}/cart"
-						method="post">
+					<%-- <form action="${pageContext.request.contextPath}/cart"
+						method="post">--%>
 						<table>
 							<colgroup>
 								<!--이름쪽은 변하지 않고, 옵션쪽은 유동적이게-->
@@ -651,10 +535,10 @@ input {
 								<tr>
 									<th><label>가격 </label></th>
 									<td><input type="text"
-										value="<fmt:formatNumber value="${detailVO.price}" pattern="#,###" />&nbsp;원"
-										class="cost"> <label for="dc"></label><input
-										type="text" value="${detailVO.discount}&nbsp;%" name="dc"
-										class="dc"></td>
+										value="<fmt:formatNumber value="${detailVO.price}" pattern="#,###" />"
+										id="cost"><label for="dc"></label><input
+										type="text" value="${detailVO.discount}" name="dc"
+										id="dc"><span id="dc-span">%</span></td>
 								</tr>
 								<tr>
 									<th><label>판매가격 </label></th>
@@ -664,8 +548,14 @@ input {
 								</tr>
 								<tr>
 									<th><label>상품코드 </label></th>
-									<td><input type="text" value="${detailVO.id}"
+									<%--<td><input type="text" value="${detailOptionVO.proNum}"
 										id="product_code"></td>
+									<td>
+									<c:forEach var="vo" items="${detailOptionVO}">
+										<p id="code">${vo.proNum}</p>
+									</c:forEach>
+									</td> --%>
+									<td><input type="text" value="${detailVO.id}" id="id"></td>
 								</tr>
 								<tr>
 									<th>배송비</th>
@@ -679,19 +569,23 @@ input {
 								</tr>
 
 								<tr>
-								<%--<c:if test="${detailVO.pic4 != null}">--%>
+								<%-- <c:choose>
+									<c:when test="${!empty detailOptionVO.color}">--%>
 									 <th>옵션선택(색상)</th>
 									<td><select name="opt_select" id="select_color" class="form-control opt_select_color">
 											<option value="noChoice" selected>--선택없음--</option>
 											<c:forEach var="vo" items="${detailOptionVO}">
-												<option value="${vo.color}">${vo.color}</option>
+												<%-- <c:forTokens var="vo1" items="${vo.color}" delims=",">--%>
+													<option value="${vo.color}">${vo.color}</option>
+												<%--</c:forTokens>--%>
 											</c:forEach>
 									</select></td>
-								<%-- </c:if>--%>
+									<%-- </c:when>
+								</c:choose>--%>
 								</tr>
 
 								<tr>
-								<%-- <c:if test="${detailVO.pic4 != null}">--%>
+									<%-- <c:if test="${detailOptionVO.size != null}">--%>
 									<th>옵션선택(사이즈)</th>
 									<td><select name="opt_select" id="select_size" class="form-control opt_select_size">
 											<option value="noChoice" selected>--선택없음--</option>
@@ -699,7 +593,7 @@ input {
 												<option value="${vo.size}">${vo.size}</option>
 											</c:forEach>
 									</select></td>
-								 <%-- </c:if>--%>
+								 	<%-- </c:if>--%>
 								</tr>
 								<tr>
 									<th><label>구매수량</label></th>
@@ -726,7 +620,7 @@ input {
 							<input type="submit" value="구매하기" id="btn2" />
 						</div>
 						<%--</div>--%>
-					</form>
+					<%-- </form>--%>
 				</div>
 			</div>
 			<hr width="100%" color="black" size="1">
@@ -798,7 +692,7 @@ input {
 			</div>
 		</div>
 	</main>
-	<footer> </footer>
+	<jsp:include page="footer.jsp"></jsp:include>
 
 
 	<script type="text/javascript">
@@ -868,19 +762,25 @@ input {
 			var size = $("#select_size").val();
 			var color = $("#select_color").val();
 			var name = $("#name").val();
+			var code = $("#code").val();
+			var dc = $("#dc").val();
 			
 			console.log("id : " + id);
 			console.log("count : " + count);
 			console.log("size : " + size);
 			console.log("color : " + color);
 			console.log("name : " + name);
+			console.log("code : " + code);
+			console.log("dc : " + dc);
 
 			var data = {
 				id : id,
 				count : count,
 				size : size,
 				color : color,
-				name : name
+				name : name,
+				code : code,
+				dc : dc
 			};
 
 			$.ajax({
@@ -911,19 +811,25 @@ input {
 			var size = $("#select_size").val();
 			var color = $("#select_color").val();
 			var name = $("#name").val();
+			var price = $("#cost").val();
+			var dc = $("#dc").val();
 			
 			console.log("id : " + id);
 			console.log("count : " + count);
 			console.log("size : " + size);
 			console.log("color : " + color);
 			console.log("name : " + name);
+			console.log("price : " + price);
+			console.log("dc : " + dc);
 
 			var data = {
 				id : id,
 				count : count,
 				size : size,
 				color : color,
-				name : name
+				name : name,
+				price : price,
+				dc : dc
 			};
 
 			$.ajax({
