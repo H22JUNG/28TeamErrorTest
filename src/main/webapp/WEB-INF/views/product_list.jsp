@@ -244,6 +244,20 @@ main .item-container .item-list .itembox .itemname {
 	color: white;
 	font-size: 12px;
 	cursor: default;
+		animation: 0.5s deadline infinite;
+}
+
+@keyframes deadline {
+  0% {
+    background: #be0000;
+  }
+
+  50% {
+    background: #ff1f65;  	
+  }
+  to {
+    background: #be0000;
+  }
 }
 
 .specialprice {
