@@ -20,7 +20,6 @@ import com.goodee.service.CartService;
 import com.goodee.service.LoginService;
 import com.goodee.service.PayService;
 import com.goodee.service.UserService;
-import com.goodee.vo.CartVO;
 import com.goodee.vo.PageVO;
 import com.goodee.vo.QnaVO;
 import com.goodee.vo.UserVO;
@@ -259,8 +258,9 @@ public class MoveController {
 	@GetMapping("/detail/{id}")
 	public String productId(@PathVariable("id") String id, Model model, @ModelAttribute("qnaVO") QnaVO qnavo) {
 		bbsservice.getQnaList(model);
-		System.out.println("id : " + id);
 		cartservice.getDetailContent(model, id);
+		bbsservice.getReview(model, id);
+		bbsservice.getComment(model, id);
 		return "detail";
 	}
 
