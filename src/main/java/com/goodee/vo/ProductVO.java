@@ -18,6 +18,7 @@ public class ProductVO {
 	public String createDate;
 	public int totalStock;
 	public int stargrade;
+	public int reviewCount;
 	
 	public int getId() {
 		return id;
@@ -102,6 +103,12 @@ public class ProductVO {
 	}
 	public void setStargrade(int stargrade) {
 		this.stargrade = stargrade;
+	}
+	public int getReviewCount() {
+		return reviewCount;
+	}
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
 	}
 	
 	

@@ -373,7 +373,7 @@ main .item-container .item-list .itembox .itemname {
 									</c:otherwise>
 								</c:choose>
 								</span>
-								<span class="review-count">(125)</span>
+								<span class="review-count">(${vo.reviewCount})</span>
 								</p>
 
 								<c:choose>
