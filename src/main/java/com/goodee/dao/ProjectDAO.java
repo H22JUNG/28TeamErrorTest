@@ -93,7 +93,7 @@ public interface ProjectDAO {
 	public int addCart(CartVO cartvo);
 
 	//Review 게시판
-	public List<ReviewVO> getReview(String id);
+	public List<ReviewVO> getReview(@Param("id")String id);
 	public int getReviewCount(String id);
 	public int getStarGradeCount1(String id);
 	public int getStarGradeCount2(String id);
