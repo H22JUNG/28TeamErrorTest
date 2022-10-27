@@ -174,14 +174,13 @@ public class CartVO {
 	}
 
 
-		// 금액이 변경될때 쓰는 메서드
-		public void initSaleTotal() {
-			// %를 어떻게 만들어줄것인가.
-			this.salePrice = (int)(this.price * (1-this.discount));
-			this.resultPrice = this.salePrice*this.count;
-			this.point = (int)(Math.floor(this.salePrice*0.05));
-			this.totalPoint = this.point * this.count;
-		}
+	// 금액이 변경될때 쓰는 메서드
+	public void initSaleTotal() {
+		this.salePrice = (int)((double)this.price * ((double)this.discount/(double)100));
+		this.resultPrice = this.salePrice*count;
+		//this.point = (int)(Math.floor(this.salePrice*0.05));
+		//this.totalPoint = this.point * this.count;
+	}
 
 
 		// toString

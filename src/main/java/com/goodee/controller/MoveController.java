@@ -74,7 +74,7 @@ public class MoveController {
 		} else if(path == 1) {
 			//장바구니
 			
-			return "";
+			return "redirect:/cart/"+((UserVO)session.getAttribute("user")).getUserid();
 		} else if(path == 2) {
 			
 			//아래 두줄 유진쓰 추가 

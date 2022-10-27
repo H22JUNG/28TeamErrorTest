@@ -120,15 +120,18 @@ public interface ProjectDAO {
 		public List<NoticeVO> selectNotice(int important);
 		public NoticeVO selectDetailNotice(int id);
 	
-	// ================ 장바구니 ================
-	// 장바구니 삭제 - 지정한 row를 삭제하는 메서드
-	public int deleteCart(int cartNum);
-	// 장바구니 수량 수정 - 지정한 row의 수량을 변경하는 메서드(cartNum, count 필요)
-	public int modifyCount(CartVO cvo);
-	// 장바구니 목록
-	public List<CartVO> getCart(String userid);
-	// 장바구니 확인 - 회원정보와 상품정보를 넘겨서 해당하는 row가 있는지 확인하기 위해 작성한 메서드(userid, itemid 필요)
-	public CartVO checkCart(CartVO cvo);
-	// 장바구니 전체 삭제
-	public void deleteAll(String userid);
+		// ================ 장바구니 ================
+		// 장바구니 삭제 - 지정한 row를 삭제하는 메서드
+		public int deleteCart(int cartNum);
+//		public void deleteCart(CartVO cvo);
+		// 장바구니 선택 삭제
+		public void deleteAllCart(int cartNum);
+		// 장바구니 수량 수정 - 지정한 row의 수량을 변경하는 메서드(cartNum, count 필요)
+		public void modifyCount(CartVO cvo);
+		// 장바구니 목록
+		public List<CartVO> getCart(String userid);
+		// 장바구니 확인 - 회원정보와 상품정보를 넘겨서 해당하는 row가 있는지 확인하기 위해 작성한 메서드(userid, itemid 필요)
+		public CartVO checkCart(CartVO cvo);
+		// 장바구니 전체 삭제
+		public void deleteAll(String userid);
 }

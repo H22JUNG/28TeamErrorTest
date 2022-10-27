@@ -1,5 +1,7 @@
 package com.goodee.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.goodee.service.CartService;
@@ -27,9 +30,38 @@ public class CartController {
 	// cart 리스트 가져오기
 	@GetMapping("/cart/{userid}")
 	public String getCart(@PathVariable("userid") String userid, Model model) {
-		model.addAttribute("cartInfo", service.getCart(userid));
-
+		model.addAttribute("cartInfo",service.getCart(userid));
+		
 		return "cart";
+	}
+	
+	// 장바구니 수량 변경
+	@PostMapping("/cart/update")
+	public String updateCart(CartVO cvo) {
+		service.modifyCount(cvo);
+		return "redirect:/cart/" + cvo.getUserid();
+	}
+	
+	// 카트 삭제
+	@PostMapping("/cart/delete")
+	public String deleteCart(CartVO cvo) {
+		service.deleteCart(cvo.getCartNum());
+		System.out.println("카트넘"+cvo.getCartNum());
+		return "redirect:/cart/" + cvo.getUserid();
+	}
+	
+	// 카트 전체 삭제
+	@PostMapping("/cart/deleteAll")
+	@ResponseBody
+	public int deleteAllCart(@RequestParam(value = "chbox[]", required=false) List<Integer> chArr, CartVO cvo) {
+		int result = 0;
+		
+		for (Integer i : chArr) {
+			service.deleteAllCart(i);
+			result = 1;
+		}
+		return result;
+//		return "redirect:/cart/" + cvo.getUserid();
 	}
 
 	// 상세페이지->장바구니 담기
