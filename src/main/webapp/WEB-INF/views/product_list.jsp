@@ -205,10 +205,18 @@ main .item-container .item-list .itembox .itemname {
 
 /* 별점 */
 .itemname .star {
-	color: #28BACE;
 	cursor: default;
 }
-.itemname .star span{
+.itemname .star .stargrade {
+	color: #28BACE;
+	letter-spacing: -0.1rem;
+	
+}
+.itemname .star .stargrade .nonstar {
+	color: #ABABAB;
+}
+
+.itemname .star .review-count{
 	color: #A8A8A8;
 	font-size: 13px;
 }
@@ -349,7 +357,24 @@ main .item-container .item-list .itembox .itemname {
 							<p class="price">${vo.price}원</p>
 							<div class="item-info">
 
-								<p class="star">★★★★☆<span>(125)</span></p>
+								<p class="star">
+									<span class="stargrade">
+								<c:choose>
+									<c:when test="${vo.stargrade == 5}">
+										★★★★★
+									</c:when>
+									<c:when test="${vo.stargrade == 0}">
+									<span class="nonstar">
+										☆☆☆☆☆
+									</span>
+									</c:when>
+									<c:otherwise>
+										<c:forEach begin="0" end="${vo.stargrade - 1}">★</c:forEach><c:forEach begin="0" end="${4 - vo.stargrade}"><span class="nonstar">☆</span></c:forEach>
+									</c:otherwise>
+								</c:choose>
+								</span>
+								<span class="review-count">(125)</span>
+								</p>
 
 								<c:choose>
 									<c:when test="${vo.totalStock == 0}">

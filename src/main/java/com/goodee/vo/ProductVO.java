@@ -17,6 +17,7 @@ public class ProductVO {
 	public int view;
 	public String createDate;
 	public int totalStock;
+	public int stargrade;
 	
 	public int getId() {
 		return id;
@@ -95,6 +96,12 @@ public class ProductVO {
 	}
 	public void setTotalStock(int totalStock) {
 		this.totalStock = totalStock;
+	}
+	public int getStargrade() {
+		return stargrade;
+	}
+	public void setStargrade(int stargrade) {
+		this.stargrade = stargrade;
 	}
 	
 	

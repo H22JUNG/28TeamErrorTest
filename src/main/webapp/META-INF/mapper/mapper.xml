@@ -30,17 +30,17 @@
 	<!-- product list -->
 	<!-- 카테고리별 -->
 	<select id="selectCategory" resultType="productVO" parameterType="productVO">
-		select p.id, pic1, pic2, pic3, pic4, p.name, format(price,0) price, discount, view, date_format(create_date, '%Y-%m-%d %T') createDate,
-		sum(stock) totalStock
-		from product p inner join option o
+		SELECT p.id, p.pic1, p.pic2, p.pic3, p.pic4, p.name, format(price,0) price, discount, view, DATE_FORMAT(p.create_date, '%Y-%m-%d %T') createDate,
+		sum(stock) totalStock, ifnull(floor(AVG(stargrade)),0) 'stargrade'
+		FROM option o right OUTER JOIN (product p left OUTER JOIN review r ON p.id = r.code)
 		on p.id = o.id
 		where category1 = #{category1}
 		group by p.id
 	</select>
 	<select id="selectInnerCategory" resultType="productVO" parameterType="productVO">
-		select p.id, pic1, pic2, pic3, pic4, p.name, format(price,0) price, discount, view, date_format(create_date, '%Y-%m-%d %T') createDate,
-		sum(stock) totalStock
-		from product p inner join option o
+		SELECT p.id, p.pic1, p.pic2, p.pic3, p.pic4, p.name, format(price,0) price, discount, view, DATE_FORMAT(p.create_date, '%Y-%m-%d %T') createDate,
+		sum(stock) totalStock, ifnull(floor(AVG(stargrade)),0) 'stargrade'
+		FROM option o right OUTER JOIN (product p left OUTER JOIN review r ON p.id = r.code)
 		on p.id = o.id
 		where category2 = #{category2}
 		group by p.id
