@@ -30,14 +30,20 @@
 	<!-- product list -->
 	<!-- 카테고리별 -->
 	<select id="selectCategory" resultType="productVO" parameterType="productVO">
-		select id, pic1, pic2, pic3, pic4, name, price, discount, view, date_format(create_date, '%Y-%m-%d %T') createDate
-		from product
+		select p.id, pic1, pic2, pic3, pic4, p.name, format(price,0) price, discount, view, date_format(create_date, '%Y-%m-%d %T') createDate,
+		sum(stock) totalStock
+		from product p inner join option o
+		on p.id = o.id
 		where category1 = #{category1}
+		group by p.id
 	</select>
 	<select id="selectInnerCategory" resultType="productVO" parameterType="productVO">
-		select id, pic1, pic2, pic3, pic4, name, price, discount, view, date_format(create_date, '%Y-%m-%d %T') createDate
-		from product
+		select p.id, pic1, pic2, pic3, pic4, p.name, format(price,0) price, discount, view, date_format(create_date, '%Y-%m-%d %T') createDate,
+		sum(stock) totalStock
+		from product p inner join option o
+		on p.id = o.id
 		where category2 = #{category2}
+		group by p.id
 	</select>
 	
 	<!-- ==================== 관리자 페이지 - 상품 관리 ==================== -->

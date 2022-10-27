@@ -12,10 +12,11 @@ public class ProductVO {
 	public String pic3;
 	public String pic4;
 	public String name;
-	public int price;
+	public String price;
 	public int discount;
 	public int view;
 	public String createDate;
+	public int totalStock;
 	
 	public int getId() {
 		return id;
@@ -65,10 +66,10 @@ public class ProductVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	public int getDiscount() {
@@ -88,6 +89,12 @@ public class ProductVO {
 	}
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
+	}
+	public int getTotalStock() {
+		return totalStock;
+	}
+	public void setTotalStock(int totalStock) {
+		this.totalStock = totalStock;
 	}
 	
 	
