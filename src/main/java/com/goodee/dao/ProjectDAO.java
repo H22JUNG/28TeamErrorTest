@@ -87,6 +87,8 @@ public interface ProjectDAO {
 	//상품 상세페이지 조회
 	public ProductVO selectDetail(String id);
 	public List<OptionVO> selectDetailOption(String id);
+	public List<OptionVO> selectOptionColor(String id);
+	public List<OptionVO> selectOptionSize(String id);
 	//장바구니 담기
 	public int addCart(CartVO cartvo);
 

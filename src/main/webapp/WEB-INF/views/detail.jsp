@@ -503,6 +503,8 @@ input {
 							<li><img src="${detailVO.pic4}" alt=""></li>
 							</c:if>
 						</ul>
+						<input type="hidden" name="pic1" id="pic1" value="${detailVO.pic1}"/>
+						<input type="hidden" value="${detailVO.price}" id="cost1">
 
 						<!--사진슬라이드 버튼-->
 						<div class="btns" id="next">
@@ -523,8 +525,6 @@ input {
 				</div>
 				<div class="options">
 					<h2><input type="text" value="${detailVO.name}" id="name"></h2>
-					<%-- <form action="${pageContext.request.contextPath}/cart"
-						method="post">--%>
 						<table>
 							<colgroup>
 								<!--이름쪽은 변하지 않고, 옵션쪽은 유동적이게-->
@@ -534,10 +534,8 @@ input {
 							<tbody>
 								<tr>
 									<th><label>가격 </label></th>
-									<td><input type="text"
-										value="<fmt:formatNumber value="${detailVO.price}" pattern="#,###" />"
-										id="cost"><label for="dc"></label><input
-										type="text" value="${detailVO.discount}" name="dc"
+									<td><input type="text" value="<fmt:formatNumber value="${detailVO.price}" pattern="#,###" />원" id="cost"><label for="dc"></label>
+									<input type="text" value="${detailVO.discount}" name="dc"
 										id="dc"><span id="dc-span">%</span></td>
 								</tr>
 								<tr>
@@ -548,14 +546,20 @@ input {
 								</tr>
 								<tr>
 									<th><label>상품코드 </label></th>
-									<%--<td><input type="text" value="${detailOptionVO.proNum}"
-										id="product_code"></td>
+									<%-- <td><input type="text" value="${detailOptionVO.proNum}"
+										id="product_code"></td> --%>
 									<td>
-									<c:forEach var="vo" items="${detailOptionVO}">
-										<p id="code">${vo.proNum}</p>
-									</c:forEach>
-									</td> --%>
-									<td><input type="text" value="${detailVO.id}" id="id"></td>
+									
+										<select name="code" id="code" data-size="${vo.proNum}" data-size="${vo.color}">
+										<c:forEach var="vo" items="${detailOptionVO}">
+											<c:forTokens var="vo1" items="${vo.proNum}" delims=",">
+								 				<option value="${vo1}">${vo1}</option>
+								 			</c:forTokens>
+								 		</c:forEach>
+										</select>
+								
+									</td>
+									<td><input type="hidden" value="${detailVO.id}" id="id"></td>
 								</tr>
 								<tr>
 									<th>배송비</th>
@@ -567,34 +571,37 @@ input {
 										value="<fmt:formatNumber value="${(detailVO.price - (detailVO.price * (detailVO.discount/100))) * 0.05}" pattern="#,###" />"
 										id="save"><span>원</span></td>
 								</tr>
-
+								
+								<%-- <c:if test="${not empty detailOptionVO[2].size}">--%>
 								<tr>
-								<%-- <c:choose>
-									<c:when test="${!empty detailOptionVO.color}">--%>
-									 <th>옵션선택(색상)</th>
-									<td><select name="opt_select" id="select_color" class="form-control opt_select_color">
-											<option value="noChoice" selected>--선택없음--</option>
-											<c:forEach var="vo" items="${detailOptionVO}">
-												<%-- <c:forTokens var="vo1" items="${vo.color}" delims=",">--%>
-													<option value="${vo.color}">${vo.color}</option>
-												<%--</c:forTokens>--%>
-											</c:forEach>
-									</select></td>
-									<%-- </c:when>
-								</c:choose>--%>
-								</tr>
-
-								<tr>
-									<%-- <c:if test="${detailOptionVO.size != null}">--%>
 									<th>옵션선택(사이즈)</th>
-									<td><select name="opt_select" id="select_size" class="form-control opt_select_size">
-											<option value="noChoice" selected>--선택없음--</option>
-											<c:forEach var="vo" items="${detailOptionVO}">
-												<option value="${vo.size}">${vo.size}</option>
-											</c:forEach>
-									</select></td>
-								 	<%-- </c:if>--%>
+								 	<td>
+								 		<select name="opt_select_2" id="select_size" class="form-control opt_select_size">
+								 		<c:forEach var="vo2" items="${selectOptionSize}">
+								 			<c:forTokens var="vo3" items="${vo2.size}" delims=",">
+								 				<option value="${vo3}">${vo3}</option>
+								 			</c:forTokens>
+								 		</c:forEach>
+								 	</select>
+								 	</td>
 								</tr>
+								<%-- </c:if>--%>
+								
+								<%-- <c:if test="${not empty detailOptionVO[3].color}">--%>
+								<tr>
+									 <th>옵션선택(색상)</th>
+								<td>
+									<c:forEach var="vo" items="${selectOptionColor}">
+										<select name="opt_select_1" id="select_color" data-size="${vo.size}" class="form-control opt_select_color">
+								 			<c:forTokens var="vo1" items="${vo.color}" delims=",">
+								 				<option value="${vo1}">${vo1}</option>
+								 			</c:forTokens>
+								 		</select>
+								 	</c:forEach>
+								</td>
+								</tr>
+								<%--</c:if> --%>
+								
 								<tr>
 									<th><label>구매수량</label></th>
 									<td><select name="select_count" id="select_count"
@@ -609,11 +616,6 @@ input {
 						</table>
 						<input type="hidden" name="productId" value="${detailVO.id}">
 						<%-- <input type="hidden" name="productNum" value="${detailOptionVO.proNum}">--%>
-						<!--선택옵션 출력창-->
-						<%-- <div class="row"> --%>
-						<%--<div class="selected_option" style="text-align: right;">
-					<p></p>
-					</div>--%>
 						<!--장바구니/구매하기 버튼-->
 						<div class="datail_top_btns">
 							<input type="submit" value="장바구니" id="btn1" />
@@ -696,6 +698,62 @@ input {
 
 
 	<script type="text/javascript">
+	
+	// 옵션 및 사이즈 중복 제거하기
+	window.addEventListener("DOMContentLoaded", function(){
+		let size = document.getElementById("select_size").value;
+		const colorSelects = document.querySelectorAll("select[name='opt_select_1']");
+		
+		for (let cselect of colorSelects) {
+			
+			if(size != cselect.dataset.size){
+				cselect.style.display = "none";
+			}
+		}
+	});
+	
+	document.querySelector("select[name='opt_select_2']").addEventListener("change", function(){
+		let size = document.getElementById("select_size").value;
+		const colorSelects = document.querySelectorAll("select[name='opt_select_1']");
+		
+		for (let cselect of colorSelects) {
+			if(size != cselect.dataset.size){
+				cselect.style.display = "none";
+			}else{
+				cselect.style.display = "block";
+			}
+		}
+	});
+	
+	window.addEventListener("DOMContentLoaded", function(){
+		let color = document.getElementById("select_color").value;
+		let size = document.getElementById("select_size").value;
+		
+		const codeSelects = document.querySelectorAll("select[name='code']");
+		
+		for (let cselect of codeSelects) {
+			
+			if(size != cselect.dataset.size){
+				cselect.style.display = "none";
+			}
+		}
+	});
+	
+	document.querySelector("select[name='code']").addEventListener("change", function(){
+		let size = document.getElementById("select_size").value;
+		let color = document.getElementById("select_color").value;
+
+		const codeSelects = document.querySelectorAll("select[name='code']");
+		
+		for (let cselect of codeSelects) {
+			if(size != cselect.dataset.color){
+				cselect.style.display = "none";
+			}else{
+				cselect.style.display = "block";
+			}
+		}
+	});
+	
 		// 사진슬라이드
 		var slideWrapper = document.getElementById('slider-wrap');
 		var slideIndex = 0;
@@ -757,13 +815,16 @@ input {
 		
 		// 장바구니 이동
 		$("#btn1").click(function() {
-			var id = $("#product_code").val();
+			var id = $("#id").val();
 			var count = $("#select_count").val();
 			var size = $("#select_size").val();
 			var color = $("#select_color").val();
 			var name = $("#name").val();
 			var code = $("#code").val();
 			var dc = $("#dc").val();
+			var price = $("#cost1").val();
+			var pic1 = $("#pic1").val();
+			
 			
 			console.log("id : " + id);
 			console.log("count : " + count);
@@ -772,6 +833,9 @@ input {
 			console.log("name : " + name);
 			console.log("code : " + code);
 			console.log("dc : " + dc);
+			console.log("price : " + price);
+			console.log("pic1 : " + pic1);
+			
 
 			var data = {
 				id : id,
@@ -780,7 +844,10 @@ input {
 				color : color,
 				name : name,
 				code : code,
-				dc : dc
+				dc : dc,
+				price : price,
+				pic1 : pic1
+				
 			};
 
 			$.ajax({
@@ -806,7 +873,7 @@ input {
 		
 		// 구매하기 이동
 		$("#btn2").click(function() {
-			var id = $("#product_code").val();
+			var id = $("#id").val();
 			var count = $("#select_count").val();
 			var size = $("#select_size").val();
 			var color = $("#select_color").val();

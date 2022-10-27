@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.goodee.service.BbsService;
+import com.goodee.service.CartService;
 import com.goodee.service.LoginService;
 import com.goodee.service.PayService;
 import com.goodee.service.UserService;
@@ -31,17 +32,18 @@ public class MoveController {
 	public UserService userservice;
 	public LoginService loginservice; //유진쓰가 추가
 	public PayService payservice; //이것도 유진쓰가 추가
+	public CartService cartservice;
 
-	
-	
 	public MoveController(BbsService bbsservice, UserService userservice, LoginService loginservice,
-			PayService payservice) {
+			PayService payservice, CartService cartservice) {
 		super();
 		this.bbsservice = bbsservice;
 		this.userservice = userservice;
 		this.loginservice = loginservice;
 		this.payservice = payservice;
+		this.cartservice = cartservice;
 	}
+	
 	@GetMapping("/loginpage")
 	public String loginpage() {
 		return "login/login";
@@ -252,17 +254,15 @@ public class MoveController {
 		return "adminProduct/product_delete";
 	}
 	
-	
-	// 상세페이지(수정)
-		// 메인P 상품id -> 상품id 갖고 상세P 가서 DetailVO데이터 넣기
-		@GetMapping("/detail/{id}")
-		public String productId(@PathVariable("id") String id, Model model) {
-			//System.out.println("id : " + id);
-			//bbsservice.getDetailContent(model, id);
-			bbsservice.getReview(model, id);
-			bbsservice.getComment(model, id);
-			return "detail";
-		}
+	// 상세페이지 -> 장바구니,구매하기로 보내기(수정)
+	// 메인P 상품id -> 상품id 갖고 상세P 가서 DetailVO데이터 넣기
+	@GetMapping("/detail/{id}")
+	public String productId(@PathVariable("id") String id, Model model, @ModelAttribute("qnaVO") QnaVO qnavo) {
+		bbsservice.getQnaList(model);
+		System.out.println("id : " + id);
+		cartservice.getDetailContent(model, id);
+		return "detail";
+	}
 
 		// Qna게시판
 		// 상품리스트P->QNA게시판P

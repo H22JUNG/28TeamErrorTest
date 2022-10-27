@@ -352,18 +352,26 @@
 	
 	
 	<!-- 상품 상세페이지 조회 -->
-	<select id="selectDetail" resultType="productVO">
+	<select id="selectDetail" resultType="ProductVO">
   		select id, pic1, pic2, pic3, pic4, name, price, discount from product where id = #{id}
   	</select>
   	
-  	<select id="selectDetailOption" resultType="optionVO">
+  	<select id="selectDetailOption" resultType="OptionVO">
   		select id, pro_num, size, color, stock, name from option where id = #{id}
+  	</select>
+  	
+  	<select id="selectOptionColor" resultType="OptionVO">
+  		SELECT id, size, GROUP_CONCAT(color) color FROM option where id = #{id} GROUP BY id, size;
+  	</select>
+  	
+  	<select id="selectOptionSize" resultType="OptionVO">
+  		SELECT id, color, GROUP_CONCAT(size) FROM option where id = #{id} GROUP BY id, color;
   	</select>
   
   	<!-- 상세페이지 장바구니 담기 -->
   	<insert id="addCart">
-  		insert into cart(cartid, userid, userName, id, name, price, count, color, size) 
-  		values(null, #{userid}, #{userName}, #{id}, #{name}, #{price}, #{count}, #{color}, #{size})
+  		insert into cart(cartid, userid, userName, id, name, price, count, color, size, pic1, pro_num) 
+  		values(null, #{userid}, #{userName}, #{id}, #{name}, #{price}, #{count}, #{color}, #{size}, #{pic1}, #{proNum})
   	</insert>
 	
 	
