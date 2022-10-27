@@ -17,7 +17,7 @@ main {
 	position: relative;
 	top: 33%;
 	width: 100%;
-	padding: 80px 80px 240px;
+	padding: 120px 80px 240px;
 	gap: 20px;
 	min-width: 1200px;
 }
@@ -72,6 +72,7 @@ main aside .outer-cate>li>a {
 	font-size: 20px;
 	display: block;
 	padding: 10px;
+	min-height: 50px;
 }
 
 main aside .outer-cate>li>a img {
@@ -80,6 +81,11 @@ main aside .outer-cate>li>a img {
 	opacity: 0.6;
 	float: right;
 }
+
+main aside .outer-cate>li:hover>a img {
+	filter: invert(60%) sepia(54%) saturate(587%) hue-rotate(139deg) brightness(93%) contrast(90%);
+}
+
 
 main aside .outer-cate>li>.inner-cate {
 /*  	display: none; */
@@ -255,7 +261,7 @@ main .item-container .item-list .itembox .itemname {
 				<button>검색</button></li>
 				<li><a
 					href="${pageContext.request.contextPath}/category/furniture">가구<img
-						src="${pageContext.request.contextPath}/image/icons/bed-icon.png" alt="" /></a>
+						src="${pageContext.request.contextPath}/image/bed-icon.png" alt="" /></a>
 					<ul class="inner-cate">
 						<li><a
 							href="${pageContext.request.contextPath}/category2/bed">침대</a></li>
@@ -270,7 +276,7 @@ main .item-container .item-list .itembox .itemname {
 					</ul></li>
 				<li><a
 					href="${pageContext.request.contextPath}/category/fabric">패브릭<img
-						src="${pageContext.request.contextPath}/image/icons/rug-icon.png" alt="" /></a>
+						src="${pageContext.request.contextPath}/image/rug-icon.png" alt="" /></a>
 					<ul class="inner-cate">
 						<li><a
 							href="${pageContext.request.contextPath}/category2/curtain">커튼</a>
@@ -283,7 +289,7 @@ main .item-container .item-list .itembox .itemname {
 					</ul></li>
 				<li><a
 					href="${pageContext.request.contextPath}/category/storage">수납용품<img
-						src="${pageContext.request.contextPath}/image/icons/storage-icon.png"
+						src="${pageContext.request.contextPath}/image/storage-icon.png"
 						alt="" /></a>
 					<ul class="inner-cate">
 						<li><a
@@ -295,19 +301,19 @@ main .item-container .item-list .itembox .itemname {
 					</ul></li>
 				<li><a
 					href="${pageContext.request.contextPath}/category/supplies">생활용품<img
-						src="${pageContext.request.contextPath}/image/icons/hanger-icon.png"
+						src="${pageContext.request.contextPath}/image/hanger-icon.png"
 						alt="" /></a></li>
 				<li><a href="${pageContext.request.contextPath}/notice">공지사항<img
-						src="${pageContext.request.contextPath}/image/icons/notice-icon.png"
+						src="${pageContext.request.contextPath}/image/notice-icon.png"
 						alt="" /></a></li>
 				<li><a href="${pageContext.request.contextPath}/qna">Q&A<img
-						src="${pageContext.request.contextPath}/image/icons/qna-icon.png" alt="" /></a>
+						src="${pageContext.request.contextPath}/image/qna-icon.png" alt="" /></a>
 				</li>
 				<li><a href="">이벤트<img
-						src="${pageContext.request.contextPath}/image/icons/event-icon.png"
+						src="${pageContext.request.contextPath}/image/event-icon.png"
 						alt="" /></a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage">마이페이지<img
-						src="${pageContext.request.contextPath}/image/icons/person-icon.png"
+						src="${pageContext.request.contextPath}/image/person-icon.png"
 						alt="" /></a></li>
 			</ul>
 		</aside>
