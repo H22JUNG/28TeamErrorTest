@@ -105,6 +105,8 @@ public interface ProjectDAO {
 	public int getPicCount(String id);
 	//리뷰 게시판 댓글
 	public List<ReviewCommentVO> getComment(String id);
+	//리뷰 모달창
+	public ReviewVO getSelectReview(int id);
 	
 	
 	//Q&A 게시판

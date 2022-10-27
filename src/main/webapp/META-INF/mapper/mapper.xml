@@ -290,11 +290,11 @@
  	<select id="getStarGradeAvg" parameterType="string" resultType="double">
 		SELECT round(AVG(stargrade),1) avg FROM review WHERE CODE=#{id}
 	</select> 
-	<!-- 전체 사진  -->
+	<!-- 사진 리뷰 전체보기  -->
 	<select id="getPic" parameterType="string" resultType="reviewVO">
-		SELECT pic1 frOM review WHERE CODE=#{id} AND pic1 IS NOT NULL
+		SELECT id, pic1 frOM review WHERE CODE=#{id} AND pic1 IS NOT NULL
 		union
-		SELECT pic2 frOM review WHERE CODE=#{id} AND pic2 is nOT NULL
+		SELECT id, pic2 frOM review WHERE CODE=#{id} AND pic2 is nOT NULL
 	</select>
 	<!-- 사진 갯수 뽑아오기 -->
 	<select id="getPicCount" parameterType="string" resultType="int">
@@ -305,9 +305,13 @@
 		select product_id, review_id, userid, username, content from review_comment where product_id=#{id}
 	</select>
 	<!-- 댓글 몇갠지 가져오기 -->
-		
 	
-	
+	<!-- 리뷰 모달창에서 사진 선택하면 해당 리뷰만 조회하기 -->
+	<select id="getSelectReview" parameterType="int" resultType="reviewVO">
+		select id, title, content, pic1, pic2, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, code, stargrade, hits
+		from review
+		where id=#{id}
+	</select>
 	
 	<!-- 유진 mapper, 주문페이지에서 입력한 정보 전송 -->
 	<!-- 결제하기위해 DB에서 내 정보 받아옴 -->
