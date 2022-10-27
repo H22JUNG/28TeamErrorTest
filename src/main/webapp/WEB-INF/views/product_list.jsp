@@ -261,7 +261,7 @@ main .item-container .item-list .itembox .itemname {
 				<button>검색</button></li>
 				<li><a
 					href="${pageContext.request.contextPath}/category/furniture">가구<img
-						src="${pageContext.request.contextPath}/image/bed-icon.png" alt="" /></a>
+						src="${pageContext.request.contextPath}/image/icons/bed-icon.png" alt="" /></a>
 					<ul class="inner-cate">
 						<li><a
 							href="${pageContext.request.contextPath}/category2/bed">침대</a></li>
@@ -276,7 +276,7 @@ main .item-container .item-list .itembox .itemname {
 					</ul></li>
 				<li><a
 					href="${pageContext.request.contextPath}/category/fabric">패브릭<img
-						src="${pageContext.request.contextPath}/image/rug-icon.png" alt="" /></a>
+						src="${pageContext.request.contextPath}/image/icons/rug-icon.png" alt="" /></a>
 					<ul class="inner-cate">
 						<li><a
 							href="${pageContext.request.contextPath}/category2/curtain">커튼</a>
@@ -289,7 +289,7 @@ main .item-container .item-list .itembox .itemname {
 					</ul></li>
 				<li><a
 					href="${pageContext.request.contextPath}/category/storage">수납용품<img
-						src="${pageContext.request.contextPath}/image/storage-icon.png"
+						src="${pageContext.request.contextPath}/image/icons/storage-icon.png"
 						alt="" /></a>
 					<ul class="inner-cate">
 						<li><a
@@ -301,19 +301,19 @@ main .item-container .item-list .itembox .itemname {
 					</ul></li>
 				<li><a
 					href="${pageContext.request.contextPath}/category/supplies">생활용품<img
-						src="${pageContext.request.contextPath}/image/hanger-icon.png"
+						src="${pageContext.request.contextPath}/image/icons/hanger-icon.png"
 						alt="" /></a></li>
 				<li><a href="${pageContext.request.contextPath}/notice">공지사항<img
-						src="${pageContext.request.contextPath}/image/notice-icon.png"
+						src="${pageContext.request.contextPath}/image/icons/notice-icon.png"
 						alt="" /></a></li>
 				<li><a href="${pageContext.request.contextPath}/qna">Q&A<img
-						src="${pageContext.request.contextPath}/image/qna-icon.png" alt="" /></a>
+						src="${pageContext.request.contextPath}/image/icons/qna-icon.png" alt="" /></a>
 				</li>
 				<li><a href="">이벤트<img
-						src="${pageContext.request.contextPath}/image/event-icon.png"
+						src="${pageContext.request.contextPath}/image/icons/event-icon.png"
 						alt="" /></a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage">마이페이지<img
-						src="${pageContext.request.contextPath}/image/person-icon.png"
+						src="${pageContext.request.contextPath}/image/icons/person-icon.png"
 						alt="" /></a></li>
 			</ul>
 		</aside>
