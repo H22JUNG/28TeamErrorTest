@@ -30,9 +30,9 @@ public class PayService {
 	}
 	
 	public void orderInfor(orderUser vo, List<CartVO> volist, HttpSession session,Model model) {
-		int cartNum = dao.selectCartNum(((UserVO)session.getAttribute("user")).getId());
+		int cartListNum = dao.selectCartNum(((UserVO)session.getAttribute("user")).getId());
 		vo.setUserid(((UserVO)session.getAttribute("user")).getUserid());
-		vo.setCartNum(cartNum);
+		vo.setCartListNum(cartListNum);
 		
 		LocalDateTime now = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -49,12 +49,18 @@ public class PayService {
 		formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		formatedNow = now.format(formatter);
 		vo.setOrderDate(formatedNow);
+		int TotalPrice = 0;
 
-		dao.orderUserInfor(vo);
 		for (int i = 0; i < volist.size(); i++) {
+			TotalPrice+=volist.get(i).getPrice()*volist.get(i).getCount();
+			
 			volist.get(i).setId(((UserVO)session.getAttribute("user")).getId());
-			volist.get(i).setCartNum(cartNum);
+			volist.get(i).setUserid(((UserVO)session.getAttribute("user")).getUserid());
+			volist.get(i).setCartListNum(cartListNum);
 		}
+		TotalPrice= TotalPrice+2500-vo.getPoint();
+		vo.setTotalPrice(TotalPrice);
+		dao.orderUserInfor(vo);
 		for (int i = 0; i < volist.size(); i++) {
 			dao.orderItemInfor(volist.get(i));
 		}
@@ -72,8 +78,15 @@ public class PayService {
 	public void orderUserResult(String userid,Model model) {
 		model.addAttribute("orderUsermodel",dao.orderUserResult(userid));	
 	}
+	
 	public void payUserInfor(HttpSession session,Model model) {
 		model.addAttribute("payInfor",dao.payUserInfor(((UserVO)session.getAttribute("user")).getUserid()));
+		
+	}
 	
+	//주문조회 상세페이지 내용 출력
+	public void detailOrderInfor(String orderNum,Model model){
+		model.addAttribute("detailOrderInfor",dao.detailOrderInfor(orderNum));
+		
 	}
 }

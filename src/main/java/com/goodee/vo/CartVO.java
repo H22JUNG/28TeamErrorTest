@@ -6,6 +6,7 @@ import org.apache.ibatis.type.Alias;
 public class CartVO {
 	// cart
 	private int cartNum;  //장바구니번호
+	private int cartListNum; //유진추가 결제내역 페이지에서 사용할것
 	private String userid;	// 이용자 아이디
 	private String userName;	// user 이름
 	private int count; //구매 수량
@@ -34,8 +35,40 @@ public class CartVO {
 	
 	
 	// 변경될 때마다 초기화 해주기 위한 메서드
+	
+	
 	public int getCartNum() {
 		return cartNum;
+	}
+
+
+	public int getCartListNum() {
+		return cartListNum;
+	}
+
+
+	public void setCartListNum(int cartListNum) {
+		this.cartListNum = cartListNum;
+	}
+
+
+	public void setSalePrice(int salePrice) {
+		this.salePrice = salePrice;
+	}
+
+
+	public void setResultPrice(int resultPrice) {
+		this.resultPrice = resultPrice;
+	}
+
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
+
+	public void setTotalPoint(int totalPoint) {
+		this.totalPoint = totalPoint;
 	}
 
 

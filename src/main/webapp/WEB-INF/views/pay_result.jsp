@@ -306,14 +306,14 @@
 						</div>
 					</c:forEach>
 							<div id="bottom">
-								<h3>결제 금액</h3>
+								<h3>결제 금액 : ${orderUser.totalPrice}</h3>
 							</div>
 						</div>
 						<!--inRight끝-->
 					</div>
 					<div id="lastBottom">
-						<!--다시 살려야함 <h3>주문 번호 : ${orderUser.orderNum}</h3> -->	
-						<a href="${pageContext.request.contextPath}/practice">주문번호 : ${orderUser.orderNum}</a>
+						<h3>주문 번호 : ${orderUser.orderNum}</h3>
+						<a href="${pageContext.request.contextPath}/practice">임시이동주문번호 : ${orderUser.orderNum}</a>
 							
 					</div>
 				</div>

@@ -401,19 +401,30 @@ section {
 						<div class="order-box">
 							<div id="orderNum">
 								<h4>주문 번호</h4>
-								<a href="${pageContext.request.contextPath}/">${list.orderNum}</a>
+								<a href="${pageContext.request.contextPath}/orderNumController/">${list.orderNum}</a>
 							</div>
 							<div>
 								<h4>주문 날짜</h4>
 								<p>${list.orderDate}</p>
 							</div>
 							<div>
-								<h4>주문 수량</h4>
-								<p>101</p>
+								<h4>결제 수단</h4>
+									<c:choose>
+							<c:when test="${list.pay eq 'cash'}">
+							<p>
+								무통장입금
+							</p>							
+							</c:when>
+							<c:otherwise>
+							<p>
+								카드
+							</p>
+							</c:otherwise>
+							</c:choose>
 							</div>
 							<div>
 								<h4>결제 금액</h4>
-								500000원
+								<p>${list.totalPrice}</p>
 							</div>
 							</div>
 						</div>

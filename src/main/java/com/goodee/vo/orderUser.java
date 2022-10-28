@@ -8,7 +8,7 @@ import org.apache.ibatis.type.Alias;
 public class orderUser {
 	
 	private String userid;
-	private int cartNum;
+	private int cartListNum;
 	private String orderName;
 	private String orderDate;
 	private String pay;
@@ -26,11 +26,11 @@ public class orderUser {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public int getCartNum() {
-		return cartNum;
+	public int getCartListNum() {
+		return cartListNum;
 	}
-	public void setCartNum(int cartNum) {
-		this.cartNum = cartNum;
+	public void setCartListNum(int cartListNum) {
+		this.cartListNum = cartListNum;
 	}
 	public String getOrderName() {
 		return orderName;
@@ -100,5 +100,4 @@ public class orderUser {
 	}
 	
 	
-
 }

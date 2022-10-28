@@ -17,6 +17,7 @@ import com.goodee.vo.ReviewCommentVO;
 import com.goodee.vo.ReviewVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.WrotebbsVO;
+import com.goodee.vo.detailOrderVO;
 import com.goodee.vo.orderUser;
 
 @Mapper
@@ -81,6 +82,8 @@ public interface ProjectDAO {
 	public List<orderUser> getOrderList(UserVO vo); 
 	public orderUser orderUserResult(String userid); //위에서 저장한 정보 출력
 	public UserVO payUserInfor(String userid);
+	public List<detailOrderVO> detailOrderInfor(String orderNum);
+	
 	//여기서위까지 유진 DAO
 	
 	

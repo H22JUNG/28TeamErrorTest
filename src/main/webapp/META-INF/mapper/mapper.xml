@@ -358,6 +358,21 @@
 		from orderuser
 		where userid = #{userid}
 	</select>
+	<!-- 마이페이지에서 주문별(장바구니)로 출력하기 -->
+	<select id="getOrderList" resultType="orderUser">
+		select cart_listnum, pay, date_format(order_date,'%Y-%m-%d') 'orderDate', order_num, total_price
+		from orderuser
+		where userid = #{userid}
+	</select>
+	
+	<!-- 주문내역에서 해당 주문번호 누르면 해당 주문 상세내역 만 뜨는페이지 -->
+	<select  id="detailOrderInfor" resultType="detailVO">
+	SELECT order_name, date_format(order_date,'%Y-%m-%d') 'orderDate', pay, address, detailAddress, extraAddress, order_tel, total_price, POINT,
+	item_name, COUNT, size, item_price, color, pic1, order_num
+	FROM orderuser u INNER JOIN orderitem i
+	ON u.cart_listnum = i.cart_listnum
+	WHERE order_num = #{orderNum};
+	</select>
 	<!-- 위까지 유진 mapper -->
 	
 	

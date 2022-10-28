@@ -6,7 +6,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("orderItem")
 public class orderItem {
 	private String userid;
-	private int cartNum;
+	private int cartListNum;
 	private String itemName;
 	private int count;
 	private String size;
@@ -20,17 +20,23 @@ public class orderItem {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public int getCartNum() {
-		return cartNum;
+	public int getCartListNum() {
+		return cartListNum;
 	}
-	public void setCartNum(int cartNum) {
-		this.cartNum = cartNum;
+	public void setCartListNum(int cartListNum) {
+		this.cartListNum = cartListNum;
 	}
 	public String getItemName() {
 		return itemName;
 	}
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 	public String getSize() {
 		return size;
@@ -62,13 +68,6 @@ public class orderItem {
 	public void setPic1(String pic1) {
 		this.pic1 = pic1;
 	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
-	}
-	
 	
 	
 }
