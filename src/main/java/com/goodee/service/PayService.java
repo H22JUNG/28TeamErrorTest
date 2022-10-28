@@ -89,4 +89,12 @@ public class PayService {
 		model.addAttribute("detailOrderInfor",dao.detailOrderInfor(orderNum));
 		
 	}
+	public void orderStock(List<CartVO> cartvo) {
+		for (int i = 0; i < cartvo.size(); i++) {
+			dao.orderStock(cartvo.get(i));			
+		}
+	}
+	public void orderPoint(orderUser vo) {
+		dao.orderPoint(vo);
+	}
 }

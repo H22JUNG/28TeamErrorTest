@@ -29,6 +29,9 @@ public class PayController {
 			
 	//session에 있는 id로 찾아서 insert했음
 	service.orderInfor(vo,(List<CartVO>)session.getAttribute("cartList"), session, model);
+	
+	service.orderStock((List<CartVO>)session.getAttribute("cartList"));
+	service.orderPoint(vo);
 	// 위에 vo에 저장한것들을 출력
 	return "pay_result";
 		}
@@ -38,4 +41,5 @@ public class PayController {
 	return"detail_order_pay";
 		}
 	
+
 }

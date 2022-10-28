@@ -83,7 +83,8 @@ public interface ProjectDAO {
 	public orderUser orderUserResult(String userid); //위에서 저장한 정보 출력
 	public UserVO payUserInfor(String userid);
 	public List<detailOrderVO> detailOrderInfor(String orderNum);
-	
+	public void orderStock(CartVO vo);
+	public void orderPoint(orderUser vo);
 	//여기서위까지 유진 DAO
 	
 	

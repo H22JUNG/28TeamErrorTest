@@ -12,7 +12,7 @@ public class orderItem {
 	private String size;
 	private int itemPrice;
 	private String color;
-	private String itemCode;
+	private String proNum;
 	private String pic1;
 	public String getUserid() {
 		return userid;
@@ -56,11 +56,11 @@ public class orderItem {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public String getItemCode() {
-		return itemCode;
+	public String getProNum() {
+		return proNum;
 	}
-	public void setItemCode(String itemCode) {
-		this.itemCode = itemCode;
+	public void setProNum(String proNum) {
+		this.proNum = proNum;
 	}
 	public String getPic1() {
 		return pic1;
