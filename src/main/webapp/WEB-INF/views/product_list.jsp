@@ -139,6 +139,7 @@ main .best-itembox .best-item>div {
 
 main .best-itembox p {
 	font-size: 25px;
+	padding-left: 10px;
 }
 
 main .best-itembox p span {
@@ -236,7 +237,7 @@ main .item-container .item-list .itembox .itemname {
 
 .deadline {
 	width: 60px;
-	background: #CB2F2F;
+	background: #be0000;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -244,7 +245,7 @@ main .item-container .item-list .itembox .itemname {
 	color: white;
 	font-size: 12px;
 	cursor: default;
-		animation: 0.5s deadline infinite;
+	animation: 0.5s deadline infinite;
 }
 
 @keyframes deadline {
@@ -318,7 +319,7 @@ main .item-container .item-list .itembox .itemname {
 							href="${pageContext.request.contextPath}/category2/storage store">수납장</a>
 						</li>
 						<li><a
-							href="${pageContext.request.contextPath}/category2/supplies">옷걸이</a>
+							href="${pageContext.request.contextPath}/category2/organization">옷걸이</a>
 						</li>
 					</ul></li>
 				<li><a
@@ -343,7 +344,7 @@ main .item-container .item-list .itembox .itemname {
 		<div class="item-container">
 			<div class="best-itembox">
 				<p>
-					가구 <span>Best</span>
+					${list[0].category} <span>Best</span>
 				</p>
 				<div class="best-item">
 					<div></div>
@@ -353,8 +354,17 @@ main .item-container .item-list .itembox .itemname {
 				</div>
 			</div>
 			<div class="item-list">
-				<p>전체 ${fn:length(list)}개</p>
+				<p>전체 ${fn:length(list)}개 
+				<select name="listOrder" id="listOrder">
+				<option value="createDate desc">신상품순</option>
+				<option value="view desc">인기순</option>
+				<option value="reviewCount desc">리뷰 많은 순</option>
+				<option value="price">낮은 가격 순</option>
+				<option value="price desc">높은 가격 순</option>
+				</select>
+				</p>
 
+				
 				<c:forEach var="vo" items="${list}">
 					<div class="itembox">
 						<div class="item-image">

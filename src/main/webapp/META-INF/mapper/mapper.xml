@@ -30,7 +30,7 @@
 	<!-- product list -->
 	<!-- 카테고리별 -->
 	<select id="selectCategory" resultType="productVO" parameterType="productVO">
-		SELECT p.id, p.pic1, p.pic2, p.pic3, p.pic4, p.name, format(price,0) price, discount, view, DATE_FORMAT(p.create_date, '%Y-%m-%d %T') createDate,
+		SELECT p.id, category1 'category', p.pic1, p.pic2, p.pic3, p.pic4, p.name, format(price,0) price, discount, view, DATE_FORMAT(p.create_date, '%Y-%m-%d %T') createDate,
 		sum(stock) totalStock, ifnull(floor(AVG(stargrade)),0) 'stargrade', (SELECT COUNT(*) FROM review r2 WHERE code = p.id) 'reviewCount'
 		FROM option o right OUTER JOIN (product p left OUTER JOIN review r ON p.id = r.code)
 		on p.id = o.id
@@ -38,7 +38,7 @@
 		group by p.id
 	</select>
 	<select id="selectInnerCategory" resultType="productVO" parameterType="productVO">
-		SELECT p.id, p.pic1, p.pic2, p.pic3, p.pic4, p.name, format(price,0) price, discount, view, DATE_FORMAT(p.create_date, '%Y-%m-%d %T') createDate,
+		SELECT p.id, category2 'category', p.pic1, p.pic2, p.pic3, p.pic4, p.name, format(price,0) price, discount, view, DATE_FORMAT(p.create_date, '%Y-%m-%d %T') createDate,
 		sum(stock) totalStock, ifnull(floor(AVG(stargrade)),0) 'stargrade', (SELECT COUNT(*) FROM review r2 WHERE code = p.id) 'reviewCount'
 		FROM option o right OUTER JOIN (product p left OUTER JOIN review r ON p.id = r.code)
 		on p.id = o.id
