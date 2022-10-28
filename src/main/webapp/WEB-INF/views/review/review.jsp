@@ -248,9 +248,8 @@
     <div id="modal-overlay">
     <div id="modal">
     	<div id="photo">
-    		 <c:forEach var="review" items="${pic}" begin="1" end="${pic.size()}" varStatus="status">
-    		 	
-    		 	<a href="#" id="${status.count}" data-id="${review.id}"><img src="${review.pic1}" /></a>
+    		 <c:forEach var="review" items="${pic}"  varStatus="status">
+    		 	<a href="#" id="pic${status.count}" data-id="${review.id}"><img src="${review.pic1}" /></a>
     		 </c:forEach>
     	</div>
 		<div id="review">
@@ -286,9 +285,8 @@
 	</div>
 	
 	<script>
+	
 	//모달 스크립트
-	
-	
 	document.getElementById("allpic").addEventListener("click", function(e) {
    		document.getElementById("modal").style.display = "flex";
    		document.getElementById("modal-overlay").style.display = "flex";
@@ -299,9 +297,41 @@
 	        document.getElementById("modal-overlay").style.display = "none";	        
 	        document.querySelector('body').style.overflow = 'auto';
 	});
-	 
-/* 	 <c:forEach var="review" items="${pic}" begin="1" end="${pic.size()}">
-		 document.getElementById("pic${review.count}").addEventListener("click", function(e) {
+	
+
+ 	 window.addEventListener("DOMContentLoaded", function(){
+ 		 let pics = document.getElementById("photo").children;
+ 		 
+ 		 for(let pic of pics){
+ 			 pic.addEventListener("click", function(e){
+ 				e.preventDefault();
+ 				 
+ 				 let id = this.dataset.id;
+ 				 
+ 				 fetch("${pageContext.request.contextPath}/photoSelect/"+id)
+ 					.then(response => response.json())
+ 					.then(data => {
+ 							let star = "";
+ 							for(let i=0; i<data.stargrade; i++) {
+ 								star += "★";
+ 							}
+ 				
+ 							let src = this.children[0].getAttribute("src");
+ 							
+ 							document.getElementById("reviewInreview-img").src = src;
+ 							document.getElementById("reviewInreview-star").innerText = star;
+ 							document.getElementById("reviewInreview-title").innerText = data.title;
+ 							document.getElementById("reviewInreview-content").innerText = data.content;
+ 					}); 
+ 			 });
+ 			 
+ 		 }
+ 		 
+ 		  	 
+ 	 <%-- 버튼이 로딩되기 전에 이벤트 먼저 생성되어 pic1에 이벤트 안먹힘 
+ 	 	<c:forEach var="review" items="${pic}" varStatus="status">
+ 	     
+		 document.getElementById("pic${status.count}").addEventListener("click", function(e) {
 			 e.preventDefault();
 			 
 			 let id = this.dataset.id;
@@ -313,15 +343,15 @@
 						for(let i=0; i<data.stargrade; i++) {
 							star += "★";
 						}
-						console.log(star);
 						document.getElementById("reviewInreview-img").src = "${review.pic1}";
 						document.getElementById("reviewInreview-star").innerText = star;
 						document.getElementById("reviewInreview-title").innerText = data.title;
 						document.getElementById("reviewInreview-content").innerText = data.content;
 				});
 		 });
-		 
-	 </c:forEach> */
+ 		
+ 	 });
+	 <%--</c:forEach>--%>
 	 
 	 	//사진 크게보기
 		 document.getElementById("reviewInreview-img").addEventListener("click", function(e) {
