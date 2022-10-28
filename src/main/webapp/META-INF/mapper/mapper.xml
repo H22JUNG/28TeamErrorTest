@@ -356,8 +356,8 @@
 	<!-- 주문한 상품 저장할 매퍼 하나더  -->
 	<insert id="orderItemInfor" parameterType="CartVO">
 	INSERT INTO orderitem
-	(userid, cart_listnum, item_name, size, item_price, color,pic1,count)
-	VALUES(#{userid},#{cartListNum},#{itemName},#{size},#{price},#{color},#{pic1},${count});
+	(userid, cart_listnum, item_name, size, item_price, color,pro_num,pic1,count)
+	VALUES(#{userid},#{cartListNum},#{itemName},#{size},#{price},#{color},#{proNum},#{pic1},${count});
 	</insert>
 	
 	<select id="selectCartListNum" resultType="int" >
@@ -386,6 +386,16 @@
 	ON u.cart_listnum = i.cart_listnum
 	WHERE order_num = #{orderNum};
 	</select>
+	<!-- 결제하고서 재고에서 갯수만큼 차감시키기 -->
+	<update id="orderStock">
+	UPDATE option SET stock = stock-#{count}
+	WHERE pro_num = #{proNum}
+	</update>
+	<!-- 결제후 사용한 적립금 만큼 적립금에서 차감하기 -->
+	<update id="orderPoint">
+	update user set point = point-#{point}
+	where userid = #{userid}
+	</update>
 	<!-- 위까지 유진 mapper -->
 	
 	
