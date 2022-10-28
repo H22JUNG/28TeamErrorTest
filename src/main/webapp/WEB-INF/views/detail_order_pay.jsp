@@ -202,6 +202,7 @@
                 width: 400px;
                 padding-left: 20px;
             }
+		
         }
        
     </style>
@@ -269,13 +270,15 @@
 				<div id="right">
 					<div id="rightTop">
 						<div id="inleft">
-							<h4>주문자 이름</h4>
-							<p>${orderUser.orderName}</p>
+					<h4>주문자 이름</h4>
+							<p>${detailOrderInfor[0].orderName}</p>
 							<h4>주문 날짜</h4>
-							<p>${orderUser.orderDate}</p>
+							<p>${detailOrderInfor[0].orderDate}</p>
+							<h4>주문 수량</h4>
+							<p>${detailOrderInfor[0].count}</p>
 							<h4>결제 수단</h4>
 							<c:choose>
-							<c:when test="${orderUser.pay eq 'cash'}">
+							<c:when test="${detailOrderInfor[0].pay eq 'cash'}">
 							<p>
 								무통장입금
 							</p>							
@@ -287,9 +290,10 @@
 							</c:otherwise>
 							</c:choose>
 
+
 						</div>
 						<div id="inRight">
-						<c:forEach var="vo" items="${orderItem}">
+						<c:forEach var="vo" items="${detailOrderInfor}">
 						<div class="itembox">
 							<div class="smallItembox">
 								<div class="itemImage">
@@ -300,20 +304,20 @@
 									<h4>상품 이름 : ${vo.itemName}</h4>
 									<p>Size : ${vo.size}</p> 
 									<p>Color : ${vo.color}</p>
-									<h4>상품 가격 : ${vo.price}</h4>
+									<p>수량 : ${vo.count}</p>
+									<h4>상품 가격 : ${vo.itemPrice}</h4>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
 							<div id="bottom">
-								<h3>결제 금액 : ${orderUser.totalPrice}</h3>
+									<h3>결제 금액 : ${detailOrderInfor[0].totalPrice} 원</h3>
 							</div>
 						</div>
 						<!--inRight끝-->
 					</div>
 					<div id="lastBottom">
-						<h3>주문 번호 : ${orderUser.orderNum}</h3>
-						<a href="${pageContext.request.contextPath}/practice">임시이동주문번호 : ${orderUser.orderNum}</a>
+						<h3>주문 번호 : ${detailOrderInfor[0].orderNum}</h3>
 							
 					</div>
 				</div>

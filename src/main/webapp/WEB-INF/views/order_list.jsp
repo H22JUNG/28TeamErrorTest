@@ -303,6 +303,11 @@ section {
 	#right {
 		width: 400px;
 	}
+	.order-box {
+    display: flex;
+    justify-content: center;
+    gap: 8%;
+	}
 }
 </style>
 </head>
@@ -401,7 +406,7 @@ section {
 						<div class="order-box">
 							<div id="orderNum">
 								<h4>주문 번호</h4>
-								<a href="${pageContext.request.contextPath}/orderNumController/">${list.orderNum}</a>
+								<a href="${pageContext.request.contextPath}/orderNumController/${list.orderNum}">${list.orderNum}</a>
 							</div>
 							<div>
 								<h4>주문 날짜</h4>
