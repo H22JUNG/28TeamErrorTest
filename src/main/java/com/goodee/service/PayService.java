@@ -30,7 +30,7 @@ public class PayService {
 	}
 	
 	public void orderInfor(orderUser vo, List<CartVO> volist, HttpSession session,Model model) {
-		int cartListNum = dao.selectCartNum(((UserVO)session.getAttribute("user")).getId());
+		int cartListNum = dao.selectCartListNum(((UserVO)session.getAttribute("user")).getUserid());
 		vo.setUserid(((UserVO)session.getAttribute("user")).getUserid());
 		vo.setCartListNum(cartListNum);
 		
