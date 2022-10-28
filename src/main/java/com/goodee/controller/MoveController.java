@@ -19,6 +19,7 @@ import com.goodee.service.BbsService;
 import com.goodee.service.CartService;
 import com.goodee.service.LoginService;
 import com.goodee.service.PayService;
+import com.goodee.service.ReviewService;
 import com.goodee.service.UserService;
 import com.goodee.vo.PageVO;
 import com.goodee.vo.QnaVO;
@@ -32,15 +33,17 @@ public class MoveController {
 	public LoginService loginservice; //유진쓰가 추가
 	public PayService payservice; //이것도 유진쓰가 추가
 	public CartService cartservice;
+	public ReviewService reviewservice;
 
 	public MoveController(BbsService bbsservice, UserService userservice, LoginService loginservice,
-			PayService payservice, CartService cartservice) {
+			PayService payservice, CartService cartservice, ReviewService reviewservice) {
 		super();
 		this.bbsservice = bbsservice;
 		this.userservice = userservice;
 		this.loginservice = loginservice;
 		this.payservice = payservice;
 		this.cartservice = cartservice;
+		this.reviewservice = reviewservice;
 	}
 	
 	@GetMapping("/loginpage")
@@ -259,8 +262,8 @@ public class MoveController {
 	public String productId(@PathVariable("id") String id, Model model, @ModelAttribute("qnaVO") QnaVO qnavo) {
 		bbsservice.getQnaList(model);
 		cartservice.getDetailContent(model, id);
-		bbsservice.getReview(model, id);
-		bbsservice.getComment(model, id);
+		reviewservice.getReview(model, id);
+		reviewservice.getComment(model, id);
 		return "detail";
 	}
 

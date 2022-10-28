@@ -108,6 +108,10 @@ public interface ProjectDAO {
 	public int getPicCount(String id);
 	//리뷰 게시판 댓글
 	public List<ReviewCommentVO> getComment(String id);
+	public List<ReviewCommentVO> commentCount();
+	public void hitsPlus(@Param("id")int id, @Param("hits")int hits);
+	public int afterPlus(@Param("id")int id);
+	public void putComment(ReviewCommentVO vo);
 	//리뷰 모달창
 	public ReviewVO getSelectReview(int id);
 	

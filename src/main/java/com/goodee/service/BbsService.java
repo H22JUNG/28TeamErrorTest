@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.goodee.dao.ProjectDAO;
 import com.goodee.vo.CartVO;
 import com.goodee.vo.QnaVO;
+import com.goodee.vo.ReviewCommentVO;
 import com.goodee.vo.UserVO;
 import com.goodee.vo.WrotebbsVO;
 
@@ -64,26 +65,6 @@ public class BbsService {
 	public void getdelete(WrotebbsVO vo) {
 		dao.deleteReview(vo);
 		dao.deleteMyPageQna(vo);
-	}
-	
-	//Review
-	public void getReview(Model model, String id) {
-		model.addAttribute("review", dao.getReview(id));
-		model.addAttribute("reviewCount", dao.getReviewCount(id));
-		int[] num = {dao.getStarGradeCount1(id),
-					dao.getStarGradeCount2(id),
-					dao.getStarGradeCount3(id),
-					dao.getStarGradeCount4(id),
-					dao.getStarGradeCount5(id)};
-		model.addAttribute("starGradeCount", num);
-		model.addAttribute("starGradeAvg", dao.getStarGradeAvg(id));
-		model.addAttribute("pic", dao.getPic(id));
-		model.addAttribute("picCount", dao.getPicCount(id));
-	}
-	
-	public void getComment(Model model, String id) {
-		//상품id 보내서 댓글들 가져온다음에 프론트에서 댓글id랑 review_id랑 일치하면 가져오기
-		model.addAttribute("comment", dao.getComment(id));
 	}
 		
 		//QnA

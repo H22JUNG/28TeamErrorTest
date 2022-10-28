@@ -136,6 +136,7 @@ public class ReviewVO {
 	public void setAvg(double avg) {
 		this.avg = avg;
 	}
+
 	
 	
 }

@@ -175,8 +175,6 @@ font-size : 12px;
 	vertical-align : text-top;
 }
 
-
-
 #modal-overlay {
 	width: 100%;
 	height: 100%;
@@ -212,7 +210,7 @@ font-size : 12px;
 	place-items: center;
 	justify-content: center;
 	grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-	grid-template-rows: repeat(auto-fill, minmax(210px, 1fr));
+	grid-auto-rows: 210px;
   	grid-gap: 15px;
 	border-right: 1px solid gray;
 	overflow-y: scroll;
@@ -309,7 +307,7 @@ font-size : 12px;
 	max-width: 80vw;
 	max-height: 90vh;
 	position: relative;
-	top: -28%;
+	top: -32%;
 	padding: 10px;
 	z-index:1501;
 }

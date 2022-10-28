@@ -1,3 +1,4 @@
+<%@page import="com.goodee.vo.UserVO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodee.vo.ReviewCommentVO"%>
 <%@page import="com.goodee.vo.ReviewVO"%>
@@ -77,11 +78,12 @@
 				</c:forEach>
 			</div>
 		</div>
-
+		
+		<!-- 최신순 기본 -->
 		<div class="review">
-        <button>추천순</button>
         <button>최신순</button>
         <button>별점순</button>
+        <button>추천순</button>
 
         <c:forEach var="review" items="${review}">
         <div class="review-container">
@@ -100,40 +102,31 @@
                </c:if>
             </div>
 				<div class="reviewComment">
-					<p>👍🏻 도움돼요(${review.hits})</p>
+					<p id="hits${review.id}" style="cursor:pointer;">👍🏻 도움돼요(${review.hits})</p>
 					<p>	
-<%--  					<%	List<ReviewVO> revo = (List<ReviewVO>)request.getAttribute("review");
-						List<ReviewCommentVO> commvo = (List<ReviewCommentVO>)request.getAttribute("comment");
-							int count = 0;
-						for(int i=0; i<revo.size(); i++) {
-							for(int j=0; j<commvo.size(); j++) {
-								if(revo.get(i).getId() == commvo.get(j).getReviewId()) {
-									count++;
-								}
-							}
-						}
-						%>
-						<a href="" class="commCount" id="commCount">댓글보기(<%=count %>개)</a> --%>
+					<!-- 	commentCount.id=review.id 일치하면  -->
+						<c:forEach var="count" items="${commentCount}">
+							<c:if test="${count.reviewId eq review.id}">
+								<a href="" class="commCount" id="commCount">댓글보기(${count.commentCount}개)</a>
+							</c:if>
+						</c:forEach>
 					</p>
-					<div class="dropdown">
+					<div class="dropdown" id="dropdown${review.id}">
 						<c:forEach var="comment" items="${comment}">
 							<c:if test="${comment.reviewId eq review.id}">
 								<p>${comment.username}: ${comment.content}</p>
 							</c:if>
 						</c:forEach>
 						<form action="" method="post">
-							<textarea name="recomm" id="" cols="40" rows="3"
+							<textarea name="recomm" id="commentContent${review.id}" cols="40" rows="3"
 								placeholder="댓글을 남겨주세요"></textarea>
-							<button>등록</button>
+							<button id="commentInsert${review.id}">등록</button>
 						</form>
 					</div>
 				</div>
 				</div>
             </c:forEach>
-
-    </div>
-    
-<%--     <div id="pageing">
+            <div class="pageing">
 			<c:if test="${list != null}">
 				<c:choose>
 					<c:when test="${1 == page.nowPage}">
@@ -183,9 +176,10 @@
 					</c:otherwise>
 				</c:choose>
 			</c:if>
-		</div> --%>
-    
+		</div>
     </div>
+    </div>
+    
     <script>
      for(let i = 0; i< document.getElementsByClassName("commCount").length; i++) {
  	    document.getElementsByClassName("commCount")[i].addEventListener("click", function(e) {
@@ -196,15 +190,57 @@
  	        	document.getElementsByClassName("dropdown")[i].style.display = 'block';
    			}
 	    });
-/*  	    if(document.getElementsByClassName("dropdown")[i].style.display == 'block') {
- 	    	document.getElementsByClassName("dropdown")[i].style.display = 'none';
- 	    } */
-    }; 
+  	  }; 
+ 
+     <c:forEach var="review" items="${review}">
+   		document.getElementById("hits${review.id}").addEventListener("click", function(e) {
+   			e.preventDefault();
+   			<% if(session.getAttribute("user") != null) {%>
+	   		fetch("${pageContext.request.contextPath}/hitsPlus?id=${review.id}&hits=${review.hits+1}")
+	   		.then(response => response.json())
+			.then(data => {
+				document.getElementById("hits${review.id}").innerHTML = '<b>👍🏻 도움돼요('+data+')<b>';	
+			 });
+	   		<%} else {%>
+	   			alert("로그인 후 이용하실 수 있습니다.");
+	   		<%} %>
+   		}); 
+   		
+   		document.getElementById("commentInsert${review.id}").addEventListener("click", function(e) {
+   			e.preventDefault();
 
-   	 document.getElementById("allpic").addEventListener("click", function(e) {
-   		document.getElementById("modal").style.display = "flex";
-   		document.getElementById("modal-overlay").style.display = "flex";
-    	});
+   			<%if (session.getAttribute("user") != null) {
+				UserVO user = (UserVO) session.getAttribute("user");%>
+   					if(document.getElementById("commentContent${review.id}").value==""
+   							|| document.getElementById("commentContent${review.id}").value == null) {
+   						alert("내용을 입력해주세요");
+   					} else {
+   						let commentData = { productId : "${review.code}",
+   											reviewId : "${review.id}",
+   											userid : "<%=user.getUserid()%>",
+   											username : "<%=user.getUsername()%>",
+   											content : document.getElementById("commentContent${review.id}").value };
+   			
+				   		fetch("${pageContext.request.contextPath}/commentInsert", {
+				   			method : "PUT",
+				   			headers : {"Content-Type" : "application/json"},
+				   			body : JSON.stringify(commentData)
+				   		})
+				   		.then(response => response.json())
+						.then(data => {
+							let p = document.createElement("p");
+							p.append(data.username +" : "+data.content);
+							document.getElementById("dropdown${review.id}").lastElementChild.before(p);
+							/* 수정삭제 만들기 */
+							document.getElementById("commentContent${review.id}").value = "";
+						});
+			   		}
+			<%} else {%>
+				 alert("로그인 후 이용하실 수 있습니다.");
+			<%}%>
+   			
+   		}); 
+   	</c:forEach>
     </script>
      
      
@@ -212,11 +248,9 @@
     <div id="modal-overlay">
     <div id="modal">
     	<div id="photo">
-    		 <c:forEach var="review" items="${pic}">
-
-    		 	<a href="#" id="${review.pic1}" data-id="${review.id}"><img src="${review.pic1}" /></a>
-
-
+    		 <c:forEach var="review" items="${pic}" begin="1" end="${pic.size()}" varStatus="status">
+    		 	
+    		 	<a href="#" id="${status.count}" data-id="${review.id}"><img src="${review.pic1}" /></a>
     		 </c:forEach>
     	</div>
 		<div id="review">
@@ -243,6 +277,7 @@
 	</div>
 	
 	
+	<!-- ====================사진 크게보기=======================-->
 	<div id="originPic-overlay">
 		<div id="originPic">
 			<h1 style="text-align:end;">✖</h1>
@@ -250,16 +285,23 @@
 		</div>
 	</div>
 	
-	
 	<script>
-	 document.getElementById("x").addEventListener("click", function() {
+	//모달 스크립트
+	
+	
+	document.getElementById("allpic").addEventListener("click", function(e) {
+   		document.getElementById("modal").style.display = "flex";
+   		document.getElementById("modal-overlay").style.display = "flex";
+    });
+	 
+	document.getElementById("x").addEventListener("click", function() {
 	        document.getElementById("modal").style.display = "none";
 	        document.getElementById("modal-overlay").style.display = "none";	        
 	        document.querySelector('body').style.overflow = 'auto';
-	  });
+	});
 	 
-	 <c:forEach var="review" items="${pic}">
-		 document.getElementById("${review.pic1}").addEventListener("click", function(e) {
+/* 	 <c:forEach var="review" items="${pic}" begin="1" end="${pic.size()}">
+		 document.getElementById("pic${review.count}").addEventListener("click", function(e) {
 			 e.preventDefault();
 			 
 			 let id = this.dataset.id;
@@ -279,7 +321,7 @@
 				});
 		 });
 		 
-	 </c:forEach>
+	 </c:forEach> */
 	 
 	 	//사진 크게보기
 		 document.getElementById("reviewInreview-img").addEventListener("click", function(e) {
@@ -297,12 +339,11 @@
 		 });
 		 
 		 window.addEventListener("keyup", e => {
-			    if(document.getElementById("originPic-overlay").style.display === "flex" && e.key === "Escape") {
-			    	document.getElementById("originPic-overlay").style.display = "none";
-			    	document.getElementById("originPic").style.display = "none";
-			    }
-			});
-
+			if(document.getElementById("originPic-overlay").style.display === "flex" && e.key === "Escape") {
+			   	document.getElementById("originPic-overlay").style.display = "none";
+			   	document.getElementById("originPic").style.display = "none";
+			}
+		 });
 	</script>
 </body>
 </html>

@@ -266,7 +266,7 @@
 		where code=#{id}
 	</select>
 	
-	<!-- Reviwe 총 갯수 뽑아오기 -->
+	<!-- Review 총 갯수 뽑아오기 -->
 	<select id="getReviewCount" parameterType="string" resultType="int">
 		SELECT COUNT(id) reviewCount FROM review WHERE CODE=#{id}
 	</select> 
@@ -292,9 +292,10 @@
 	</select> 
 	<!-- 사진 리뷰 전체보기  -->
 	<select id="getPic" parameterType="string" resultType="reviewVO">
-		SELECT id, pic1 frOM review WHERE CODE=#{id} AND pic1 IS NOT NULL
+		SELECT id, pic1, create_date frOM review WHERE CODE=#{id} AND pic1 IS NOT NULL
 		union
-		SELECT id, pic2 frOM review WHERE CODE=#{id} AND pic2 is nOT NULL
+		SELECT id, pic2, create_date frOM review WHERE CODE=#{id} AND pic2 is nOT NULL
+		ORDER BY create_date DESC;
 	</select>
 	<!-- 사진 갯수 뽑아오기 -->
 	<select id="getPicCount" parameterType="string" resultType="int">
@@ -305,7 +306,25 @@
 		select product_id, review_id, userid, username, content from review_comment where product_id=#{id}
 	</select>
 	<!-- 댓글 몇갠지 가져오기 -->
+	<select id="commentCount" resultType="commentVO">
+		SELECT review.id 'reviewId', COUNT(review_comment.id) 'commentCount'
+		FROM review left outer JOIN review_comment
+		ON review.id = review_comment.review_id
+		GROUP BY review.id;
+	</select>
+	<!-- hits +1 -->
+	<update id="hitsPlus" parameterType="int">
+		UPDATE review SET hits=#{hits} WHERE id=#{id}
+	</update>
+	<select id="afterPlus" parameterType="int">
+		select hits from review where id=#{id}
+	</select>
 	
+	<!-- 리뷰에 댓글달기 -->
+	<insert id="putComment" parameterType="commentVO">
+		insert into review_comment(product_id, review_id, userid, username, content)
+		value (#{productId}, #{reviewId}, #{userid}, #{username}, #{content})
+	</insert>
 	<!-- 리뷰 모달창에서 사진 선택하면 해당 리뷰만 조회하기 -->
 	<select id="getSelectReview" parameterType="int" resultType="reviewVO">
 		select id, title, content, pic1, pic2, owner_id, owner, date_format(create_date, '%Y-%m-%d') createDate, code, stargrade, hits
