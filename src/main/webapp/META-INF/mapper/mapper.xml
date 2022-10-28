@@ -330,19 +330,19 @@
 	<!-- 주문자 정보입력한것 추가해보기ㅇ -->
  	<insert id="orderUserInfor" parameterType="orderUser"> 
  	INSERT INTO orderuser
-	(userid, cart_num, order_name, order_date,pay, address, detailAddress, extraAddress, order_tel,order_num, POINT)
-	VALUES(#{userid}, #{cartNum}, #{orderName}, NOW(), #{pay}, #{address},#{detailAddress},#{extraAddress},#{orderTel},#{orderNum},#{point});
+	(userid, cart_listnum, order_name, order_date,pay, address, detailAddress, extraAddress, order_tel,order_num, total_price, POINT)
+	VALUES(#{userid}, #{cartListNum}, #{orderName}, NOW(), #{pay}, #{address},#{detailAddress},#{extraAddress},#{orderTel},#{orderNum},#{totalPrice}, #{point});
 		</insert>
 	
 	<!-- 주문한 상품 저장할 매퍼 하나더  -->
 	<insert id="orderItemInfor" parameterType="CartVO">
 	INSERT INTO orderitem
-	(userid, cart_num, item_name, size, item_price, color,pic1,count)
-	VALUES(#{userid},#{cartNum},#{itemName},#{size},#{price},#{color},#{pic1},#{count});
+	(userid, cart_listnum, item_name, size, item_price, color,pic1,count)
+	VALUES(#{userid},#{cartListNum},#{itemName},#{size},#{price},#{color},#{pic1},${count});
 	</insert>
 	
-	<select id="selectCartNum" resultType="int" >
-		SELECT ifnull(max(cart_num),0)+1 FROM orderuser WHERE userid = #{userid}
+	<select id="selectCartListNum" resultType="int" >
+		SELECT ifnull(max(cart_listnum),0)+1 FROM orderuser WHERE userid = #{userid}
 	</select>
 
 	<!-- 결제완료 페이지에 출력되는 내용 -->
@@ -352,12 +352,6 @@
 		where userid = #{userid}
 	</select>
 	
-	<!-- 마이페이지에서 주문별(장바구니)로 출력하기 -->
-	<select id="getOrderList" resultType="orderUser">
-		select cart_num, date_format(order_date,'%Y-%m-%d') 'orderDate', order_num, total_price
-		from orderuser
-		where userid = #{userid}
-	</select>
 	<!-- 마이페이지에서 주문별(장바구니)로 출력하기 -->
 	<select id="getOrderList" resultType="orderUser">
 		select cart_listnum, pay, date_format(order_date,'%Y-%m-%d') 'orderDate', order_num, total_price
