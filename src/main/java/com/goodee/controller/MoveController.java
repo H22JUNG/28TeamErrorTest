@@ -259,11 +259,21 @@ public class MoveController {
 	// 상세페이지 -> 장바구니,구매하기로 보내기(수정)
 	// 메인P 상품id -> 상품id 갖고 상세P 가서 DetailVO데이터 넣기
 	@GetMapping("/detail/{id}")
-	public String productId(@PathVariable("id") String id, Model model, @ModelAttribute("qnaVO") QnaVO qnavo) {
+	public String productId(@PathVariable("id") String id, Model model,
+							@ModelAttribute("qnaVO") QnaVO qnavo,
+							@ModelAttribute("page")PageVO pagevo,
+							int page) {
 		bbsservice.getQnaList(model);
 		cartservice.getDetailContent(model, id);
 		reviewservice.getReview(model, id);
 		reviewservice.getComment(model, id);
+		System.out.println("dhodksxk");
+		page = pagevo.getNowPage();
+		if( pagevo==null || page==0) {
+			page = 1;
+		}
+		reviewservice.getPage(model, id, page);
+		System.out.println("여기 오류떠야돼");
 		return "detail";
 	}
 

@@ -115,7 +115,8 @@ public interface ProjectDAO {
 	public void putComment(ReviewCommentVO vo);
 	//리뷰 모달창
 	public ReviewVO getSelectReview(int id);
-	
+	//리뷰 페이징
+
 	
 	//Q&A 게시판
 	public List<QnaVO> QnaList();

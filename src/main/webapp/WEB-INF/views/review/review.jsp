@@ -127,60 +127,44 @@
 				</div>
             </c:forEach>
             <div class="pageing">
-			<c:if test="${list != null}">
 				<c:choose>
-					<c:when test="${1 == page.nowPage}">
-						<span class="spanarrow">〈〈 </span>
-					</c:when>
+					<c:when test="${1 == page.nowPage}"><span class="spanarrow">〈〈 </span></c:when>
 					<c:otherwise>
-						<a href="${pageContext.request.contextPath}/adminpagedel/1?searchUser=${searchUser}&userInfo=${userInfo}"
-							class="arrow">〈〈 </a>
+						<a href="${pageContext.request.contextPath}/비동기로페이징"	class="arrow" id="prev">〈〈 </a>
 					</c:otherwise>
 				</c:choose>
-				<c:choose>
-					<c:when test="${1 == page.nowPage}">
-						<span class="spanarrow"> 〈</span>
-					</c:when>
-					<c:otherwise>
-						<a href="${pageContext.request.contextPath}/adminpagedel/${page.nowPage - 1}?searchUser=${searchUser}&userInfo=${userInfo}"
-							class="arrow"> 〈</a>
-					</c:otherwise>
-				</c:choose>
+
 				<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
 					<c:choose>
 						<c:when test="${page.nowPage eq i}">
 							<span class="arrow" id="nowpage">${i}</span>
 						</c:when>
 						<c:otherwise>
-							<a href="${pageContext.request.contextPath}/adminpagedel/${i}?searchUser=${searchUser}&userInfo=${userInfo}"
-								class="arrow" style="color: #CBCBCB;">${i}</a>
+							<a href="${pageContext.request.contextPath}/시발왜안가"
+								class="arrow" style="color: #CBCBCB;" id="selectPage">${i}</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
+
 				<c:choose>
-					<c:when test="${page.totalPage == page.nowPage}">
-						<span class="spanarrow">〉 </span>
-					</c:when>
+					<c:when test="${page.totalPage eq page.nowPage}"><span class="spanarrow"> 〉〉</span></c:when>
 					<c:otherwise>
-						<a href="${pageContext.request.contextPath}/adminpagedel/${page.nowPage + 1}?searchUser=${searchUser}&userInfo=${userInfo}"
-							class="arrow">〉 </a>
+						<a href="${pageContext.request.contextPath}/비동기로페이징" class="arrow" id="next"> 〉〉</a>
 					</c:otherwise>
 				</c:choose>
-				<c:choose>
-					<c:when test="${page.totalPage eq page.nowPage}">
-						<span class="spanarrow"> 〉〉</span>
-					</c:when>
-					<c:otherwise>
-						<a href="${pageContext.request.contextPath}/adminpagedel/${page.totalPage}?searchUser=${searchUser}&userInfo=${userInfo}"
-							class="arrow"> 〉〉</a>
-					</c:otherwise>
-				</c:choose>
-			</c:if>
 		</div>
     </div>
     </div>
     
     <script>
+    
+    
+    
+    
+    
+    
+    
+    
      for(let i = 0; i< document.getElementsByClassName("commCount").length; i++) {
  	    document.getElementsByClassName("commCount")[i].addEventListener("click", function(e) {
    			e.preventDefault();
@@ -326,6 +310,7 @@
  			 });
  			 
  		 }
+ 	 });
  		 
  		  	 
  	 <%-- 버튼이 로딩되기 전에 이벤트 먼저 생성되어 pic1에 이벤트 안먹힘 
@@ -350,8 +335,7 @@
 				});
 		 });
  		
- 	 });
-	 <%--</c:forEach>--%>
+	 </c:forEach>--%>
 	 
 	 	//사진 크게보기
 		 document.getElementById("reviewInreview-img").addEventListener("click", function(e) {

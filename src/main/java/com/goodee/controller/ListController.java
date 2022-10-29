@@ -20,11 +20,16 @@ public class ListController {
 	@GetMapping("/category/{category1}")
 	public String movecategory(@PathVariable("category1") String category1, Model model) {
 		service.selectCategory(category1, model);
+		System.out.println("dhodksxk");
+
 		return "product_list";
 	}
 	@GetMapping("/category2/{category2}")
 	public String category2(@PathVariable("category2") String category2, Model model) {
 		service.selectInnerCategory(category2, model);
+		System.out.println("dhodksxk");
+		System.out.println("dhodksxk");
+
 		return "product_list";
 	}
 }
